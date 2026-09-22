@@ -1,0 +1,26 @@
+{
+  "skill_name": "hatena-research-blog",
+  "evals": [
+    {
+      "id": 0,
+      "name": "latest-articles-batch",
+      "prompt": "うちのHatenaブログ(https://mutomasa.hatenablog.com/)の直近の記事から、AI・ロボティクス関連のものを選んで、このAstroサイトのResearch Blog用に英訳して src/content/blog/ に下書き(draft)として追加して。だいたい直近1〜2週間分くらいを見てもらえれば十分です。",
+      "expected_output": "A candidate list is presented before writing files. Only AI/ML/robotics/VLA-relevant posts (e.g. the MolmoAct 2 and Marigold V2 posts) are translated and written as draft:true Markdown files in src/content/blog/; personal/lifestyle/career posts (book review, JAIST volunteering announcement, category theory book purchase, grad-school elective posts) are excluded. src/content.config.ts is updated to declare originalUrl/originalTitle/sourceLanguage so they survive `npm run build`.",
+      "files": []
+    },
+    {
+      "id": 1,
+      "name": "single-article-by-url",
+      "prompt": "このHatenaの記事を英訳して、Research Blogの下書きとして追加してほしい: https://mutomasa.hatenablog.com/entry/2026/09/20/125823",
+      "expected_output": "A single faithful English translation of the MolmoAct 2 article is written to src/content/blog/ as draft:true, with correct frontmatter (originalUrl pointing at the given URL, originalTitle in Japanese, sourceLanguage), a visible link back to the Japanese original, and schema updated if needed so the build succeeds.",
+      "files": []
+    },
+    {
+      "id": 2,
+      "name": "dry-run-candidate-list",
+      "prompt": "Hatenaブログ(https://mutomasa.hatenablog.com/)の最近の記事の中で、Research Blogに移植する価値がありそうなAI関連記事をリストアップして。まだファイルは作らなくていいので、候補一覧だけ見せて。",
+      "expected_output": "Only a candidate list is presented (title/URL/date/proposed English title/category/import status) — no files are written to src/content/blog/ and no schema changes are made.",
+      "files": []
+    }
+  ]
+}
