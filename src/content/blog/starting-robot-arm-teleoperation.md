@@ -3,7 +3,7 @@ title: 'Starting Robot Arm Teleoperation'
 description: 'A short note on beginning hands-on teleoperation of a robot arm as part of the graduate research theme, working through the gap between theory and practice by trial and error.'
 pubDate: 2026-09-06
 tags: ['robotics', 'teleoperation', 'physical-ai']
-draft: true
+draft: false
 originalUrl: 'https://mutomasa.hatenablog.com/entry/2026/09/06/114615'
 originalTitle: 'ロボットアームのテレオペをはじめた'
 sourceLanguage: 'ja'

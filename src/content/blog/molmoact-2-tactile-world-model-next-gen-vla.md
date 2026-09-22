@@ -3,7 +3,7 @@ title: 'Rethinking Next-Generation VLA from MolmoAct 2: Combining Tactile Sensin
 description: "A comparison between Allen Institute for AI's MolmoAct 2 robot foundation model and the author's master's research on a Vision-Tactile JEPA World Model for long-horizon VLA, exploring how tactile sensing and future-state prediction could help robots recover from failure."
 pubDate: 2026-09-20
 tags: ['robotics', 'vla', 'world-models', 'tactile-sensing', 'physical-ai']
-draft: true
+draft: false
 originalUrl: 'https://mutomasa.hatenablog.com/entry/2026/09/20/125823'
 originalTitle: 'MolmoAct 2から考える、触覚とWorld Modelを組み合わせた次世代VLA'
 sourceLanguage: 'ja'

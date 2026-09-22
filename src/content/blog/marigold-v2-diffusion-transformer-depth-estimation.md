@@ -3,7 +3,7 @@ title: 'Looking into Marigold V2: Depth Estimation with a Diffusion Transformer'
 description: 'Notes on Marigold V2, a monocular depth estimation model from HUAWEI Bayer Lab, EPFL, and the University of Bologna that repurposes an image-generation Diffusion Transformer for single-step dense prediction, and what it suggests about reusing generative foundation models to understand the world.'
 pubDate: 2026-09-14
 tags: ['computer-vision', 'diffusion-models', 'depth-estimation', 'foundation-models']
-draft: true
+draft: false
 originalUrl: 'https://mutomasa.hatenablog.com/entry/2026/09/14/094007'
 originalTitle: 'Diffusion TransformerでDepth推定するMarigold V2を調べた'
 sourceLanguage: 'ja'

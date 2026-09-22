@@ -3,7 +3,7 @@ title: 'D2: From Drawing Diagrams to Managing Them as Code — Diagram as Code f
 description: "Notes on D2, a Diagram-as-Code tool, comparing it with Mermaid and draw.io MCP, and looking at why managing architecture diagrams as text pairs especially well with AI Coding Agent-driven development."
 pubDate: 2026-09-18
 tags: ['ai-coding-agents', 'developer-tools', 'diagram-as-code', 'ai-engineering']
-draft: true
+draft: false
 originalUrl: 'https://mutomasa.hatenablog.com/entry/2026/09/18/112355'
 originalTitle: 'D2：図を「描く」から「コードで管理する」へ。AI時代のDiagram as Code'
 sourceLanguage: 'ja'
