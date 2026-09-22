@@ -1,23 +1,87 @@
+---
+import '../styles/global.css';
+import Icon from '../components/Icon.astro';
+import { NAV, SITE } from '../consts';
+import { pageHref } from '../lib/url';
+
+interface Props {
+	title?: string;
+	description?: string;
+}
+
+const { title, description = SITE.description } = Astro.props;
+const pageTitle = title ? `${title} | ${SITE.name}` : `${SITE.name} | ${SITE.title}`;
+
+// ビルド後は /projects/ のように末尾スラッシュが付くため正規化して比較する
+const normalize = (path: string) => (path.length > 1 ? path.replace(/\/+$/, '') : path);
+const current = normalize(Astro.url.pathname);
+const isCurrent = (href: string) =>
+	href === '/' ? current === '/' : current === href || current.startsWith(`${href}/`);
+---
+
 <!doctype html>
-<html lang="en">
+<html lang="ja">
 	<head>
 		<meta charset="utf-8" />
-		<meta name="viewport" content="width=device-width" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
+		<link rel="icon" href="/favicon.ico" sizes="any" />
 		<meta name="generator" content={Astro.generator} />
-		<title>Astro Basics</title>
+		<meta name="description" content={description} />
+		<title>{pageTitle}</title>
 	</head>
 	<body>
-		<slot />
+		<a class="skip-link" href="#main">Skip to content</a>
+
+		<header class="site-header">
+			<div class="container">
+				<a class="brand" href="/">{SITE.name}</a>
+				<nav class="site-nav" aria-label="Main">
+					<ul>
+						{
+							NAV.map((item) => (
+								<li>
+									<a
+										href={pageHref(item.href)}
+										aria-current={isCurrent(item.href) ? 'page' : undefined}
+									>
+										{item.label}
+									</a>
+								</li>
+							))
+						}
+					</ul>
+				</nav>
+			</div>
+		</header>
+
+		<main id="main">
+			<div class="container">
+				<slot />
+			</div>
+		</main>
+
+		<footer class="site-footer">
+			<div class="container">
+				<p style="margin:0">© {new Date().getFullYear()} {SITE.name}</p>
+				<ul class="social">
+					<li>
+						<a href={SITE.github.url} rel="noopener noreferrer">
+							<Icon name="github" size={18} /> GitHub
+						</a>
+					</li>
+					<li>
+						<a href={SITE.speakerdeck.url} rel="noopener noreferrer">
+							<Icon name="slides" size={18} /> Speaker Deck
+						</a>
+					</li>
+					<li>
+						<a href={SITE.huggingface.url} rel="noopener noreferrer">
+							<Icon name="smile" size={18} /> Hugging Face
+						</a>
+					</li>
+				</ul>
+			</div>
+		</footer>
 	</body>
 </html>
-
-<style>
-	html,
-	body {
-		margin: 0;
-		width: 100%;
-		height: 100%;
-	}
-</style>

@@ -1,0 +1,63 @@
+name: Build and Deploy
+
+# ビルド検証（PR含む全トリガー）を行い、main/master への push・スケジュール実行・
+# 手動実行のときだけ Hugging Face Spaces（mutomasa/engineering-research-portfolio）
+# へ dist/ をデプロイします。PR からのデプロイは行いません。
+
+on:
+  push:
+    branches: [main, master]
+  pull_request:
+  schedule:
+    # Projects ページの GitHub リポジトリ一覧を最新化するため、毎日ビルド・デプロイする
+    - cron: '0 0 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - run: npm ci
+
+      - run: npm run build
+        env:
+          # GitHub API のレート制限を緩和するため（出力には含まれません）
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: site
+          path: dist
+
+  deploy:
+    needs: build
+    if: github.event_name != 'pull_request'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          name: site
+          path: dist
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - run: pip install -U "huggingface_hub[cli]"
+
+      - name: Deploy to Hugging Face Space
+        env:
+          HF_TOKEN: ${{ secrets.HF_TOKEN }}
+        run: |
+          hf upload spaces/mutomasa/engineering-research-portfolio dist/ . \
+            --commit-message "Deploy from GitHub Actions (${{ github.sha }})"

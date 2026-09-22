@@ -1,0 +1,55 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Icon from '../components/Icon.astro';
+import { publications } from '../data/publications';
+
+const items = [...publications].sort((a, b) => b.year - a.year);
+const kindLabel = { paper: 'Paper', poster: 'Poster', other: 'Research output' } as const;
+---
+
+<Layout title="Papers" description="Publications, posters and research outputs.">
+	<div class="page">
+		<h1 class="page-title">Papers</h1>
+		<p class="lead">論文・ポスター・研究成果の一覧です。</p>
+
+		{
+			items.length === 0 ? (
+				<div class="empty">
+					<p style="margin:0">
+						現在、掲載できる論文・ポスター・研究成果はありません。追加され次第ここに掲載します。
+					</p>
+				</div>
+			) : (
+				<ul class="pub-list">
+					{items.map((pub) => (
+						<li>
+							<article class="card">
+								<h2>
+									{pub.url ? (
+										<a href={pub.url} rel="noopener noreferrer">
+											{pub.title}
+										</a>
+									) : (
+										pub.title
+									)}
+								</h2>
+								<p>{pub.authors}</p>
+								<div class="meta">
+									<span class="badge">{kindLabel[pub.kind]}</span>
+									<span>{pub.venue}</span>
+									<span>{pub.year}</span>
+									{pub.url && (
+										<span>
+											<Icon name="external" size={14} />
+											<span class="visually-hidden">External link</span>
+										</span>
+									)}
+								</div>
+							</article>
+						</li>
+					))}
+				</ul>
+			)
+		}
+	</div>
+</Layout>

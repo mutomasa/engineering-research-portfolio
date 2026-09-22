@@ -1,0 +1,49 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Icon from '../components/Icon.astro';
+import { SITE } from '../consts';
+---
+
+<Layout title="About" description={`About ${SITE.name}: research areas and links.`}>
+	<div class="page">
+		<h1 class="page-title">About</h1>
+		<p class="lead">{SITE.name} — {SITE.title}</p>
+
+		<section class="about-section" aria-labelledby="areas">
+			<h2 id="areas">Research Areas</h2>
+			<ul class="tags">
+				{SITE.researchAreas.map((area) => <li class="tag">{area}</li>)}
+			</ul>
+		</section>
+
+		<section class="about-section" aria-labelledby="links">
+			<h2 id="links">Links</h2>
+			<ul class="card-grid">
+				<li>
+					<a class="card" href={SITE.github.url} rel="noopener noreferrer">
+						<span class="card-icon"><Icon name="github" /></span>
+						<h3>GitHub</h3>
+						<p>OSS・研究コード</p>
+						<span class="card-cta">@{SITE.github.user} <Icon name="external" size={16} /></span>
+					</a>
+				</li>
+				<li>
+					<a class="card" href={SITE.speakerdeck.url} rel="noopener noreferrer">
+						<span class="card-icon"><Icon name="slides" /></span>
+						<h3>Speaker Deck</h3>
+						<p>発表スライド・資料</p>
+						<span class="card-cta">@{SITE.speakerdeck.user} <Icon name="external" size={16} /></span>
+					</a>
+				</li>
+				<li>
+					<a class="card" href={SITE.huggingface.url} rel="noopener noreferrer">
+						<span class="card-icon"><Icon name="smile" /></span>
+						<h3>Hugging Face</h3>
+						<p>モデル・データセット・Spaces</p>
+						<span class="card-cta">@{SITE.huggingface.user} <Icon name="external" size={16} /></span>
+					</a>
+				</li>
+			</ul>
+		</section>
+	</div>
+</Layout>

@@ -1,0 +1,45 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { getPublishedPosts, formatDate } from '../../lib/blog';
+import { pageHref } from '../../lib/url';
+
+const posts = await getPublishedPosts();
+---
+
+<Layout title="Research Blog" description="研究日誌・論文解説・実験結果">
+	<div class="page">
+		<h1 class="page-title">Research Blog</h1>
+		<p class="lead">研究日誌・論文解説・実験結果を、新しい順に掲載しています。</p>
+
+		{
+			posts.length === 0 ? (
+				<div class="empty">
+					<p style="margin:0">記事はまだありません。</p>
+				</div>
+			) : (
+				<ul class="card-grid">
+					{posts.map((post) => (
+						<li>
+							<a class="card" href={pageHref(`/blog/${post.id}`)}>
+								<div class="meta">
+									<time datetime={post.data.pubDate.toISOString()}>
+										{formatDate(post.data.pubDate)}
+									</time>
+								</div>
+								<h2>{post.data.title}</h2>
+								<p>{post.data.description}</p>
+								{post.data.tags.length > 0 && (
+									<ul class="tags" style="margin-top:auto;padding-top:0.5rem">
+										{post.data.tags.map((tag) => (
+											<li class="tag">{tag}</li>
+										))}
+									</ul>
+								)}
+							</a>
+						</li>
+					))}
+				</ul>
+			)
+		}
+	</div>
+</Layout>

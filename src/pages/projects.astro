@@ -1,0 +1,140 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Icon from '../components/Icon.astro';
+import { SITE } from '../consts';
+import { getPublicRepos } from '../lib/github';
+import { formatDate } from '../lib/blog';
+
+const result = await getPublicRepos();
+const repos = result.ok ? result.repos : [];
+---
+
+<Layout title="Projects" description={`Public repositories by ${SITE.github.user} on GitHub.`}>
+	<div class="page">
+		<h1 class="page-title">Projects</h1>
+		<p class="lead">
+			GitHub の公開リポジトリ（<a href={SITE.github.url} rel="noopener noreferrer"
+				>@{SITE.github.user}</a
+			>）を、更新日時の新しい順に表示しています。
+		</p>
+
+		{
+			!result.ok || repos.length === 0 ? (
+				<div class="notice" role="alert">
+					<p>
+						<strong>
+							{result.ok
+								? '公開リポジトリが見つかりませんでした。'
+								: 'リポジトリ一覧を取得できませんでした。'}
+						</strong>
+					</p>
+					{!result.ok && <p>({result.error})</p>}
+					<p>
+						<a class="text-link" href={SITE.github.reposUrl} rel="noopener noreferrer">
+							<Icon name="github" size={18} /> GitHub のリポジトリ一覧を開く
+						</a>
+					</p>
+				</div>
+			) : (
+				<>
+					{/* JS が無効な環境では検索欄を出さず、一覧のみ表示する */}
+					<form class="search" role="search" id="repo-search-form" hidden>
+						<div class="search-field">
+							<label class="visually-hidden" for="repo-search">
+								Search repositories by name, description or language
+							</label>
+							<Icon name="search" size={18} />
+							<input
+								id="repo-search"
+								type="search"
+								placeholder="Search repositories"
+								autocomplete="off"
+							/>
+						</div>
+					</form>
+
+					<p class="result-count" id="repo-count" aria-live="polite">
+						{repos.length} repositories
+					</p>
+
+					<ul class="card-grid" id="repo-list">
+						{repos.map((repo) => (
+							<li
+								data-search={[repo.name, repo.description, repo.language]
+									.filter(Boolean)
+									.join(' ')
+									.toLowerCase()}
+							>
+								<article class="card repo">
+									<h2>
+										<a href={repo.url} rel="noopener noreferrer">
+											{repo.name}
+										</a>
+										{repo.fork && <span class="badge">Fork</span>}
+										{repo.archived && <span class="badge">Archived</span>}
+									</h2>
+									<p>{repo.description ?? 'No description'}</p>
+									<div class="meta">
+										{repo.language && <span>{repo.language}</span>}
+										<span>
+											<Icon name="star" size={14} />
+											<span class="visually-hidden">Stars:</span>
+											{repo.stars}
+										</span>
+										<span>
+											Updated <time datetime={repo.updatedAt}>{formatDate(repo.updatedAt)}</time>
+										</span>
+									</div>
+								</article>
+							</li>
+						))}
+					</ul>
+
+					<p class="empty" id="repo-empty" hidden>
+						No repositories match your search.
+					</p>
+
+					<p class="result-count" style="margin-top:1.5rem">
+						Fetched from the GitHub REST API on <time datetime={result.fetchedAt}
+							>{formatDate(result.fetchedAt)}</time
+						>.
+					</p>
+				</>
+			)
+		}
+	</div>
+</Layout>
+
+<script>
+	const form = document.querySelector<HTMLFormElement>('#repo-search-form');
+	const input = document.querySelector<HTMLInputElement>('#repo-search');
+	const count = document.querySelector<HTMLElement>('#repo-count');
+	const empty = document.querySelector<HTMLElement>('#repo-empty');
+	const items = Array.from(
+		document.querySelectorAll<HTMLLIElement>('#repo-list > li[data-search]'),
+	);
+
+	if (form && input && count && empty && items.length > 0) {
+		form.hidden = false;
+		form.addEventListener('submit', (event) => event.preventDefault());
+
+		const apply = () => {
+			// スペース区切りの語をすべて含むものを表示（AND 検索）
+			const terms = input.value.toLowerCase().split(/\s+/).filter(Boolean);
+			let visible = 0;
+			for (const item of items) {
+				const haystack = item.dataset.search ?? '';
+				const match = terms.every((term) => haystack.includes(term));
+				item.hidden = !match;
+				if (match) visible++;
+			}
+			count.textContent =
+				terms.length === 0
+					? `${items.length} repositories`
+					: `${visible} of ${items.length} repositories`;
+			empty.hidden = visible > 0;
+		};
+
+		input.addEventListener('input', apply);
+	}
+</script>

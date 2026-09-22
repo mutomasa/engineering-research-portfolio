@@ -1,11 +1,106 @@
 ---
-import Welcome from '../components/Welcome.astro';
 import Layout from '../layouts/Layout.astro';
+import Icon from '../components/Icon.astro';
+import type { IconName } from '../components/Icon.astro';
+import { SITE } from '../consts';
+import { pageHref } from '../lib/url';
 
-// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
-// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
+interface HomeCard {
+	icon: IconName;
+	title: string;
+	text: string;
+	href?: string;
+	external?: boolean;
+}
+
+const cards: HomeCard[] = [
+	{
+		icon: 'code',
+		title: 'Projects',
+		text: 'GitHubと自動連携したOSS・研究コード一覧',
+		href: '/projects',
+	},
+	{
+		icon: 'server',
+		title: 'Home Lab',
+		text: 'OSS分散計算・最適化・AI・Lakehouse基盤',
+		href: '/lab',
+	},
+	{
+		icon: 'pen',
+		title: 'Research Blog',
+		text: '研究日誌・論文解説・実験結果',
+		href: '/blog',
+	},
+	{
+		icon: 'file',
+		title: 'Publications',
+		text: '論文・ポスター・研究成果',
+		href: '/papers',
+	},
+	{
+		icon: 'slides',
+		title: 'Presentations',
+		text: 'Speaker Deckで公開している発表スライド・資料',
+		href: '/presentations',
+	},
+	{
+		icon: 'play',
+		title: 'Live Demos',
+		text: 'Hugging Face Spacesで動くAIデモ',
+		href: SITE.huggingface.spacesUrl,
+		external: true,
+	},
+];
 ---
 
 <Layout>
-	<Welcome />
+	<section class="hero" aria-labelledby="hero-title">
+		<p class="eyebrow">{SITE.name} — {SITE.title}</p>
+		<h1 class="page-title" id="hero-title">Research &amp; Engineering</h1>
+		<p class="lead" style="margin-bottom:0">{SITE.researchAreas.join(' · ')}</p>
+	</section>
+
+	<ul class="card-grid">
+		{
+			cards.map((card) => (
+				<li>
+					{card.href ? (
+						<a
+							class="card"
+							href={card.external ? card.href : pageHref(card.href)}
+							target={card.external ? '_blank' : undefined}
+							rel={card.external ? 'noopener noreferrer' : undefined}
+						>
+							<span class="card-icon">
+								<Icon name={card.icon} />
+							</span>
+							<h2>{card.title}</h2>
+							<p>{card.text}</p>
+							<span class="card-cta">
+								{card.external ? (
+									<>
+										Open Spaces <Icon name="external" size={16} />
+										<span class="visually-hidden">(opens in a new tab)</span>
+									</>
+								) : (
+									<>
+										View <Icon name="arrow" size={16} />
+									</>
+								)}
+							</span>
+						</a>
+					) : (
+						<div class="card">
+							<span class="card-icon">
+								<Icon name={card.icon} />
+							</span>
+							<h2>{card.title}</h2>
+							<p>{card.text}</p>
+						</div>
+					)}
+				</li>
+			))
+		}
+	</ul>
 </Layout>
