@@ -33,6 +33,7 @@ export const NAV = [
 	{ label: 'Home', href: '/' },
 	{ label: 'Projects', href: '/projects' },
 	{ label: 'Home Lab', href: '/lab' },
+	{ label: 'Equipment', href: '/equipment' },
 	{ label: 'Research Blog', href: '/blog' },
 	{ label: 'Papers', href: '/papers' },
 	{ label: 'Presentations', href: '/presentations' },

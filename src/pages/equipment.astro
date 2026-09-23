@@ -1,0 +1,53 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Icon from '../components/Icon.astro';
+import { equipment } from '../data/equipment';
+
+const inUse = equipment.filter((item) => !item.arriving);
+const arriving = equipment.filter((item) => item.arriving);
+const sections = [
+	{ id: 'in-use', title: 'In Use', items: inUse },
+	{ id: 'arriving', title: 'Arriving Soon', items: arriving },
+].filter((section) => section.items.length > 0);
+---
+
+<Layout title="Robots & Equipment" description="Robots and devices I use for research on robot foundation models and spatial AI.">
+	<div class="page">
+		<h1 class="page-title">Robots &amp; Equipment</h1>
+		<p class="lead">Robots and devices I use for research on robot foundation models and spatial AI.</p>
+
+		{
+			sections.map((section) => (
+				<section class="about-section" aria-labelledby={section.id}>
+					<h2 id={section.id}>{section.title}</h2>
+					<ul class="card-grid">
+						{section.items.map((item) => (
+							<li>
+								<article class="card">
+									<div class="meta">
+										<span class="badge">{item.category}</span>
+										{item.arriving && <span>Expected: {item.arriving}</span>}
+									</div>
+									<h3>
+										{item.url ? (
+											<a href={item.url} target="_blank" rel="noopener noreferrer">
+												{item.name} <Icon name="external" size={14} />
+												<span class="visually-hidden">(opens in a new tab)</span>
+											</a>
+										) : (
+											item.name
+										)}
+									</h3>
+									<p>{item.purpose}</p>
+									<ul class="tags" aria-label="Research areas">
+										{item.areas.map((area) => <li class="tag">{area}</li>)}
+									</ul>
+								</article>
+							</li>
+						))}
+					</ul>
+				</section>
+			))
+		}
+	</div>
+</Layout>
