@@ -17,7 +17,16 @@ export const SITE = {
 		url: 'https://huggingface.co/mutomasa',
 		spacesUrl: 'https://huggingface.co/mutomasa/spaces',
 	},
-	researchAreas: ['Physical AI', 'World Models', 'AI Agents', 'Knowledge Science'],
+	researchThemes: ['Robot Foundation Models', 'Spatial AI'],
+	researchAreas: [
+		'Robot Foundation Models',
+		'Vision-Language-Action (VLA)',
+		'World Models',
+		'Tactile Sensing',
+		'Spatial AI',
+		'Scene Graphs',
+		'Gaussian Splatting',
+	],
 } as const;
 
 export const NAV = [
