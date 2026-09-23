@@ -26,7 +26,7 @@ export const equipment: Equipment[] = [
 		areas: ['SLAM', 'ROS 2', 'Mixed Reality'],
 	},
 	{
-		name: 'Intel RealSense',
+		name: 'Intel RealSense D435',
 		category: 'Depth Camera',
 		purpose: 'Recording SO-101 tactile manipulation tasks for research datasets.',
 		areas: ['Tactile Sensing', 'Data Collection'],
