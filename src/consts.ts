@@ -37,5 +37,6 @@ export const NAV = [
 	{ label: 'Research Blog', href: '/blog' },
 	{ label: 'Papers', href: '/papers' },
 	{ label: 'Presentations', href: '/presentations' },
+	{ label: 'Volunteer', href: '/volunteer' },
 	{ label: 'About', href: '/about' },
 ] as const;
