@@ -2,25 +2,35 @@
 import Layout from '../../layouts/Layout.astro';
 import { getPublishedPosts, formatDate } from '../../lib/blog';
 import { pageHref } from '../../lib/url';
+import T from '../../components/T.astro';
 
 const posts = await getPublishedPosts();
 ---
 
-<Layout title="Research Blog" description="研究日誌・論文解説・実験結果">
+<Layout
+	title="Research Blog"
+	titleJa="研究ブログ"
+	description="Research notes, paper explainers and experiment results."
+>
 	<div class="page">
-		<h1 class="page-title">Research Blog</h1>
-		<p class="lead">研究日誌・論文解説・実験結果を、新しい順に掲載しています。</p>
+		<h1 class="page-title"><T en="Research Blog" ja="研究ブログ" /></h1>
+		<p class="lead">
+			<T
+				en="Research notes, paper explainers and experiment results, newest first. Posts are written in English."
+				ja="研究日誌・論文解説・実験結果を、新しい順に掲載しています。記事は英語で書いています。"
+			/>
+		</p>
 
 		{
 			posts.length === 0 ? (
 				<div class="empty">
-					<p style="margin:0">記事はまだありません。</p>
+					<p style="margin:0"><T en="No posts yet." ja="記事はまだありません。" /></p>
 				</div>
 			) : (
 				<ul class="card-grid">
 					{posts.map((post) => (
 						<li>
-							<a class="card" href={pageHref(`/blog/${post.id}`)}>
+							<a class="card" href={pageHref(`/blog/${post.id}`)} lang="en">
 								<div class="meta">
 									<time datetime={post.data.pubDate.toISOString()}>
 										{formatDate(post.data.pubDate)}

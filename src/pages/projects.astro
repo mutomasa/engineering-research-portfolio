@@ -1,6 +1,7 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import Icon from '../components/Icon.astro';
+import T from '../components/T.astro';
 import { SITE } from '../consts';
 import { getPublicRepos } from '../lib/github';
 import { formatDate } from '../lib/blog';
@@ -9,13 +10,22 @@ const result = await getPublicRepos();
 const repos = result.ok ? result.repos : [];
 ---
 
-<Layout title="Projects" description={`Public repositories by ${SITE.github.user} on GitHub.`}>
+<Layout title="Projects" titleJa="プロジェクト" description={`Public repositories by ${SITE.github.user} on GitHub.`}>
 	<div class="page">
-		<h1 class="page-title">Projects</h1>
+		<h1 class="page-title"><T en="Projects" ja="プロジェクト" /></h1>
 		<p class="lead">
-			GitHub の公開リポジトリ（<a href={SITE.github.url} rel="noopener noreferrer"
-				>@{SITE.github.user}</a
-			>）を、更新日時の新しい順に表示しています。
+			<T>
+				<Fragment slot="en">
+					Public GitHub repositories (<a href={SITE.github.url} rel="noopener noreferrer"
+						>@{SITE.github.user}</a
+					>), most recently updated first.
+				</Fragment>
+				<Fragment slot="ja">
+					GitHub の公開リポジトリ（<a href={SITE.github.url} rel="noopener noreferrer"
+						>@{SITE.github.user}</a
+					>）を、更新日時の新しい順に表示しています。
+				</Fragment>
+			</T>
 		</p>
 
 		{
@@ -23,15 +33,18 @@ const repos = result.ok ? result.repos : [];
 				<div class="notice" role="alert">
 					<p>
 						<strong>
-							{result.ok
-								? '公開リポジトリが見つかりませんでした。'
-								: 'リポジトリ一覧を取得できませんでした。'}
+							{result.ok ? (
+									<T en="No public repositories found." ja="公開リポジトリが見つかりませんでした。" />
+								) : (
+									<T en="Could not fetch the repository list." ja="リポジトリ一覧を取得できませんでした。" />
+								)}
 						</strong>
 					</p>
 					{!result.ok && <p>({result.error})</p>}
 					<p>
 						<a class="text-link" href={SITE.github.reposUrl} rel="noopener noreferrer">
-							<Icon name="github" size={18} /> GitHub のリポジトリ一覧を開く
+							<Icon name="github" size={18} />
+							<T en="Open the repository list on GitHub" ja="GitHub のリポジトリ一覧を開く" />
 						</a>
 					</p>
 				</div>
@@ -41,20 +54,26 @@ const repos = result.ok ? result.repos : [];
 					<form class="search" role="search" id="repo-search-form" hidden>
 						<div class="search-field">
 							<label class="visually-hidden" for="repo-search">
-								Search repositories by name, description or language
+								<T
+									en="Search repositories by name, description or language"
+									ja="名前・説明・言語でリポジトリを検索"
+								/>
 							</label>
 							<Icon name="search" size={18} />
 							<input
 								id="repo-search"
 								type="search"
 								placeholder="Search repositories"
+								data-i18n-attr="placeholder"
+								data-en="Search repositories"
+								data-ja="リポジトリを検索"
 								autocomplete="off"
 							/>
 						</div>
 					</form>
 
 					<p class="result-count" id="repo-count" aria-live="polite">
-						{repos.length} repositories
+						<T en={`${repos.length} repositories`} ja={`${repos.length} 件のリポジトリ`} />
 					</p>
 
 					<ul class="card-grid" id="repo-list">
@@ -70,19 +89,27 @@ const repos = result.ok ? result.repos : [];
 										<a href={repo.url} rel="noopener noreferrer">
 											{repo.name}
 										</a>
-										{repo.fork && <span class="badge">Fork</span>}
-										{repo.archived && <span class="badge">Archived</span>}
+										{repo.fork && (
+										<span class="badge">
+											<T en="Fork" ja="フォーク" />
+										</span>
+									)}
+										{repo.archived && (
+										<span class="badge">
+											<T en="Archived" ja="アーカイブ済み" />
+										</span>
+									)}
 									</h2>
-									<p>{repo.description ?? 'No description'}</p>
+									<p>{repo.description ?? <T en="No description" ja="説明なし" />}</p>
 									<div class="meta">
 										{repo.language && <span>{repo.language}</span>}
 										<span>
 											<Icon name="star" size={14} />
-											<span class="visually-hidden">Stars:</span>
+											<span class="visually-hidden"><T en="Stars:" ja="スター数:" /></span>
 											{repo.stars}
 										</span>
 										<span>
-											Updated <time datetime={repo.updatedAt}>{formatDate(repo.updatedAt)}</time>
+											<T en="Updated" ja="更新" /> <time datetime={repo.updatedAt}>{formatDate(repo.updatedAt)}</time>
 										</span>
 									</div>
 								</article>
@@ -91,13 +118,20 @@ const repos = result.ok ? result.repos : [];
 					</ul>
 
 					<p class="empty" id="repo-empty" hidden>
-						No repositories match your search.
+						<T en="No repositories match your search." ja="検索に一致するリポジトリはありません。" />
 					</p>
 
 					<p class="result-count" style="margin-top:1.5rem">
-						Fetched from the GitHub REST API on <time datetime={result.fetchedAt}
-							>{formatDate(result.fetchedAt)}</time
-						>.
+						<T>
+							<Fragment slot="en">
+								Fetched from the GitHub REST API on <time datetime={result.fetchedAt}
+									>{formatDate(result.fetchedAt)}</time
+								>.
+							</Fragment>
+							<Fragment slot="ja">
+								<time datetime={result.fetchedAt}>{formatDate(result.fetchedAt)}</time> に GitHub REST API から取得しました。
+							</Fragment>
+						</T>
 					</p>
 				</>
 			)
@@ -106,6 +140,8 @@ const repos = result.ok ? result.repos : [];
 </Layout>
 
 <script>
+	import { getLang } from '../lib/i18n';
+
 	const form = document.querySelector<HTMLFormElement>('#repo-search-form');
 	const input = document.querySelector<HTMLInputElement>('#repo-search');
 	const count = document.querySelector<HTMLElement>('#repo-count');
@@ -128,13 +164,19 @@ const repos = result.ok ? result.repos : [];
 				item.hidden = !match;
 				if (match) visible++;
 			}
+			const ja = getLang() === 'ja';
 			count.textContent =
 				terms.length === 0
-					? `${items.length} repositories`
-					: `${visible} of ${items.length} repositories`;
+					? ja
+						? `${items.length} 件のリポジトリ`
+						: `${items.length} repositories`
+					: ja
+						? `${items.length} 件中 ${visible} 件のリポジトリ`
+						: `${visible} of ${items.length} repositories`;
 			empty.hidden = visible > 0;
 		};
 
 		input.addEventListener('input', apply);
+		document.addEventListener('langchange', apply);
 	}
 </script>

@@ -1,0 +1,17 @@
+---
+// 英語・日本語の両方を出力し、表示中の言語だけを見せる（切り替えは Layout のスクリプトと global.css）。
+// 短い文字列は en / ja 属性、リンクなどを含む場合は slot="en" / slot="ja" で渡す。
+interface Props {
+	en?: string;
+	ja?: string;
+	/** 段落や記事全体など、ブロック要素で囲む場合に指定する */
+	block?: boolean;
+}
+
+const { en, ja, block = false } = Astro.props;
+const Tag = block ? 'div' : 'span';
+---
+
+<Tag data-lang-only="en" lang="en"><slot name="en">{en}</slot></Tag><Tag data-lang-only="ja" lang="ja"
+	><slot name="ja">{ja}</slot></Tag
+>

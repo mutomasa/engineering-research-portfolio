@@ -2,24 +2,26 @@
 import { getEntry, render } from 'astro:content';
 import Layout from '../layouts/Layout.astro';
 import Icon from '../components/Icon.astro';
+import T from '../components/T.astro';
 
-const entry = await getEntry('lab', 'home-lab');
-if (!entry) throw new Error('src/content/lab/home-lab.md が見つかりません');
+// 英語版と日本語版をそれぞれ src/content/lab/{en,ja}/home-lab.md に置く
+const [en, ja] = await Promise.all([getEntry('lab', 'en/home-lab'), getEntry('lab', 'ja/home-lab')]);
+if (!en || !ja) throw new Error('src/content/lab/{en,ja}/home-lab.md が見つかりません');
 
-const { Content } = await render(entry);
-const { title, description } = entry.data;
+const [{ Content: ContentEn }, { Content: ContentJa }] = await Promise.all([render(en), render(ja)]);
 ---
 
-<Layout title={title} description={description}>
+<Layout title={en.data.title} titleJa={ja.data.title} description={en.data.description}>
 	<article class="page">
 		<p class="eyebrow">
-			<a class="text-link" href="/"><Icon name="back" size={16} /> Home</a>
+			<a class="text-link" href="/"><Icon name="back" size={16} /> <T en="Home" ja="ホーム" /></a>
 		</p>
-		<h1 class="page-title">{title}</h1>
-		<p class="lead">{description}</p>
+		<h1 class="page-title"><T en={en.data.title} ja={ja.data.title} /></h1>
+		<p class="lead"><T en={en.data.description} ja={ja.data.description} /></p>
 
-		<div class="prose prose-wide">
-			<Content />
-		</div>
+		<T block>
+			<div class="prose prose-wide" slot="en"><ContentEn /></div>
+			<div class="prose prose-wide" slot="ja"><ContentJa /></div>
+		</T>
 	</article>
 </Layout>

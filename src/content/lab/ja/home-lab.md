@@ -1,5 +1,5 @@
 ---
-title: 'Home Lab'
+title: 'ホームラボ'
 description: 'Ubuntuホスト1台に複数のVMを構築し、OSSベースの分散計算環境を段階的に構築するプロジェクト'
 ---
 

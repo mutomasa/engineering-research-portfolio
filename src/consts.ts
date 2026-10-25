@@ -1,6 +1,7 @@
 export const SITE = {
 	name: 'Masahiro Muto',
 	title: 'AI Engineer & Robotics Researcher · Quantum Technology Enthusiast',
+	titleJa: 'AIエンジニア・ロボティクス研究者・量子技術愛好家',
 	description:
 		'Research portfolio of Masahiro Muto: Physical AI, World Models, AI Agents and Knowledge Science.',
 	github: {
@@ -30,13 +31,13 @@ export const SITE = {
 } as const;
 
 export const NAV = [
-	{ label: 'Home', href: '/' },
-	{ label: 'Projects', href: '/projects' },
-	{ label: 'Home Lab', href: '/lab' },
-	{ label: 'Equipment', href: '/equipment' },
-	{ label: 'Research Blog', href: '/blog' },
-	{ label: 'Papers', href: '/papers' },
-	{ label: 'Presentations', href: '/presentations' },
-	{ label: 'Volunteer', href: '/volunteer' },
-	{ label: 'About', href: '/about' },
+	{ label: 'Home', labelJa: 'ホーム', href: '/' },
+	{ label: 'Projects', labelJa: 'プロジェクト', href: '/projects' },
+	{ label: 'Home Lab', labelJa: 'ホームラボ', href: '/lab' },
+	{ label: 'Equipment', labelJa: '機材', href: '/equipment' },
+	{ label: 'Research Blog', labelJa: '研究ブログ', href: '/blog' },
+	{ label: 'Papers', labelJa: '論文', href: '/papers' },
+	{ label: 'Presentations', labelJa: '発表資料', href: '/presentations' },
+	{ label: 'Volunteer', labelJa: 'ボランティア', href: '/volunteer' },
+	{ label: 'About', labelJa: 'プロフィール', href: '/about' },
 ] as const;

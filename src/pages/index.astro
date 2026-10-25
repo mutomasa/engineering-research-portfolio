@@ -2,13 +2,16 @@
 import Layout from '../layouts/Layout.astro';
 import Icon from '../components/Icon.astro';
 import type { IconName } from '../components/Icon.astro';
+import T from '../components/T.astro';
 import { SITE } from '../consts';
 import { pageHref } from '../lib/url';
 
 interface HomeCard {
 	icon: IconName;
 	title: string;
+	titleJa: string;
 	text: string;
+	textJa: string;
 	href?: string;
 	external?: boolean;
 }
@@ -17,49 +20,65 @@ const cards: HomeCard[] = [
 	{
 		icon: 'code',
 		title: 'Projects',
-		text: 'GitHubと自動連携したOSS・研究コード一覧',
+		titleJa: 'プロジェクト',
+		text: 'Open-source and research code, synced automatically from GitHub',
+		textJa: 'GitHubと自動連携したOSS・研究コード一覧',
 		href: '/projects',
 	},
 	{
 		icon: 'server',
 		title: 'Home Lab',
-		text: 'OSS分散計算・最適化・AI・Lakehouse基盤',
+		titleJa: 'ホームラボ',
+		text: 'An OSS platform for distributed computing, optimization, AI and a lakehouse',
+		textJa: 'OSS分散計算・最適化・AI・Lakehouse基盤',
 		href: '/lab',
 	},
 	{
 		icon: 'bot',
 		title: 'Robots & Equipment',
-		text: '研究に使っているロボット・センサー・XR機材',
+		titleJa: 'ロボット・機材',
+		text: 'Robots, sensors and XR devices I use for research',
+		textJa: '研究に使っているロボット・センサー・XR機材',
 		href: '/equipment',
 	},
 	{
 		icon: 'pen',
 		title: 'Research Blog',
-		text: '研究日誌・論文解説・実験結果',
+		titleJa: '研究ブログ',
+		text: 'Research notes, paper explainers and experiment results',
+		textJa: '研究日誌・論文解説・実験結果',
 		href: '/blog',
 	},
 	{
 		icon: 'file',
 		title: 'Publications',
-		text: '論文・ポスター・研究成果',
+		titleJa: '論文・研究成果',
+		text: 'Papers, posters and research outputs',
+		textJa: '論文・ポスター・研究成果',
 		href: '/papers',
 	},
 	{
 		icon: 'slides',
 		title: 'Presentations',
-		text: 'Speaker Deckで公開している発表スライド・資料',
+		titleJa: '発表資料',
+		text: 'Slides and talks published on Speaker Deck',
+		textJa: 'Speaker Deckで公開している発表スライド・資料',
 		href: '/presentations',
 	},
 	{
 		icon: 'heart',
 		title: 'Volunteer',
-		text: 'JAISTの研究者・起業を志す方への技術支援ボランティア',
+		titleJa: 'ボランティア',
+		text: 'Volunteer technical support for researchers and aspiring entrepreneurs at JAIST',
+		textJa: 'JAISTの研究者・起業を志す方への技術支援ボランティア',
 		href: '/volunteer',
 	},
 	{
 		icon: 'play',
 		title: 'Live Demos',
-		text: 'Hugging Face Spacesで動くAIデモ',
+		titleJa: 'ライブデモ',
+		text: 'AI demos running on Hugging Face Spaces',
+		textJa: 'Hugging Face Spacesで動くAIデモ',
 		href: SITE.huggingface.spacesUrl,
 		external: true,
 	},
@@ -68,7 +87,7 @@ const cards: HomeCard[] = [
 
 <Layout>
 	<section class="hero" aria-labelledby="hero-title">
-		<p class="eyebrow">{SITE.name} — {SITE.title}</p>
+		<p class="eyebrow">{SITE.name} — <T en={SITE.title} ja={SITE.titleJa} /></p>
 		<h1 class="page-title" id="hero-title">Research &amp; Engineering</h1>
 		<p class="lead" style="margin-bottom:0">{SITE.researchThemes.join(' · ')}</p>
 	</section>
@@ -87,17 +106,17 @@ const cards: HomeCard[] = [
 							<span class="card-icon">
 								<Icon name={card.icon} />
 							</span>
-							<h2>{card.title}</h2>
-							<p>{card.text}</p>
+							<h2><T en={card.title} ja={card.titleJa} /></h2>
+							<p><T en={card.text} ja={card.textJa} /></p>
 							<span class="card-cta">
 								{card.external ? (
 									<>
-										Open Spaces <Icon name="external" size={16} />
-										<span class="visually-hidden">(opens in a new tab)</span>
+										<T en="Open Spaces" ja="Spacesを開く" /> <Icon name="external" size={16} />
+										<span class="visually-hidden"><T en="(opens in a new tab)" ja="（新しいタブで開きます）" /></span>
 									</>
 								) : (
 									<>
-										View <Icon name="arrow" size={16} />
+										<T en="View" ja="見る" /> <Icon name="arrow" size={16} />
 									</>
 								)}
 							</span>
@@ -107,8 +126,8 @@ const cards: HomeCard[] = [
 							<span class="card-icon">
 								<Icon name={card.icon} />
 							</span>
-							<h2>{card.title}</h2>
-							<p>{card.text}</p>
+							<h2><T en={card.title} ja={card.titleJa} /></h2>
+							<p><T en={card.text} ja={card.textJa} /></p>
 						</div>
 					)}
 				</li>

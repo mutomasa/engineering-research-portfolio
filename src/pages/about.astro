@@ -1,45 +1,64 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import Icon from '../components/Icon.astro';
+import T from '../components/T.astro';
 import { SITE } from '../consts';
 ---
 
-<Layout title="About" description={`About ${SITE.name}: research areas and links.`}>
+<Layout title="About" titleJa="プロフィール" description={`About ${SITE.name}: research areas and links.`}>
 	<div class="page">
-		<h1 class="page-title">About</h1>
-		<p class="lead">{SITE.name} — {SITE.title}</p>
+		<h1 class="page-title"><T en="About" ja="プロフィール" /></h1>
+		<p class="lead">{SITE.name} — <T en={SITE.title} ja={SITE.titleJa} /></p>
 
 		<section class="about-section" aria-labelledby="affiliation">
-			<h2 id="affiliation">Affiliation</h2>
-			<p>
-				Member of the <a href="https://www.jaist.ac.jp/robot/index.php" target="_blank" rel="noopener noreferrer">Chong Lab (Intelligent Robotics Laboratory)</a> at the Japan Advanced Institute of Science and Technology (JAIST).
-			</p>
-			<p>My research focuses on the following themes:</p>
-			<ul>
-				<li>
-					<strong>Robot Foundation Models</strong> — Vision-Language-Action (VLA) models, world models, and tactile sensing
-				</li>
-				<li>
-					<strong>Spatial AI</strong> — scene graphs and Gaussian Splatting for robotics
-				</li>
-			</ul>
+			<h2 id="affiliation"><T en="Affiliation" ja="所属" /></h2>
+			<T block>
+				<Fragment slot="en">
+					<p>
+						Member of the <a href="https://www.jaist.ac.jp/robot/index.php" target="_blank" rel="noopener noreferrer">Chong Lab (Intelligent Robotics Laboratory)</a> at the Japan Advanced Institute of Science and Technology (JAIST).
+					</p>
+					<p>My research focuses on the following themes:</p>
+					<ul>
+						<li>
+							<strong>Robot Foundation Models</strong> — Vision-Language-Action (VLA) models, world models, and tactile sensing
+						</li>
+						<li>
+							<strong>Spatial AI</strong> — scene graphs and Gaussian Splatting for robotics
+						</li>
+					</ul>
+				</Fragment>
+				<Fragment slot="ja">
+					<p>
+						北陸先端科学技術大学院大学（JAIST）の<a href="https://www.jaist.ac.jp/robot/index.php" target="_blank" rel="noopener noreferrer">知能ロボティクス研究室（Chong Lab）</a>に所属しています。
+					</p>
+					<p>主に次のテーマで研究しています。</p>
+					<ul>
+						<li>
+							<strong>ロボット基盤モデル</strong> — Vision-Language-Action（VLA）モデル、世界モデル、触覚センシング
+						</li>
+						<li>
+							<strong>空間AI</strong> — ロボティクスのためのシーングラフとGaussian Splatting
+						</li>
+					</ul>
+				</Fragment>
+			</T>
 		</section>
 
 		<section class="about-section" aria-labelledby="areas">
-			<h2 id="areas">Research Areas</h2>
+			<h2 id="areas"><T en="Research Areas" ja="研究分野" /></h2>
 			<ul class="tags">
 				{SITE.researchAreas.map((area) => <li class="tag">{area}</li>)}
 			</ul>
 		</section>
 
 		<section class="about-section" aria-labelledby="links">
-			<h2 id="links">Links</h2>
+			<h2 id="links"><T en="Links" ja="リンク" /></h2>
 			<ul class="card-grid">
 				<li>
 					<a class="card" href={SITE.github.url} target="_blank" rel="noopener noreferrer">
 						<span class="card-icon"><Icon name="github" /></span>
 						<h3>GitHub</h3>
-						<p>OSS・研究コード</p>
+						<p><T en="Open-source and research code" ja="OSS・研究コード" /></p>
 						<span class="card-cta">@{SITE.github.user} <Icon name="external" size={16} /></span>
 					</a>
 				</li>
@@ -47,7 +66,7 @@ import { SITE } from '../consts';
 					<a class="card" href={SITE.speakerdeck.url} target="_blank" rel="noopener noreferrer">
 						<span class="card-icon"><Icon name="slides" /></span>
 						<h3>Speaker Deck</h3>
-						<p>発表スライド・資料</p>
+						<p><T en="Slides and presentation materials" ja="発表スライド・資料" /></p>
 						<span class="card-cta">@{SITE.speakerdeck.user} <Icon name="external" size={16} /></span>
 					</a>
 				</li>
@@ -55,7 +74,7 @@ import { SITE } from '../consts';
 					<a class="card" href={SITE.huggingface.url} target="_blank" rel="noopener noreferrer">
 						<span class="card-icon"><Icon name="smile" /></span>
 						<h3>Hugging Face</h3>
-						<p>モデル・データセット・Spaces</p>
+						<p><T en="Models, datasets and Spaces" ja="モデル・データセット・Spaces" /></p>
 						<span class="card-cta">@{SITE.huggingface.user} <Icon name="external" size={16} /></span>
 					</a>
 				</li>

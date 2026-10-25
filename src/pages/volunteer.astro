@@ -1,23 +1,18 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import T from '../components/T.astro';
 ---
 
 <Layout
 	title="Volunteer"
+	titleJa="ボランティア"
 	description="Technical support volunteering for researchers and aspiring entrepreneurs at JAIST, drawing on 25+ years of engineering experience."
 >
 	<div class="page">
-		<h1 class="page-title">Volunteer</h1>
-		<p class="lead">Technical support volunteering at JAIST · 技術支援ボランティア</p>
+		<h1 class="page-title"><T en="Volunteer" ja="ボランティア" /></h1>
+		<p class="lead"><T en="Technical support volunteering at JAIST" ja="JAISTでの技術支援ボランティア" /></p>
 
-		<nav aria-label="Language">
-			<ul class="tags">
-				<li><a class="tag" href="#en">English</a></li>
-				<li><a class="tag" href="#ja" lang="ja">日本語</a></li>
-			</ul>
-		</nav>
-
-		<article class="prose about-section" id="en" lang="en" aria-labelledby="en-title">
+		<article class="prose about-section" id="en" lang="en" data-lang-only="en" aria-labelledby="en-title">
 			<h2 id="en-title">
 				Bringing 25+ Years of Engineering Experience to Research and the Future of the Region: Starting Technical Support Volunteering at JAIST
 			</h2>
@@ -124,7 +119,7 @@ import Layout from '../layouts/Layout.astro';
 			</p>
 		</article>
 
-		<article class="prose about-section" id="ja" lang="ja" aria-labelledby="ja-title">
+		<article class="prose about-section" id="ja" lang="ja" data-lang-only="ja" aria-labelledby="ja-title">
 			<h2 id="ja-title">25年以上のエンジニアリング経験を、研究と地域の未来へ。JAISTで技術支援ボランティアを始めます</h2>
 			<p class="meta">Masahiro Muto（武藤 雅裕）｜2026年9月</p>
 

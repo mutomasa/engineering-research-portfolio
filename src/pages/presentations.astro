@@ -1,6 +1,7 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import Icon from '../components/Icon.astro';
+import T from '../components/T.astro';
 import { SITE } from '../consts';
 import { getDecks } from '../lib/speakerdeck';
 import { formatDate } from '../lib/blog';
@@ -9,12 +10,20 @@ const result = await getDecks();
 const decks = result.ok ? result.decks : [];
 ---
 
-<Layout title="Presentations" description="Slides and talks published on Speaker Deck.">
+<Layout title="Presentations" titleJa="発表資料" description="Slides and talks published on Speaker Deck.">
 	<div class="page">
-		<h1 class="page-title">Presentations</h1>
+		<h1 class="page-title"><T en="Presentations" ja="発表資料" /></h1>
 		<p class="lead">
-			発表スライド・資料を <a href={SITE.speakerdeck.url} rel="noopener noreferrer">Speaker Deck</a>
-			で公開しています。公開日の新しい順に表示しています。
+			<T>
+				<Fragment slot="en">
+					Slides and talks published on <a href={SITE.speakerdeck.url} rel="noopener noreferrer">Speaker Deck</a>, most
+					recent first.
+				</Fragment>
+				<Fragment slot="ja">
+					発表スライド・資料を <a href={SITE.speakerdeck.url} rel="noopener noreferrer">Speaker Deck</a>
+					で公開しています。公開日の新しい順に表示しています。
+				</Fragment>
+			</T>
 		</p>
 
 		{
@@ -22,21 +31,26 @@ const decks = result.ok ? result.decks : [];
 				<div class="notice" role="alert">
 					<p>
 						<strong>
-							{result.ok
-								? '公開中のスライドが見つかりませんでした。'
-								: 'スライド一覧を取得できませんでした。'}
+							{result.ok ? (
+									<T en="No published slides found." ja="公開中のスライドが見つかりませんでした。" />
+								) : (
+									<T en="Could not fetch the slide list." ja="スライド一覧を取得できませんでした。" />
+								)}
 						</strong>
 					</p>
 					{!result.ok && <p>({result.error})</p>}
 					<p>
 						<a class="text-link" href={SITE.speakerdeck.url} rel="noopener noreferrer">
-							<Icon name="slides" size={18} /> Speaker Deck のプロフィールを開く
+							<Icon name="slides" size={18} />
+							<T en="Open the Speaker Deck profile" ja="Speaker Deck のプロフィールを開く" />
 						</a>
 					</p>
 				</div>
 			) : (
 				<>
-					<p class="result-count">{decks.length} presentations</p>
+					<p class="result-count">
+						<T en={`${decks.length} presentations`} ja={`${decks.length} 件の発表資料`} />
+					</p>
 
 					<ul class="card-grid">
 						{decks.map((deck) => (
@@ -60,8 +74,10 @@ const decks = result.ok ? result.decks : [];
 										</span>
 									</div>
 									<span class="card-cta">
-										View on Speaker Deck <Icon name="external" size={16} />
-										<span class="visually-hidden">(opens in a new tab)</span>
+										<T en="View on Speaker Deck" ja="Speaker Deck で見る" /> <Icon name="external" size={16} />
+										<span class="visually-hidden">
+											<T en="(opens in a new tab)" ja="（新しいタブで開きます）" />
+										</span>
 									</span>
 								</a>
 							</li>
@@ -69,9 +85,16 @@ const decks = result.ok ? result.decks : [];
 					</ul>
 
 					<p class="result-count" style="margin-top:1.5rem">
-						Fetched from the Speaker Deck feed on <time datetime={result.fetchedAt}
-							>{formatDate(result.fetchedAt)}</time
-						>.
+						<T>
+							<Fragment slot="en">
+								Fetched from the Speaker Deck feed on <time datetime={result.fetchedAt}
+									>{formatDate(result.fetchedAt)}</time
+								>.
+							</Fragment>
+							<Fragment slot="ja">
+								<time datetime={result.fetchedAt}>{formatDate(result.fetchedAt)}</time> に Speaker Deck のフィードから取得しました。
+							</Fragment>
+						</T>
 					</p>
 				</>
 			)

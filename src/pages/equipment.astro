@@ -1,45 +1,63 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import Icon from '../components/Icon.astro';
+import T from '../components/T.astro';
 import { equipment } from '../data/equipment';
 
 const inUse = equipment.filter((item) => !item.arriving);
 const arriving = equipment.filter((item) => item.arriving);
 const sections = [
-	{ id: 'in-use', title: 'In Use', items: inUse },
-	{ id: 'arriving', title: 'Arriving Soon', items: arriving },
+	{ id: 'in-use', title: 'In Use', titleJa: '使用中', items: inUse },
+	{ id: 'arriving', title: 'Arriving Soon', titleJa: '到着予定', items: arriving },
 ].filter((section) => section.items.length > 0);
 ---
 
-<Layout title="Robots & Equipment" description="Robots and devices I use for research on robot foundation models and spatial AI.">
+<Layout title="Robots & Equipment" titleJa="ロボット・機材" description="Robots and devices I use for research on robot foundation models and spatial AI.">
 	<div class="page">
-		<h1 class="page-title">Robots &amp; Equipment</h1>
-		<p class="lead">Robots and devices I use for research on robot foundation models and spatial AI.</p>
+		<h1 class="page-title"><T en="Robots & Equipment" ja="ロボット・機材" /></h1>
+		<p class="lead">
+			<T
+				en="Robots and devices I use for research on robot foundation models and spatial AI."
+				ja="ロボット基盤モデルと空間AIの研究に使っているロボット・機材です。"
+			/>
+		</p>
 
 		{
 			sections.map((section) => (
 				<section class="about-section" aria-labelledby={section.id}>
-					<h2 id={section.id}>{section.title}</h2>
+					<h2 id={section.id}>
+						<T en={section.title} ja={section.titleJa} />
+					</h2>
 					<ul class="card-grid">
 						{section.items.map((item) => (
 							<li>
 								<article class="card">
 									<div class="meta">
-										<span class="badge">{item.category}</span>
-										{item.arriving && <span>Expected: {item.arriving}</span>}
+										<span class="badge">
+											<T en={item.category} ja={item.categoryJa} />
+										</span>
+										{item.arriving && (
+											<span>
+												<T en={`Expected: ${item.arriving}`} ja={`到着予定: ${item.arrivingJa ?? item.arriving}`} />
+											</span>
+										)}
 									</div>
 									<h3>
 										{item.url ? (
 											<a href={item.url} target="_blank" rel="noopener noreferrer">
 												{item.name} <Icon name="external" size={14} />
-												<span class="visually-hidden">(opens in a new tab)</span>
+												<span class="visually-hidden">
+													<T en="(opens in a new tab)" ja="（新しいタブで開きます）" />
+												</span>
 											</a>
 										) : (
 											item.name
 										)}
 									</h3>
-									<p>{item.purpose}</p>
-									<ul class="tags" aria-label="Research areas">
+									<p>
+										<T en={item.purpose} ja={item.purposeJa} />
+									</p>
+									<ul class="tags" aria-label="Research areas / 研究分野">
 										{item.areas.map((area) => <li class="tag">{area}</li>)}
 									</ul>
 								</article>

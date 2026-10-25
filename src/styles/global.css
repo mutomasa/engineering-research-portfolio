@@ -27,6 +27,12 @@ html {
 	-webkit-text-size-adjust: 100%;
 }
 
+/* 表示中でない言語を隠す（JS 無効時は英語を表示） */
+:root:not([data-lang='ja']) [data-lang-only='ja'],
+:root[data-lang='ja'] [data-lang-only='en'] {
+	display: none !important;
+}
+
 body {
 	margin: 0;
 	min-height: 100vh;
@@ -103,6 +109,11 @@ a {
 	gap: 0.5rem 1.5rem;
 	padding-block: 0.75rem;
 }
+.brand-row {
+	display: flex;
+	align-items: center;
+	gap: 0.75rem;
+}
 .brand {
 	font-weight: 700;
 	text-decoration: none;
@@ -130,6 +141,35 @@ a {
 	color: var(--fg);
 	font-weight: 600;
 	border-bottom-color: var(--fg);
+}
+
+/* 言語切り替え（JS 無効時は動かないため出さない） */
+.lang-switch {
+	display: none;
+	padding: 2px;
+	border: 1px solid var(--border);
+	border-radius: 999px;
+}
+:root[data-lang] .lang-switch {
+	display: inline-flex;
+}
+.lang-switch button {
+	padding: 0.15rem 0.75rem;
+	background: none;
+	border: 0;
+	border-radius: 999px;
+	color: var(--muted);
+	font: inherit;
+	font-size: 0.85rem;
+	cursor: pointer;
+}
+.lang-switch button:hover {
+	color: var(--fg);
+}
+.lang-switch button[aria-pressed='true'] {
+	background: var(--fg);
+	color: var(--bg);
+	font-weight: 600;
 }
 
 .site-footer {
