@@ -36,7 +36,7 @@ export const NAV = [
 	{ label: 'Home Lab', labelJa: 'ホームラボ', href: '/lab' },
 	{ label: 'Equipment', labelJa: '機材', href: '/equipment' },
 	{ label: 'Research Blog', labelJa: '研究ブログ', href: '/blog' },
-	{ label: 'Papers', labelJa: '論文', href: '/papers' },
+	{ label: 'Research', labelJa: '研究内容', href: '/research' },
 	{ label: 'Presentations', labelJa: '発表資料', href: '/presentations' },
 	{ label: 'Volunteer', labelJa: 'ボランティア', href: '/volunteer' },
 	{ label: 'About', labelJa: 'プロフィール', href: '/about' },

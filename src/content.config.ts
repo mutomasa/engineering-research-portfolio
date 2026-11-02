@@ -43,4 +43,20 @@ const lab = defineCollection({
 	}),
 });
 
-export const collections = { blog, blogJa, lab };
+// 研究内容（/research に一覧、/research/<slug> に本文を表示）。日本語のみ。
+const research = defineCollection({
+	loader: glob({ base: './src/content/research', pattern: '**/[^_]*.{md,mdx}' }),
+	schema: z.object({
+		title: z.string(),
+		subtitle: z.string().optional(),
+		description: z.string(),
+		// 「研究計画書」「研究紹介」などの資料の種類
+		kind: z.string(),
+		// 一覧での表示順（小さいほど先）
+		order: z.number().default(100),
+		updated: z.coerce.date(),
+		tags: z.array(z.string()).default([]),
+	}),
+});
+
+export const collections = { blog, blogJa, lab, research };

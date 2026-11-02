@@ -1,0 +1,127 @@
+---
+import { getCollection } from 'astro:content';
+import Layout from '../../layouts/Layout.astro';
+import Icon from '../../components/Icon.astro';
+import T from '../../components/T.astro';
+import { publications } from '../../data/publications';
+import { formatDate } from '../../lib/blog';
+import { pageHref } from '../../lib/url';
+
+const docs = (await getCollection('research')).sort((a, b) => a.data.order - b.data.order);
+const pubs = [...publications].sort((a, b) => b.year - a.year);
+const kindLabel = {
+	paper: { en: 'Paper', ja: '論文' },
+	poster: { en: 'Poster', ja: 'ポスター' },
+	other: { en: 'Research output', ja: '研究成果' },
+} as const;
+---
+
+<Layout
+	title="Research"
+	titleJa="研究内容"
+	description="Master's research at JAIST: Physical AI, robot foundation models and Spatial AI."
+>
+	<div class="page">
+		<h1 class="page-title"><T en="Research" ja="研究内容" /></h1>
+		<T block>
+			<div slot="en">
+				<p class="lead">
+					I am enrolled in a master's program at the Japan Advanced Institute of Science and Technology (JAIST), where I
+					do research on Physical AI for real robots.
+				</p>
+				<p>
+					My themes are failure-aware robotic manipulation that fuses vision and touch in a world model, and Spatial AI that
+					lets a mobile robot find objects from natural-language instructions using a spatial scene graph. The research
+					documents below are written in Japanese.
+				</p>
+			</div>
+			<div slot="ja">
+				<p class="lead">
+					北陸先端科学技術大学院大学（JAIST）の修士課程に在籍し、実機ロボットを対象とした Physical AI の研究に取り組んでいます。
+				</p>
+				<p>
+					視覚と触覚を統合した世界モデルによる「失敗を先読みする」ロボット操作と、Spatial Scene Graph
+					を用いて自然言語指示から物体を特定し移動する Spatial AI の2つのテーマを進めています。各テーマの詳細は下の資料から読めます。
+				</p>
+			</div>
+		</T>
+
+		<h2 class="section-title"><T en="Research themes" ja="研究テーマ" /></h2>
+		<ul class="pub-list">
+			{
+				docs.map((doc) => (
+					<li>
+						<a class="card" href={pageHref(`/research/${doc.id}`)}>
+							<h3 lang="ja">{doc.data.title}</h3>
+							{doc.data.subtitle && (
+								<p lang="en">
+									<em>{doc.data.subtitle}</em>
+								</p>
+							)}
+							<p lang="ja">{doc.data.description}</p>
+							<div class="meta">
+								<span class="badge" lang="ja">{doc.data.kind}</span>
+								<time datetime={doc.data.updated.toISOString()}>{formatDate(doc.data.updated)}</time>
+							</div>
+							<ul class="tags" style="margin-top:0.75rem">
+								{doc.data.tags.map((tag) => (
+									<li class="tag">{tag}</li>
+								))}
+							</ul>
+							<span class="card-cta">
+								<T en="Read (Japanese)" ja="資料を読む" /> <Icon name="arrow" size={16} />
+							</span>
+						</a>
+					</li>
+				))
+			}
+		</ul>
+
+		<h2 class="section-title"><T en="Publications" ja="論文・研究成果" /></h2>
+		{
+			pubs.length === 0 ? (
+				<div class="empty">
+					<p style="margin:0">
+						<T
+							en="There are no papers, posters or research outputs to list yet. They will appear here once available."
+							ja="現在、掲載できる論文・ポスター・研究成果はありません。追加され次第ここに掲載します。"
+						/>
+					</p>
+				</div>
+			) : (
+				<ul class="pub-list">
+					{pubs.map((pub) => (
+						<li>
+							<article class="card">
+								<h3>
+									{pub.url ? (
+										<a href={pub.url} rel="noopener noreferrer">
+											{pub.title}
+										</a>
+									) : (
+										pub.title
+									)}
+								</h3>
+								<p>{pub.authors}</p>
+								<div class="meta">
+									<span class="badge">
+										<T {...kindLabel[pub.kind]} />
+									</span>
+									<span>{pub.venue}</span>
+									<span>{pub.year}</span>
+								</div>
+							</article>
+						</li>
+					))}
+				</ul>
+			)
+		}
+	</div>
+</Layout>
+
+<style>
+	.section-title {
+		margin: 2.5rem 0 1rem;
+		font-size: 1.4rem;
+	}
+</style>

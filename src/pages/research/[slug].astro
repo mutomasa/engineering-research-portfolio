@@ -1,0 +1,65 @@
+---
+import 'katex/dist/katex.min.css';
+import { getCollection, render, type CollectionEntry } from 'astro:content';
+import Layout from '../../layouts/Layout.astro';
+import Icon from '../../components/Icon.astro';
+import T from '../../components/T.astro';
+import { formatDate } from '../../lib/blog';
+import { pageHref } from '../../lib/url';
+
+export async function getStaticPaths() {
+	const docs = await getCollection('research');
+	return docs.map((doc) => ({ params: { slug: doc.id }, props: { doc } }));
+}
+
+const { doc } = Astro.props as { doc: CollectionEntry<'research'> };
+const { Content } = await render(doc);
+---
+
+<Layout title={doc.data.title} titleJa={doc.data.title} description={doc.data.description}>
+	<article class="page">
+		<p class="eyebrow">
+			<a class="text-link" href={pageHref('/research')}><Icon name="back" size={16} /> <T en="Research" ja="研究内容" /></a>
+		</p>
+		<h1 class="page-title" lang="ja">{doc.data.title}</h1>
+		{doc.data.subtitle && <p class="lead" lang="en">{doc.data.subtitle}</p>}
+		<div class="meta">
+			<span class="badge" lang="ja">{doc.data.kind}</span>
+			<time datetime={doc.data.updated.toISOString()}>{formatDate(doc.data.updated)}</time>
+		</div>
+		<p class="lead" data-lang-only="en" lang="en" style="margin-top:1.5rem">This document is available in Japanese only.</p>
+		<div class="prose" style="margin-top:2rem" lang="ja">
+			<Content />
+		</div>
+	</article>
+</Layout>
+
+<script>
+	// ```mermaid のコードブロックを図に変換する（図があるページだけ mermaid を読み込む）
+	const blocks = Array.from(document.querySelectorAll<HTMLElement>('pre:has(> code.language-mermaid)'));
+	if (blocks.length > 0) {
+		const { default: mermaid } = await import('mermaid');
+		mermaid.initialize({ startOnLoad: false, theme: 'neutral', securityLevel: 'strict' });
+		const nodes = blocks.map((pre) => {
+			const div = document.createElement('div');
+			div.className = 'mermaid';
+			div.textContent = pre.textContent ?? '';
+			pre.replaceWith(div);
+			return div;
+		});
+		await mermaid.run({ nodes });
+	}
+</script>
+
+<style>
+	.prose :global(.mermaid) {
+		margin: 0 0 1.5rem;
+		overflow-x: auto;
+		text-align: center;
+	}
+	.prose :global(.katex-display) {
+		overflow-x: auto;
+		overflow-y: hidden;
+		padding: 0.25rem 0;
+	}
+</style>
