@@ -53,6 +53,21 @@ demo: 'https://huggingface.co/spaces/...' # デモ（省略可）
 ---
 ```
 
+### はてなブログの原文（日本語）
+
+`src/content/blog-ja/` に、はてなブログの記事を翻訳せずに原文のまま置きます。英訳記事と同じファイル名（slug）にすると、言語切替で英訳と原文が切り替わります。英訳がない記事は日本語のみで公開されます。取り込み手順は `.claude/skills/hatena-research-blog/SKILL.md` を参照してください。
+
+```yaml
+---
+title: '原題'
+description: '一覧に表示される説明'
+pubDate: 2026-10-14
+tags: ['robotics'] # 省略可
+originalUrl: 'https://mutomasa.hatenablog.com/entry/...'
+draft: false # 省略可
+---
+```
+
 ### 論文・ポスター・研究成果
 
 `src/data/publications.ts` の `publications` 配列に追加します。実在するものだけを追加してください。
