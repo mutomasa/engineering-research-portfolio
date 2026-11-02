@@ -16,8 +16,8 @@ const posts = await getPublishedPosts();
 		<h1 class="page-title"><T en="Research Blog" ja="研究ブログ" /></h1>
 		<p class="lead">
 			<T
-				en="Research notes, paper explainers and experiment results, newest first. Posts are written in English."
-				ja="研究日誌・論文解説・実験結果を、新しい順に掲載しています。記事は英語で書いています。"
+				en="Research notes, paper explainers and experiment results, newest first. Most posts are English translations of my Japanese blog; switch to 日本語 to read the originals."
+				ja="研究日誌・論文解説・実験結果を、新しい順に掲載しています。日本語表示では、はてなブログの記事を翻訳せずに原文のまま読めます。"
 			/>
 		</p>
 
@@ -28,19 +28,40 @@ const posts = await getPublishedPosts();
 				</div>
 			) : (
 				<ul class="card-grid">
-					{posts.map((post) => (
+					{posts.map(({ slug, en, ja, pubDate, tags }) => (
 						<li>
-							<a class="card" href={pageHref(`/blog/${post.id}`)} lang="en">
+							<a class="card" href={pageHref(`/blog/${slug}`)}>
 								<div class="meta">
-									<time datetime={post.data.pubDate.toISOString()}>
-										{formatDate(post.data.pubDate)}
-									</time>
+									<time datetime={pubDate.toISOString()}>{formatDate(pubDate)}</time>
+									{!en && (
+										<span class="badge" data-lang-only="en" lang="en">
+											Japanese
+										</span>
+									)}
 								</div>
-								<h2>{post.data.title}</h2>
-								<p>{post.data.description}</p>
-								{post.data.tags.length > 0 && (
+								{en && ja ? (
+									<>
+										<h2 data-lang-only="en" lang="en">{en.data.title}</h2>
+										<h2 data-lang-only="ja" lang="ja">{ja.data.title}</h2>
+										<p data-lang-only="en" lang="en">{en.data.description}</p>
+										<p data-lang-only="ja" lang="ja">{ja.data.description}</p>
+									</>
+								) : en ? (
+									<>
+										<h2>{en.data.title}</h2>
+										<p>{en.data.description}</p>
+									</>
+								) : (
+									ja && (
+										<>
+											<h2 lang="ja">{ja.data.title}</h2>
+											<p lang="ja">{ja.data.description}</p>
+										</>
+									)
+								)}
+								{tags.length > 0 && (
 									<ul class="tags" style="margin-top:auto;padding-top:0.5rem">
-										{post.data.tags.map((tag) => (
+										{tags.map((tag) => (
 											<li class="tag">{tag}</li>
 										))}
 									</ul>
