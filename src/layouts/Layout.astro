@@ -4,6 +4,8 @@ import Icon from '../components/Icon.astro';
 import T from '../components/T.astro';
 import { NAV, SITE } from '../consts';
 import { pageHref } from '../lib/url';
+import { Image } from 'astro:assets';
+import logo from '../../logo/kawasemi_intelligence_log.png';
 
 interface Props {
 	title?: string;
@@ -61,7 +63,10 @@ const isCurrent = (href: string) =>
 		<header class="site-header">
 			<div class="container">
 				<div class="brand-row">
-					<a class="brand" href="/">{SITE.name}</a>
+					<a class="brand" href="/">
+						<Image src={logo} alt="" width={44} height={44} densities={[1, 2, 3]} loading="eager" class="brand-logo" />
+						<span>{SITE.name}</span>
+					</a>
 					<div class="lang-switch" role="group" aria-label="Language / 言語">
 						<button type="button" data-set-lang="en" lang="en">EN</button>
 						<button type="button" data-set-lang="ja" lang="ja">日本語</button>
