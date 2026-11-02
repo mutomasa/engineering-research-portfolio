@@ -3,6 +3,8 @@ import { getEntry, render } from 'astro:content';
 import Layout from '../layouts/Layout.astro';
 import Icon from '../components/Icon.astro';
 import T from '../components/T.astro';
+import { Image } from 'astro:assets';
+import overview from '../../diagram/overview.png';
 
 // 英語版と日本語版をそれぞれ src/content/lab/{en,ja}/home-lab.md に置く
 const [en, ja] = await Promise.all([getEntry('lab', 'en/home-lab'), getEntry('lab', 'ja/home-lab')]);
@@ -19,9 +21,43 @@ const [{ Content: ContentEn }, { Content: ContentJa }] = await Promise.all([rend
 		<h1 class="page-title"><T en={en.data.title} ja={ja.data.title} /></h1>
 		<p class="lead"><T en={en.data.description} ja={ja.data.description} /></p>
 
+		<figure class="lab-overview">
+			<a href={overview.src} aria-label="Open the full-size diagram / 構成図を原寸で開く">
+				<Image
+					src={overview}
+					widths={[720, 1080, 1440]}
+					sizes="(min-width: 64rem) 64rem, 100vw"
+					alt="Home Lab VM layout on an Ubuntu host (Intel Core i9-9980HK, 64GB RAM): a Compute/AI cluster (Slurm controller and two compute nodes with Slurm + Enroot + Ray), a Spark cluster (master and two workers), a Lakehouse VM (MinIO + Iceberg REST), the distributed optimization stack and a learning path. Total 15 vCPU / 45GB RAM."
+					loading="eager"
+				/>
+			</a>
+			<figcaption>
+				<T en="VM layout on the Ubuntu host (click to enlarge)" ja="Ubuntu ホスト上の VM 構成図（クリックで拡大）" />
+			</figcaption>
+		</figure>
+
 		<T block>
 			<div class="prose prose-wide" slot="en"><ContentEn /></div>
 			<div class="prose prose-wide" slot="ja"><ContentJa /></div>
 		</T>
 	</article>
 </Layout>
+
+<style>
+	.lab-overview {
+		margin: 1.5rem 0 2rem;
+	}
+	.lab-overview img {
+		display: block;
+		width: 100%;
+		height: auto;
+		border: 1px solid var(--border);
+		border-radius: var(--radius);
+	}
+	.lab-overview figcaption {
+		margin-top: 0.5rem;
+		color: var(--muted);
+		font-size: 0.9rem;
+		text-align: center;
+	}
+</style>
