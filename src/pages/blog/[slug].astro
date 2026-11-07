@@ -53,14 +53,14 @@ const jaAttrs = both ? { 'data-lang-only': 'ja' } : {};
 				<ul class="post-links">
 					{github && (
 						<li>
-							<a class="text-link" href={github} rel="noopener noreferrer">
+							<a class="text-link" href={github} target="_blank" rel="noopener noreferrer">
 								<Icon name="github" size={18} /> <T en="Related GitHub" ja="関連 GitHub" />
 							</a>
 						</li>
 					)}
 					{demo && (
 						<li>
-							<a class="text-link" href={demo} rel="noopener noreferrer">
+							<a class="text-link" href={demo} target="_blank" rel="noopener noreferrer">
 								<Icon name="play" size={18} /> <T en="Live demo" ja="ライブデモ" />
 							</a>
 						</li>
@@ -91,7 +91,7 @@ const jaAttrs = both ? { 'data-lang-only': 'ja' } : {};
 					<p>
 						<em>
 							この記事は、はてなブログに投稿した原文をそのまま掲載しています。元記事：
-							<a href={originalUrl} rel="noopener noreferrer">{ja!.data.title}</a>
+							<a href={originalUrl} target="_blank" rel="noopener noreferrer">{ja!.data.title}</a>
 						</em>
 					</p>
 				</div>

@@ -16,12 +16,12 @@ const repos = result.ok ? result.repos : [];
 		<p class="lead">
 			<T>
 				<Fragment slot="en">
-					Public GitHub repositories (<a href={SITE.github.url} rel="noopener noreferrer"
+					Public GitHub repositories (<a href={SITE.github.url} target="_blank" rel="noopener noreferrer"
 						>@{SITE.github.user}</a
 					>), most recently updated first.
 				</Fragment>
 				<Fragment slot="ja">
-					GitHub の公開リポジトリ（<a href={SITE.github.url} rel="noopener noreferrer"
+					GitHub の公開リポジトリ（<a href={SITE.github.url} target="_blank" rel="noopener noreferrer"
 						>@{SITE.github.user}</a
 					>）を、更新日時の新しい順に表示しています。
 				</Fragment>
@@ -42,7 +42,7 @@ const repos = result.ok ? result.repos : [];
 					</p>
 					{!result.ok && <p>({result.error})</p>}
 					<p>
-						<a class="text-link" href={SITE.github.reposUrl} rel="noopener noreferrer">
+						<a class="text-link" href={SITE.github.reposUrl} target="_blank" rel="noopener noreferrer">
 							<Icon name="github" size={18} />
 							<T en="Open the repository list on GitHub" ja="GitHub のリポジトリ一覧を開く" />
 						</a>
@@ -86,7 +86,7 @@ const repos = result.ok ? result.repos : [];
 							>
 								<article class="card repo">
 									<h2>
-										<a href={repo.url} rel="noopener noreferrer">
+										<a href={repo.url} target="_blank" rel="noopener noreferrer">
 											{repo.name}
 										</a>
 										{repo.fork && (
