@@ -18,7 +18,7 @@ export const SITE = {
 		url: 'https://huggingface.co/mutomasa',
 		spacesUrl: 'https://huggingface.co/mutomasa/spaces',
 	},
-	researchThemes: ['Robot Foundation Models', 'Spatial AI'],
+	researchThemes: ['Robot Foundation Models', 'Spatial AI', 'Agentic Robotics'],
 	researchAreas: [
 		'Robot Foundation Models',
 		'Vision-Language-Action (VLA)',
