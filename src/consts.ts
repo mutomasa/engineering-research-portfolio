@@ -38,6 +38,7 @@ export const NAV = [
 	{ label: 'Research Blog', labelJa: '研究ブログ', href: '/blog' },
 	{ label: 'Research', labelJa: '研究内容', href: '/research' },
 	{ label: 'Presentations', labelJa: '発表資料', href: '/presentations' },
+	{ label: 'Skills', labelJa: 'スキル', href: '/skills' },
 	{ label: 'Volunteer', labelJa: 'ボランティア', href: '/volunteer' },
 	{ label: 'About', labelJa: 'プロフィール', href: '/about' },
 ] as const;

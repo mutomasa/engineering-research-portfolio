@@ -1,0 +1,117 @@
+---
+import Layout from '../layouts/Layout.astro';
+import T from '../components/T.astro';
+import { skillCategories, LEVEL_DEFINITIONS, SKILLS_UPDATED } from '../data/skills';
+---
+
+<Layout
+	title="Skills"
+	titleJa="スキル"
+	description="Technical skill sheet: IT and AI architecture, generative AI, GPU infrastructure, cloud and robotics."
+>
+	<div class="page">
+		<h1 class="page-title"><T en="Skills" ja="スキル" /></h1>
+		<p class="lead">
+			<T
+				en="AI and IT architecture design, technology strategy, and development of advanced AI technologies and systems."
+				ja="AI・ITアーキテクチャ設計、技術戦略策定、先端技術のAI技術開発とシステム開発を得意としています。"
+			/>
+		</p>
+		<p class="result-count">
+			<T en={`Updated ${SKILLS_UPDATED.en}`} ja={`更新日：${SKILLS_UPDATED.ja}`} />
+		</p>
+
+		<nav class="skill-toc" aria-label="Skill categories / スキル分類">
+			<ul class="tags">
+				{
+					skillCategories.map((category) => (
+						<li>
+							<a class="tag" href={`#${category.id}`}>
+								<T en={category.title.en} ja={category.title.ja} />
+							</a>
+						</li>
+					))
+				}
+			</ul>
+		</nav>
+
+		{
+			skillCategories.map((category, i) => (
+				<section class="about-section" aria-labelledby={category.id}>
+					<h2 id={category.id}>
+						{i + 1}. <T en={category.title.en} ja={category.title.ja} />
+					</h2>
+					<div class="prose prose-wide">
+						<table>
+							<thead>
+								<tr>
+									<th scope="col"><T en="Area" ja="小分類" /></th>
+									<th scope="col"><T en="Skill / Technology" ja="スキル・技術" /></th>
+									<th scope="col" class="num"><T en="Experience" ja="経験年数" /></th>
+									<th scope="col"><T en={category.detailLabel.en} ja={category.detailLabel.ja} /></th>
+								</tr>
+							</thead>
+							<tbody>
+								{category.skills.map((skill) => (
+									<tr>
+										<td><T en={skill.area.en} ja={skill.area.ja} /></td>
+										<th scope="row"><T en={skill.name.en} ja={skill.name.ja} /></th>
+										<td class="num"><T en={skill.years.en} ja={skill.years.ja} /></td>
+										<td><T en={skill.detail.en} ja={skill.detail.ja} /></td>
+									</tr>
+								))}
+							</tbody>
+						</table>
+					</div>
+				</section>
+			))
+		}
+
+		<section class="about-section" aria-labelledby="levels">
+			<h2 id="levels"><T en="Proficiency levels" ja="習熟度の目安" /></h2>
+			<div class="prose prose-wide">
+				<table>
+					<thead>
+						<tr>
+							<th scope="col"><T en="Level" ja="区分" /></th>
+							<th scope="col"><T en="Definition" ja="定義" /></th>
+						</tr>
+					</thead>
+					<tbody>
+						{
+							LEVEL_DEFINITIONS.map((item) => (
+								<tr>
+									<th scope="row"><T en={item.level.en} ja={item.level.ja} /></th>
+									<td><T en={item.definition.en} ja={item.definition.ja} /></td>
+								</tr>
+							))
+						}
+					</tbody>
+				</table>
+			</div>
+		</section>
+	</div>
+</Layout>
+
+<style>
+	.skill-toc .tags {
+		margin: 0 0 0.5rem;
+		padding: 0;
+		list-style: none;
+	}
+	.skill-toc a.tag {
+		color: inherit;
+		text-decoration: none;
+	}
+	.skill-toc a.tag:hover {
+		text-decoration: underline;
+	}
+	tbody th {
+		font-weight: 600;
+		white-space: nowrap;
+	}
+	.num {
+		text-align: right !important;
+		white-space: nowrap;
+	}
+</style>
