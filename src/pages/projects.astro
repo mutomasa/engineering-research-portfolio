@@ -5,11 +5,16 @@ import T from '../components/T.astro';
 import { SITE } from '../consts';
 import { getPublicRepos } from '../lib/github';
 import { formatDate } from '../lib/blog';
-import { PROJECT_NOTES, PROJECT_CATEGORIES } from '../data/projectNotes';
+import { PROJECT_NOTES, PROJECT_CATEGORIES, CATEGORY_ORDER } from '../data/projectNotes';
 
 const result = await getPublicRepos();
 const repos = result.ok ? result.repos : [];
 const noteOf = (name: string) => PROJECT_NOTES[name];
+const categoryCounts = CATEGORY_ORDER.map((id) => ({
+	id,
+	label: PROJECT_CATEGORIES[id],
+	count: repos.filter((repo) => noteOf(repo.name)?.category === id).length,
+})).filter((c) => c.count > 0);
 ---
 
 <Layout title="Projects" titleJa="プロジェクト" description={`Public repositories by ${SITE.github.user} on GitHub.`}>
@@ -80,6 +85,18 @@ const noteOf = (name: string) => PROJECT_NOTES[name];
 						</div>
 					</form>
 
+					{/* JS が無効な環境では絞り込みボタンを出さない */}
+					<div class="category-filter" id="repo-category-filter" role="group" aria-label="Filter by category / カテゴリで絞り込み" hidden>
+						<button type="button" class="category-button" data-category="" aria-pressed="true">
+							<T en="All" ja="すべて" /> <span class="category-count">{repos.length}</span>
+						</button>
+						{categoryCounts.map((c) => (
+							<button type="button" class="category-button" data-category={c.id} aria-pressed="false">
+								<T en={c.label.en} ja={c.label.ja} /> <span class="category-count">{c.count}</span>
+							</button>
+						))}
+					</div>
+
 					<p class="result-count" id="repo-count" aria-live="polite">
 						<T en={`${repos.length} repositories`} ja={`${repos.length} 件のリポジトリ`} />
 					</p>
@@ -87,6 +104,7 @@ const noteOf = (name: string) => PROJECT_NOTES[name];
 					<ul class="card-grid" id="repo-list">
 						{repos.map((repo) => (
 							<li
+								data-category={noteOf(repo.name)?.category ?? ''}
 								data-search={[
 									repo.name,
 									repo.description,
@@ -116,11 +134,6 @@ const noteOf = (name: string) => PROJECT_NOTES[name];
 										{repo.fork && (
 										<span class="badge">
 											<T en="Fork" ja="フォーク" />
-										</span>
-									)}
-										{noteOf(repo.name)?.status === 'design' && (
-										<span class="badge">
-											<T en="Design stage" ja="設計段階" />
 										</span>
 									)}
 										{noteOf(repo.name)?.status === 'paused' && (
@@ -186,6 +199,9 @@ const noteOf = (name: string) => PROJECT_NOTES[name];
 	const input = document.querySelector<HTMLInputElement>('#repo-search');
 	const count = document.querySelector<HTMLElement>('#repo-count');
 	const empty = document.querySelector<HTMLElement>('#repo-empty');
+	const filter = document.querySelector<HTMLElement>('#repo-category-filter');
+	const buttons = Array.from(document.querySelectorAll<HTMLButtonElement>('.category-button'));
+	let category = '';
 	const items = Array.from(
 		document.querySelectorAll<HTMLLIElement>('#repo-list > li[data-search]'),
 	);
@@ -193,6 +209,7 @@ const noteOf = (name: string) => PROJECT_NOTES[name];
 	if (form && input && count && empty && items.length > 0) {
 		form.hidden = false;
 		form.addEventListener('submit', (event) => event.preventDefault());
+		if (filter) filter.hidden = false;
 
 		const apply = () => {
 			// スペース区切りの語をすべて含むものを表示（AND 検索）
@@ -200,13 +217,15 @@ const noteOf = (name: string) => PROJECT_NOTES[name];
 			let visible = 0;
 			for (const item of items) {
 				const haystack = item.dataset.search ?? '';
-				const match = terms.every((term) => haystack.includes(term));
+				const match =
+					(category === '' || item.dataset.category === category) &&
+					terms.every((term) => haystack.includes(term));
 				item.hidden = !match;
 				if (match) visible++;
 			}
 			const ja = getLang() === 'ja';
 			count.textContent =
-				terms.length === 0
+				terms.length === 0 && category === ''
 					? ja
 						? `${items.length} 件のリポジトリ`
 						: `${items.length} repositories`
@@ -217,11 +236,50 @@ const noteOf = (name: string) => PROJECT_NOTES[name];
 		};
 
 		input.addEventListener('input', apply);
+		for (const button of buttons) {
+			button.addEventListener('click', () => {
+				category = button.dataset.category ?? '';
+				for (const b of buttons) b.setAttribute('aria-pressed', String(b === button));
+				apply();
+			});
+		}
 		document.addEventListener('langchange', apply);
 	}
 </script>
 
 <style>
+	.category-filter {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 0.4rem;
+		margin: 0 0 1rem;
+	}
+	.category-button {
+		padding: 0.3rem 0.8rem;
+		background: var(--surface);
+		color: var(--fg);
+		border: 1px solid var(--border);
+		border-radius: 999px;
+		font: inherit;
+		font-size: 0.85rem;
+		cursor: pointer;
+	}
+	.category-button:hover {
+		border-color: var(--fg);
+	}
+	.category-button:focus-visible {
+		outline: 2px solid var(--fg);
+		outline-offset: 2px;
+	}
+	.category-button[aria-pressed='true'] {
+		background: var(--fg);
+		color: var(--bg);
+		border-color: var(--fg);
+	}
+	.category-count {
+		opacity: 0.7;
+		font-size: 0.78rem;
+	}
 	.repo-category {
 		margin: 0 0 0.35rem;
 		font-size: 0.78rem;
