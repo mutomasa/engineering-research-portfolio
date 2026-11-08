@@ -43,6 +43,7 @@ const articles = standaloneArticles(entries);
 								{series.subtitle && <p lang="ja">{series.subtitle}</p>}
 							</a>
 							<p lang="ja">{series.description}</p>
+							{series.note && <p class="book-note" lang="ja">{series.note}</p>}
 							<div class="meta">
 								<span class="badge" lang="ja">{series.kind}</span>
 								<span lang="ja">{series.status}</span>
@@ -112,6 +113,14 @@ const articles = standaloneArticles(entries);
 </Layout>
 
 <style>
+	.book-note {
+		margin: 0.75rem 0;
+		padding: 0.6rem 0.8rem;
+		border-left: 3px solid var(--muted);
+		background: var(--surface);
+		color: var(--muted);
+		font-size: 0.9rem;
+	}
 	.section-title {
 		margin: 2.5rem 0 1rem;
 		font-size: 1.4rem;
