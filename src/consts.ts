@@ -33,13 +33,13 @@ export const SITE = {
 export const NAV = [
 	{ label: 'Home', labelJa: 'ホーム', href: '/' },
 	{ label: 'Projects', labelJa: 'プロジェクト', href: '/projects' },
-	{ label: 'Home Lab', labelJa: 'ホームラボ', href: '/lab' },
-	{ label: 'Equipment', labelJa: '機材', href: '/equipment' },
-	{ label: 'Research Blog', labelJa: '研究ブログ', href: '/blog' },
-	{ label: 'Research', labelJa: '研究内容', href: '/research' },
 	{ label: 'AI/IT Tech', labelJa: 'AI/IT技術', href: '/tech' },
+	{ label: 'Research', labelJa: '研究内容', href: '/research' },
+	{ label: 'Research Blog', labelJa: '研究ブログ', href: '/blog' },
 	{ label: 'Presentations', labelJa: '発表資料', href: '/presentations' },
 	{ label: 'Skills', labelJa: 'スキル', href: '/skills' },
+	{ label: 'Home Lab', labelJa: 'ホームラボ', href: '/lab' },
+	{ label: 'Equipment', labelJa: '機材', href: '/equipment' },
 	{ label: 'Volunteer', labelJa: 'ボランティア', href: '/volunteer' },
 	{ label: 'About', labelJa: 'プロフィール', href: '/about' },
 ] as const;

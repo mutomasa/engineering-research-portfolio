@@ -5,9 +5,11 @@ import T from '../components/T.astro';
 import { SITE } from '../consts';
 import { getPublicRepos } from '../lib/github';
 import { formatDate } from '../lib/blog';
+import { PROJECT_NOTES, PROJECT_CATEGORIES } from '../data/projectNotes';
 
 const result = await getPublicRepos();
 const repos = result.ok ? result.repos : [];
+const noteOf = (name: string) => PROJECT_NOTES[name];
 ---
 
 <Layout title="Projects" titleJa="プロジェクト" description={`Public repositories by ${SITE.github.user} on GitHub.`}>
@@ -26,6 +28,12 @@ const repos = result.ok ? result.repos : [];
 					>）を、更新日時の新しい順に表示しています。
 				</Fragment>
 			</T>
+		</p>
+		<p class="lead">
+			<T
+				en="Most projects are machine-learning work: computer vision, LLMs and AI agents, graphs and knowledge graphs, and robotics and spatial AI. Each summary below was written from the repository’s README or design documents."
+				ja="機械学習のプロジェクトが中心で、コンピュータビジョン、LLM・AI Agent、グラフ・知識グラフ、ロボティクス・空間AI を扱っています。各カードの概要は、リポジトリの README や設計書をもとに書いています。"
+			/>
 		</p>
 
 		{
@@ -79,12 +87,28 @@ const repos = result.ok ? result.repos : [];
 					<ul class="card-grid" id="repo-list">
 						{repos.map((repo) => (
 							<li
-								data-search={[repo.name, repo.description, repo.language]
+								data-search={[
+									repo.name,
+									repo.description,
+									repo.language,
+									noteOf(repo.name)?.ja,
+									noteOf(repo.name)?.en,
+									noteOf(repo.name) && PROJECT_CATEGORIES[noteOf(repo.name)!.category].ja,
+									noteOf(repo.name) && PROJECT_CATEGORIES[noteOf(repo.name)!.category].en,
+								]
 									.filter(Boolean)
 									.join(' ')
 									.toLowerCase()}
 							>
 								<article class="card repo">
+									{noteOf(repo.name) && (
+										<p class="repo-category">
+											<T
+												en={PROJECT_CATEGORIES[noteOf(repo.name)!.category].en}
+												ja={PROJECT_CATEGORIES[noteOf(repo.name)!.category].ja}
+											/>
+										</p>
+									)}
 									<h2>
 										<a href={repo.url} target="_blank" rel="noopener noreferrer">
 											{repo.name}
@@ -94,13 +118,29 @@ const repos = result.ok ? result.repos : [];
 											<T en="Fork" ja="フォーク" />
 										</span>
 									)}
+										{noteOf(repo.name)?.status === 'design' && (
+										<span class="badge">
+											<T en="Design stage" ja="設計段階" />
+										</span>
+									)}
+										{noteOf(repo.name)?.status === 'paused' && (
+										<span class="badge">
+											<T en="Paused" ja="開発中断" />
+										</span>
+									)}
 										{repo.archived && (
 										<span class="badge">
 											<T en="Archived" ja="アーカイブ済み" />
 										</span>
 									)}
 									</h2>
-									<p>{repo.description ?? <T en="No description" ja="説明なし" />}</p>
+									{noteOf(repo.name) ? (
+										<p>
+											<T en={noteOf(repo.name)!.en} ja={noteOf(repo.name)!.ja} />
+										</p>
+									) : (
+										<p>{repo.description ?? <T en="No description" ja="説明なし" />}</p>
+									)}
 									<div class="meta">
 										{repo.language && <span>{repo.language}</span>}
 										<span>
@@ -180,3 +220,13 @@ const repos = result.ok ? result.repos : [];
 		document.addEventListener('langchange', apply);
 	}
 </script>
+
+<style>
+	.repo-category {
+		margin: 0 0 0.35rem;
+		font-size: 0.78rem;
+		font-weight: 600;
+		letter-spacing: 0.02em;
+		color: var(--muted);
+	}
+</style>
