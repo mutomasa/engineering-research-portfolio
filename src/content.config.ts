@@ -59,4 +59,23 @@ const research = defineCollection({
 	}),
 });
 
-export const collections = { blog, blogJa, lab, research };
+// AI/IT 技術の記事・書籍（/tech に一覧、/tech/<slug> に本文を表示）。日本語のみ。
+// 書籍はサブディレクトリにまとめ、series に src/data/techSeries.ts の id を指定する。
+const tech = defineCollection({
+	loader: glob({ base: './src/content/tech', pattern: '**/[^_]*.{md,mdx}' }),
+	schema: z.object({
+		title: z.string(),
+		description: z.string(),
+		updated: z.coerce.date(),
+		tags: z.array(z.string()).default([]),
+		draft: z.boolean().default(false),
+		// 書籍（シリーズ）の id。単発の記事では省略する
+		series: z.string().optional(),
+		// 書籍内の並び順、または一覧での並び順（小さいほど先）
+		order: z.number().default(100),
+		// 「第1章」「付録A」などの見出しラベル（任意）
+		label: z.string().optional(),
+	}),
+});
+
+export const collections = { blog, blogJa, lab, research, tech };

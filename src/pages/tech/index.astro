@@ -1,0 +1,146 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Icon from '../../components/Icon.astro';
+import T from '../../components/T.astro';
+import { formatDate } from '../../lib/blog';
+import { getTechEntries, groupBySeries, standaloneArticles } from '../../lib/tech';
+import { pageHref } from '../../lib/url';
+
+const entries = await getTechEntries();
+const books = groupBySeries(entries).filter(({ chapters }) => chapters.length > 0);
+const articles = standaloneArticles(entries);
+---
+
+<Layout
+	title="AI/IT Tech"
+	titleJa="AI/IT技術"
+	description="Books and articles on AI and IT technology: system architecture, cloud, data, security, GPUs and AI agents."
+>
+	<div class="page">
+		<h1 class="page-title"><T en="AI/IT Tech" ja="AI/IT技術" /></h1>
+		<T block>
+			<div slot="en">
+				<p class="lead">
+					Books and articles on AI and IT technology — from system architecture and infrastructure to GPUs and AI agents.
+				</p>
+				<p>These writings are in Japanese.</p>
+			</div>
+			<div slot="ja">
+				<p class="lead">
+					AI と IT の技術について、書籍と記事をまとめています。システムアーキテクチャ・インフラから GPU、AI Agent までを扱います。
+				</p>
+			</div>
+		</T>
+
+		<h2 class="section-title"><T en="Books" ja="書籍" /></h2>
+		<ul class="pub-list">
+			{
+				books.map(({ series, chapters }) => (
+					<li>
+						<article class="card book">
+							<a class="book-head" href={pageHref(`/tech/${chapters[0].id}`)}>
+								<h3 lang="ja">{series.title}</h3>
+								{series.subtitle && <p lang="ja">{series.subtitle}</p>}
+							</a>
+							<p lang="ja">{series.description}</p>
+							<div class="meta">
+								<span class="badge" lang="ja">{series.kind}</span>
+								<span lang="ja">{series.status}</span>
+								<span>
+									<T en={`${chapters.length} parts`} ja={`全${chapters.length}編`} />
+								</span>
+							</div>
+							<ul class="tags">
+								{series.tags.map((tag) => (
+									<li class="tag">{tag}</li>
+								))}
+							</ul>
+							<details class="toc">
+								<summary>
+									<T en="Table of contents" ja="目次" />
+								</summary>
+								<ol>
+									{chapters.map((chapter) => (
+										<li>
+											<a class="text-link" href={pageHref(`/tech/${chapter.id}`)} lang="ja">
+												{chapter.data.label && <span class="toc-label">{chapter.data.label}</span>}
+												{chapter.data.title}
+											</a>
+										</li>
+									))}
+								</ol>
+							</details>
+							<a class="card-cta" href={pageHref(`/tech/${chapters[0].id}`)}>
+								<T en="Start reading (Japanese)" ja="読み始める" /> <Icon name="arrow" size={16} />
+							</a>
+						</article>
+					</li>
+				))
+			}
+		</ul>
+
+		<h2 class="section-title"><T en="Articles" ja="記事" /></h2>
+		{
+			articles.length === 0 ? (
+				<div class="empty">
+					<p style="margin:0">
+						<T en="Articles are coming soon." ja="記事は順次追加していきます。" />
+					</p>
+				</div>
+			) : (
+				<ul class="pub-list">
+					{articles.map((article) => (
+						<li>
+							<a class="card" href={pageHref(`/tech/${article.id}`)}>
+								<h3 lang="ja">{article.data.title}</h3>
+								<p lang="ja">{article.data.description}</p>
+								<div class="meta">
+									<time datetime={article.data.updated.toISOString()}>{formatDate(article.data.updated)}</time>
+								</div>
+								<ul class="tags" style="margin-top:0.75rem">
+									{article.data.tags.map((tag) => (
+										<li class="tag">{tag}</li>
+									))}
+								</ul>
+							</a>
+						</li>
+					))}
+				</ul>
+			)
+		}
+	</div>
+</Layout>
+
+<style>
+	.section-title {
+		margin: 2.5rem 0 1rem;
+		font-size: 1.4rem;
+	}
+	.book-head {
+		color: inherit;
+		text-decoration: none;
+	}
+	.book-head:hover h3 {
+		text-decoration: underline;
+	}
+	.book-head p {
+		margin: 0.25rem 0 0;
+	}
+	.toc summary {
+		cursor: pointer;
+		font-weight: 600;
+	}
+	.toc ol {
+		margin: 0.75rem 0 0;
+		padding-left: 0;
+		list-style: none;
+		display: grid;
+		gap: 0.35rem;
+	}
+	.toc-label {
+		display: inline-block;
+		min-width: 4.5em;
+		color: var(--muted);
+		font-size: 0.9em;
+	}
+</style>

@@ -28,6 +28,8 @@ Node.js 22.12 以上
     ├── pages/                    # index / projects / papers / presentations / about / lab / blog
     ├── content/blog/             # ブログ記事（Markdown）
     ├── content/lab/home-lab.md   # Home Lab の解説（/lab に表示）
+    ├── content/tech/             # AI/IT技術タブの書籍・記事（/tech に表示）
+    ├── data/techSeries.ts        # AI/IT技術タブの書籍（シリーズ）の定義
     ├── content.config.ts         # Content Collections の定義
     ├── consts.ts                 # 名前・リンク・ナビゲーション
     ├── data/publications.ts      # 論文・ポスター等のデータ

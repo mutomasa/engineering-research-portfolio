@@ -1,0 +1,177 @@
+---
+import 'katex/dist/katex.min.css';
+import { render } from 'astro:content';
+import Layout from '../../layouts/Layout.astro';
+import Icon from '../../components/Icon.astro';
+import T from '../../components/T.astro';
+import { techSeries } from '../../data/techSeries';
+import { formatDate } from '../../lib/blog';
+import { getTechEntries, type TechEntry } from '../../lib/tech';
+import { pageHref } from '../../lib/url';
+
+export async function getStaticPaths() {
+	const entries = await getTechEntries();
+	return entries.map((entry) => {
+		const chapters = entry.data.series ? entries.filter((e) => e.data.series === entry.data.series) : [];
+		return { params: { slug: entry.id }, props: { entry, chapters } };
+	});
+}
+
+const { entry, chapters } = Astro.props as { entry: TechEntry; chapters: TechEntry[] };
+const { Content } = await render(entry);
+const series = techSeries.find((s) => s.id === entry.data.series);
+const index = chapters.findIndex((c) => c.id === entry.id);
+const prev = index > 0 ? chapters[index - 1] : undefined;
+const next = index >= 0 && index < chapters.length - 1 ? chapters[index + 1] : undefined;
+const heading = entry.data.label ? `${entry.data.label} ${entry.data.title}` : entry.data.title;
+const pageTitle = series ? `${heading} | ${series.title}` : heading;
+---
+
+<Layout title={pageTitle} titleJa={pageTitle} description={entry.data.description}>
+	<article class="page">
+		<p class="eyebrow">
+			<a class="text-link" href={pageHref('/tech')}><Icon name="back" size={16} /> <T en="AI/IT Tech" ja="AI/IT技術" /></a>
+			{series && <span lang="ja"> / {series.title}</span>}
+		</p>
+		{entry.data.label && <p class="chapter-label" lang="ja">{entry.data.label}</p>}
+		<h1 class="page-title" lang="ja">{entry.data.title}</h1>
+		<p class="lead" lang="ja" style="margin-bottom:1rem">{entry.data.description}</p>
+		<div class="meta">
+			{series && <span class="badge" lang="ja">{series.kind}</span>}
+			<time datetime={entry.data.updated.toISOString()}>{formatDate(entry.data.updated)}</time>
+		</div>
+		<p class="lead" data-lang-only="en" lang="en" style="margin-top:1.5rem">This document is available in Japanese only.</p>
+		<div class="prose" style="margin-top:2rem" lang="ja">
+			<Content />
+		</div>
+
+		{
+			series && (
+				<nav class="chapter-nav" aria-label="Chapters" lang="ja">
+					<div class="pager">
+						{prev ? (
+							<a class="card pager-link" href={pageHref(`/tech/${prev.id}`)}>
+								<span class="pager-dir">← 前へ</span>
+								<span>{prev.data.label ? `${prev.data.label} ${prev.data.title}` : prev.data.title}</span>
+							</a>
+						) : (
+							<span />
+						)}
+						{next && (
+							<a class="card pager-link pager-next" href={pageHref(`/tech/${next.id}`)}>
+								<span class="pager-dir">次へ →</span>
+								<span>{next.data.label ? `${next.data.label} ${next.data.title}` : next.data.title}</span>
+							</a>
+						)}
+					</div>
+					<details class="toc">
+						<summary>{series.title} の目次</summary>
+						<ol>
+							{chapters.map((chapter) => (
+								<li>
+									<a
+										class="text-link"
+										href={pageHref(`/tech/${chapter.id}`)}
+										aria-current={chapter.id === entry.id ? 'page' : undefined}
+									>
+										{chapter.data.label && <span class="toc-label">{chapter.data.label}</span>}
+										{chapter.data.title}
+									</a>
+								</li>
+							))}
+						</ol>
+					</details>
+				</nav>
+			)
+		}
+	</article>
+</Layout>
+
+<script>
+	// ```mermaid のコードブロックを図に変換する（図があるページだけ mermaid を読み込む）
+	const blocks = Array.from(document.querySelectorAll<HTMLElement>('pre:has(> code.language-mermaid)'));
+	if (blocks.length > 0) {
+		const { default: mermaid } = await import('mermaid');
+		mermaid.initialize({ startOnLoad: false, theme: 'neutral', securityLevel: 'strict' });
+		const nodes = blocks.map((pre) => {
+			const div = document.createElement('div');
+			div.className = 'mermaid';
+			div.textContent = pre.textContent ?? '';
+			pre.replaceWith(div);
+			return div;
+		});
+		await mermaid.run({ nodes });
+	}
+</script>
+
+<style>
+	.chapter-label {
+		margin: 0 0 0.25rem;
+		color: var(--muted);
+		font-weight: 600;
+	}
+	.prose :global(.mermaid) {
+		margin: 0 0 1.5rem;
+		overflow-x: auto;
+		text-align: center;
+	}
+	.prose :global(.katex-display) {
+		overflow-x: auto;
+		overflow-y: hidden;
+		padding: 0.25rem 0;
+	}
+	.chapter-nav {
+		max-width: 46rem;
+		margin-top: 3rem;
+		padding-top: 1.5rem;
+		border-top: 1px solid var(--border);
+	}
+	.pager {
+		display: grid;
+		grid-template-columns: 1fr 1fr;
+		gap: 1rem;
+	}
+	.pager-link {
+		gap: 0.25rem;
+	}
+	.pager-next {
+		text-align: right;
+		grid-column: 2;
+	}
+	.pager-dir {
+		color: var(--muted);
+		font-size: 0.85rem;
+		font-weight: 600;
+	}
+	.toc {
+		margin-top: 1.5rem;
+	}
+	.toc summary {
+		cursor: pointer;
+		font-weight: 600;
+	}
+	.toc ol {
+		margin: 0.75rem 0 0;
+		padding-left: 0;
+		list-style: none;
+		display: grid;
+		gap: 0.35rem;
+	}
+	.toc a[aria-current='page'] {
+		font-weight: 700;
+	}
+	.toc-label {
+		display: inline-block;
+		min-width: 4.5em;
+		color: var(--muted);
+		font-size: 0.9em;
+	}
+	@media (max-width: 40rem) {
+		.pager {
+			grid-template-columns: 1fr;
+		}
+		.pager-next {
+			grid-column: auto;
+		}
+	}
+</style>
