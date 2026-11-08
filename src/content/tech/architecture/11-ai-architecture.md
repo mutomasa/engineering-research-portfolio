@@ -8,7 +8,7 @@ label: '第11章'
 tags: ['AI Agent', 'LLM', 'RAG', 'Harness', 'Meta-Harness', 'MCP', 'A2A', 'AI Governance']
 ---
 
-いよいよ最後の章です。これまでの章で学んだ、モジュール化、境界、通信、データ、権限、隔離、可観測性、GPU といった考え方は、すべて AI を組み込んだシステムの設計に直結します。AI 時代のアーキテクチャは、まったく新しいものではなく、**これまでの原則を、確率的に振る舞い、自ら行動するソフトウェアに適用し直す** ことだと言えます。
+いよいよ最後の章です。これまでの章で学んだ、モジュール化、境界、通信、データ、権限、隔離、可観測性、GPU といった考え方は、すべて AI を組み込んだシステムの設計に直結します。AI 時代のアーキテクチャは、まったく新しいものではなく、**これまでの原則を、確率的に振る舞い、自ら行動するソフトウェアに適用し直す** ことです。
 
 ## 11.1 従来のアプリケーションとAIシステムの違い
 
@@ -221,7 +221,7 @@ flowchart LR
 
 ### AI Coding Agent
 
-[AI Coding Agent](/tech/architecture/glossary#ai-coding-agent) は、リポジトリを読み、コードを編集し、コマンドを実行し、テストの結果を見て修正を繰り返す Agent です。第1章で見たように、コードを書く速さを劇的に変えました。
+[AI Coding Agent](/tech/architecture/glossary#ai-coding-agent) は、リポジトリを読み、コードを編集し、コマンドを実行し、テストの結果を見て修正を繰り返す Agent です。第1章で見たように、コードを書く速さを変えました。
 
 ### 開発ハーネス
 
@@ -296,7 +296,7 @@ Databricks の共同創業者 Matei Zaharia は、2026年6月の Data + AI Summi
 
 ```mermaid
 flowchart TB
-    UI["利用者の窓口<br/>ターミナル・Web UI・モバイル・REST API"] --> SV["Server<br/>履歴・ポリシー・成果物・カタログ・MCP・Skills"]
+    UI["利用者向けのインターフェース<br/>ターミナル・Web UI・モバイル・REST API"] --> SV["Server<br/>履歴・ポリシー・成果物・カタログ・MCP・Skills"]
     SV <-->|"共通 API<br/>メッセージとファイルを入力し<br/>イベントとツール呼び出しを出力"| RN["Runner<br/>各 Agent を包む・サンドボックス・信頼性"]
     RN --> CA["既存の AI Coding Agent<br/>Claude Code・Codex・Cursor など"]
     RN --> CU["自作の Agent"]
@@ -318,7 +318,7 @@ flowchart TB
 
 | 系統 | 力点 | 例 |
 |---|---|---|
-| ゲートウェイ／コントロールプレーン系 | 入口でアクセス・コスト・ログを統制する | LiteLLM、Portkey、Cloudflare AI Gateway、Databricks Unity AI Gateway |
+| ゲートウェイ／コントロールプレーン系 | リクエストを中継して、アクセス・コスト・ログを統制する | LiteLLM、Portkey、Cloudflare AI Gateway、Databricks Unity AI Gateway |
 | ワークフロー・オーケストレーション系 | 手順を堅牢にし、状態を保存して再実行できるようにする | Conductor（Netflix 発の OSS）、Temporal、LangGraph、Microsoft Agent Framework |
 | 並列 UI 系 | 複数の Agent の並列実行を見える化し、差分をレビューする | Claude Squad、Vibe Kanban、Sculptor |
 | 相互運用系 | 異なるハーネスを共通 API で包み、合成・協働・統制を担う | Omnigent |
@@ -559,7 +559,7 @@ flowchart LR
 - 監視のデータから性能のボトルネックを見つけ、AI Coding Agent が修正のプルリクエストを作る
 - 評価の結果から、用途に合ったより安いモデルへの切り替えを提案する
 
-ここで最も重要なのは、ループの中の **検証** です。検証の仕組みがない自己改善は、自己劣化と区別がつきません。第4章の適応度関数、第9章の SLO と Policy as Code、本章の評価（eval）が、自己改善するシステムの「安全装置」になります。
+このループで欠かせないのは **検証** です。検証の仕組みがない自己改善は、自己劣化と区別がつきません。第4章の適応度関数、第9章の SLO と Policy as Code、本章の評価（eval）が、自己改善するシステムの「安全装置」になります。
 
 ### 人間の役割
 

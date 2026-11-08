@@ -67,7 +67,7 @@ tags: ['Glossary']
 一方を得ると他方を失う関係。可用性とコスト、性能と整合性など、品質特性は互いにぶつかり合うため、優先順位をつけて選ぶ必要がある。
 
 - 関連用語：[非機能要件](#non-functional-requirement)、[ADR](#adr)
-- 詳細：[第1章](/tech/architecture/01-why-architecture)
+- 詳細：[第4章](/tech/architecture/04-architecture-design)
 
 <a id="non-functional-requirement"></a>
 
@@ -76,7 +76,7 @@ tags: ['Glossary']
 システムが「どのように」動くべきかの要件。性能、可用性、セキュリティ、保守性、コストなど。数値と条件で表すことが重要。
 
 - 関連用語：[トレードオフ](#trade-off)
-- 詳細：[第1章](/tech/architecture/01-why-architecture)
+- 詳細：[第4章](/tech/architecture/04-architecture-design)
 
 <a id="adr"></a>
 
@@ -85,7 +85,7 @@ tags: ['Glossary']
 重要な設計判断を、背景・決定・結果とともに1件1文書で記録する方法。Michael Nygard が提案。リポジトリ内に置くと AI Coding Agent も参照できる。
 
 - 関連用語：[アーキテクト](#architect)
-- 詳細：[第1章](/tech/architecture/01-why-architecture)
+- 詳細：[第4章](/tech/architecture/04-architecture-design)
 
 <a id="waterfall"></a>
 
@@ -94,16 +94,16 @@ tags: ['Glossary']
 要件定義から設計・実装・テスト・リリースまでを順番に進める開発手法。計画しやすいが、途中の変更に弱い。
 
 - 関連用語：[アジャイル](#agile)
-- 詳細：[第1章](/tech/architecture/01-why-architecture)
+- 詳細：[第4章](/tech/architecture/04-architecture-design)
 
 <a id="agile"></a>
 
 ### アジャイル（Agile）
 
-短い期間で計画・実装・確認・改善を繰り返し、動くソフトウェアを少しずつ育てる開発の考え方。設計も継続的に行う。
+短い期間で計画・実装・確認・改善を繰り返し、動くソフトウェアを少しずつ作り上げていく開発の考え方。設計も継続的に行う。
 
 - 関連用語：[ウォーターフォール](#waterfall)
-- 詳細：[第1章](/tech/architecture/01-why-architecture)
+- 詳細：[第4章](/tech/architecture/04-architecture-design)
 
 <a id="uml"></a>
 
@@ -112,7 +112,7 @@ tags: ['Glossary']
 ソフトウェアの構造や振る舞いを図で表す標準記法。ユースケース図、クラス図、シーケンス図、コンポーネント図、配置図などがある。
 
 - 関連用語：[C4 モデル](#c4-model)
-- 詳細：[第1章](/tech/architecture/01-why-architecture)
+- 詳細：[第4章](/tech/architecture/04-architecture-design)
 
 <a id="c4-model"></a>
 
@@ -121,7 +121,7 @@ tags: ['Glossary']
 Simon Brown が提唱した、System Context・Container・Component・Code の4階層でソフトウェアの構造を表す方法。
 
 - 関連用語：[UML](#uml)
-- 詳細：[第1章](/tech/architecture/01-why-architecture)
+- 詳細：[第4章](/tech/architecture/04-architecture-design)
 
 <a id="separation-of-concerns"></a>
 
@@ -130,7 +130,7 @@ Simon Brown が提唱した、System Context・Container・Component・Code の4
 画面表示・業務ルール・データ保存など、異なる関心事を異なる部品に分けること。
 
 - 関連用語：[凝集度](#cohesion)、[レイヤードアーキテクチャ](#layered-architecture)
-- 詳細：[第1章](/tech/architecture/01-why-architecture)
+- 詳細：[第4章](/tech/architecture/04-architecture-design)
 
 <a id="cohesion"></a>
 
@@ -139,7 +139,7 @@ Simon Brown が提唱した、System Context・Container・Component・Code の4
 1つの部品の中身が、どれだけ1つの目的にまとまっているか。高いほど良い。
 
 - 関連用語：[結合度](#coupling)
-- 詳細：[第1章](/tech/architecture/01-why-architecture)
+- 詳細：[第4章](/tech/architecture/04-architecture-design)
 
 <a id="coupling"></a>
 
@@ -148,7 +148,7 @@ Simon Brown が提唱した、System Context・Container・Component・Code の4
 部品同士がどれだけ互いに依存しているか。低い（疎結合）ほど、変更の影響が広がりにくい。
 
 - 関連用語：[凝集度](#cohesion)
-- 詳細：[第1章](/tech/architecture/01-why-architecture)
+- 詳細：[第4章](/tech/architecture/04-architecture-design)
 
 <a id="solid"></a>
 
@@ -157,7 +157,7 @@ Simon Brown が提唱した、System Context・Container・Component・Code の4
 単一責任・開放閉鎖・リスコフの置換・インターフェース分離・依存性逆転の5原則の頭文字。オブジェクト指向設計の指針。
 
 - 関連用語：[クリーンアーキテクチャ](#clean-architecture)
-- 詳細：[第1章](/tech/architecture/01-why-architecture)
+- 詳細：[第4章](/tech/architecture/04-architecture-design)
 
 ## ITアーキテクチャの歴史（第3章）
 
@@ -284,7 +284,7 @@ OS の中心部分。特権的なカーネル空間で動き、プロセス・�
 
 ### システムコール（System Call）
 
-アプリケーションがカーネルに処理（ファイル操作、通信、プロセス生成など）を依頼するための窓口。
+アプリケーションがカーネルに処理（ファイル操作、通信、プロセス生成など）を依頼するための呼び出し。
 
 - 関連用語：[カーネル](#kernel)
 - 詳細：[第5章](/tech/architecture/05-computer-network)

@@ -95,7 +95,7 @@ Linux カーネルは、主要な機能を一つの大きなプログラムと�
 
 - **[プロセス](/tech/architecture/glossary#process)**：実行中のプログラム。それぞれが独立したメモリ空間を持ち、他のプロセスのメモリには触れられない。
 - **[スレッド](/tech/architecture/glossary#thread)**：プロセスの中で並行して動く実行の流れ。同じプロセスのスレッド同士はメモリを共有する。
-- **[システムコール](/tech/architecture/glossary#system-call)**：アプリケーションがカーネルに処理を依頼する窓口。ファイルを開く（`open`）、読む（`read`）、ネットワークに送る（`send`）、新しいプロセスを作る（`fork`/`execve`）など。
+- **[システムコール](/tech/architecture/glossary#system-call)**：アプリケーションがカーネルに処理を依頼するための呼び出し。ファイルを開く（`open`）、読む（`read`）、ネットワークに送る（`send`）、新しいプロセスを作る（`fork`/`execve`）など。
 
 | | プロセス | スレッド |
 |---|---|---|
@@ -358,8 +358,8 @@ flowchart LR
 
 - **[VPC](/tech/architecture/glossary#vpc)（Virtual Private Cloud）**：クラウド上に作る、自分専用の論理的に隔離されたネットワーク
 - **Subnet（サブネット）**：VPC の中をさらに分割した範囲。インターネットに直接出られる **パブリックサブネット** と、出られない **プライベートサブネット** を分けるのが基本
-- **Internet Gateway**：VPC とインターネットをつなぐ出入口
-- **NAT Gateway**：プライベートサブネットのサーバーが、外部（例：OS の更新サーバー）に出ていくためだけの出口
+- **Internet Gateway**：VPC とインターネットの間で通信できるようにする部品
+- **NAT Gateway**：プライベートサブネットのサーバーが、外部（例：OS の更新サーバー）へ通信するときだけに使う経路
 - **Security Group / Network ACL**：仮想的なファイアウォール
 
 ```mermaid
