@@ -483,6 +483,49 @@ a.card:hover {
 	border-left: 3px solid var(--fg);
 	color: var(--muted);
 }
+
+/* `> [!POINT]` から作る、猫のキャラクター付きの「ポイント」ボックス */
+.prose .point {
+	display: flex;
+	gap: 0.9rem;
+	align-items: flex-start;
+	margin: 1.5rem 0;
+	padding: 1rem 1.1rem;
+	background: #fff8ef;
+	border: 1px solid #f3d3b0;
+	border-radius: var(--radius);
+}
+.prose .point-cat {
+	flex: none;
+	width: 56px;
+	height: 56px;
+}
+.prose .point-body {
+	min-width: 0;
+}
+.prose .point-body > :last-child {
+	margin-bottom: 0;
+}
+.prose .point-label {
+	display: inline-block;
+	margin: 0 0 0.4rem;
+	padding: 0.05rem 0.6rem;
+	background: #f4a261;
+	border-radius: 999px;
+	color: #3b2a20;
+	font-size: 0.8rem;
+	font-weight: 700;
+}
+@media (max-width: 480px) {
+	.prose .point {
+		gap: 0.6rem;
+		padding: 0.85rem;
+	}
+	.prose .point-cat {
+		width: 44px;
+		height: 44px;
+	}
+}
 .prose-wide {
 	max-width: none;
 }
