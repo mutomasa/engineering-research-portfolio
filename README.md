@@ -28,6 +28,7 @@ Node.js 22.12 以上
     ├── pages/                    # index / projects / papers / presentations / about / lab / blog
     ├── content/blog/             # ブログ記事（Markdown）
     ├── content/lab/home-lab.md   # Home Lab の解説（/lab に表示）
+    ├── content/portfolio/        # プロジェクトポートフォリオ（/portfolio に表示）
     ├── content/tech/             # AI/IT技術タブの書籍・記事（/tech に表示）
     ├── data/techSeries.ts        # AI/IT技術タブの書籍（シリーズ）の定義
     ├── content.config.ts         # Content Collections の定義
@@ -73,6 +74,17 @@ draft: false # 省略可
 ### 論文・ポスター・研究成果
 
 `src/data/publications.ts` の `publications` 配列に追加します。実在するものだけを追加してください。
+
+## Portfolio ページについて
+
+`/portfolio` は、各リポジトリの README と設計書から作ったプロジェクトポートフォリオです。本文の `src/content/portfolio/portfolio.md` と、ダウンロード用の `public/portfolio/masahiro-muto-portfolio.pdf` は、リポジトリの外の `../freelance-portfolio/` で生成しています。内容を直すときは `../freelance-portfolio/parts/*.md` を編集し、次のコマンドで両方を作り直します。
+
+```bash
+cd ../freelance-portfolio
+python3 assemble.py && node ~/.claude/skills/md-to-pdf/scripts/build.js portfolio.md portfolio.pdf
+python3 export_site.py ../engineering-research-portfolio/src/content/portfolio/portfolio.md
+cp portfolio.pdf ../engineering-research-portfolio/public/portfolio/masahiro-muto-portfolio.pdf
+```
 
 ## Projects ページについて
 

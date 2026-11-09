@@ -33,6 +33,7 @@ export const SITE = {
 export const NAV = [
 	{ label: 'Home', labelJa: 'ホーム', href: '/' },
 	{ label: 'Projects', labelJa: 'プロジェクト', href: '/projects' },
+	{ label: 'Portfolio', labelJa: 'ポートフォリオ', href: '/portfolio' },
 	{ label: 'AI/IT Tech', labelJa: 'AI/IT技術', href: '/tech' },
 	{ label: 'Research', labelJa: '研究内容', href: '/research' },
 	{ label: 'Research Blog', labelJa: '研究ブログ', href: '/blog' },

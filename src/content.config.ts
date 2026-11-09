@@ -43,6 +43,17 @@ const lab = defineCollection({
 	}),
 });
 
+// フリーランス向けのプロジェクトポートフォリオ（/portfolio に表示）。日本語のみ。
+// freelance-portfolio/export_site.py で parts/*.md から生成する。
+const portfolio = defineCollection({
+	loader: glob({ base: './src/content/portfolio', pattern: '**/[^_]*.{md,mdx}' }),
+	schema: z.object({
+		title: z.string(),
+		description: z.string(),
+		updated: z.coerce.date(),
+	}),
+});
+
 // 研究内容（/research に一覧、/research/<slug> に本文を表示）。日本語のみ。
 const research = defineCollection({
 	loader: glob({ base: './src/content/research', pattern: '**/[^_]*.{md,mdx}' }),
@@ -78,4 +89,4 @@ const tech = defineCollection({
 	}),
 });
 
-export const collections = { blog, blogJa, lab, research, tech };
+export const collections = { blog, blogJa, lab, portfolio, research, tech };
