@@ -49,7 +49,7 @@ export const techDocuments: TechDocument[] = [
 			'意味・関係・文脈を AI の判断と行動へつなぐために、RDF / OWL / SHACL、LinkML による Model-as-Code、因果知識グラフ、主要ベンダーの Ontology 製品の動向と、実装・評価の取り組みをまとめたスライド。',
 		kind: 'スライド（JAIST 西村研究室セミナー）',
 		date: '2026年11月改訂',
-		pages: 22,
+		pages: 26,
 		file: 'ontology-knowledge-graph-2026-11.pdf',
 		tags: ['Ontology', 'Knowledge Graph', 'LLM', 'Spatial AI'],
 	},
