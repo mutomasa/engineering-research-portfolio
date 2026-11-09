@@ -82,11 +82,30 @@ tags: ['References']
 | Woosuk Kwon ほか, "Efficient Memory Management for Large Language Model Serving with PagedAttention," SOSP, 2023 | vLLM と PagedAttention |
 | Norman P. Jouppi ほか, "In-Datacenter Performance Analysis of a Tensor Processing Unit," ISCA, 2017 | TPU |
 
-## AI 時代のアーキテクチャ（第11章）
+## 機械学習のアーキテクチャ（第11章）
 
 | 文献 | 内容 |
 |---|---|
+| Ian Goodfellow, Yoshua Bengio, Aaron Courville, *Deep Learning*, MIT Press, 2016 | 深層学習の標準的な教科書 |
+| David E. Rumelhart, Geoffrey E. Hinton, Ronald J. Williams, "Learning representations by back-propagating errors," *Nature*, 1986 | 誤差逆伝播法 |
+| Yann LeCun ほか, "Gradient-Based Learning Applied to Document Recognition," *Proceedings of the IEEE*, 1998 | LeNet-5 と CNN |
+| Kaiming He ほか, "Deep Residual Learning for Image Recognition," CVPR, 2016 | ResNet と残差接続 |
+| Sepp Hochreiter, Jürgen Schmidhuber, "Long Short-Term Memory," *Neural Computation*, 1997 | LSTM |
+| Dzmitry Bahdanau, Kyunghyun Cho, Yoshua Bengio, "Neural Machine Translation by Jointly Learning to Align and Translate," ICLR, 2015 | RNN の Seq2Seq への Attention の導入 |
 | Ashish Vaswani ほか, "Attention Is All You Need," NeurIPS, 2017 | Transformer |
+| Alexey Dosovitskiy ほか, "An Image is Worth 16x16 Words: Transformers for Image Recognition at Scale," ICLR, 2021 | Vision Transformer（ViT） |
+| Mathias Lechner ほか, "Neural circuit policies enabling auditable autonomy," *Nature Machine Intelligence*, 2020 | Neural Circuit Policies |
+| Ramin Hasani ほか, "Liquid Time-constant Networks," AAAI, 2021 | LTC（Liquid Neural Networks） |
+| Ramin Hasani ほか, "Closed-form continuous-time neural networks," *Nature Machine Intelligence*, 2022 | CfC |
+| Makram Chahine ほか, "Robust flight navigation out of distribution with liquid neural networks," *Science Robotics*, 2023 | ドローンでの分布外環境への頑健性 |
+| D. Sculley ほか, "Hidden Technical Debt in Machine Learning Systems," NeurIPS, 2015 | 機械学習システムの技術的負債 |
+| Google Cloud, [MLOps: Continuous delivery and automation pipelines in machine learning](https://cloud.google.com/architecture/mlops-continuous-delivery-and-automation-pipelines-in-machine-learning) | MLOps の成熟度レベル |
+| [MLflow Documentation](https://mlflow.org/docs/latest/) | MLflow の公式ドキュメント（Tracking、Model Registry、評価、サービング） |
+
+## AI 時代のアーキテクチャ（第12章）
+
+| 文献 | 内容 |
+|---|---|
 | Patrick Lewis ほか, "Retrieval-Augmented Generation for Knowledge-Intensive NLP Tasks," NeurIPS, 2020 | RAG |
 | Shunyu Yao ほか, "ReAct: Synergizing Reasoning and Acting in Language Models," ICLR, 2023 | 推論と行動を交互に行う Agent |
 | Anthropic, [Building effective agents](https://www.anthropic.com/engineering/building-effective-agents), 2024 | ワークフローと Agent の使い分け |

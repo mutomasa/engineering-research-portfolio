@@ -20,7 +20,8 @@ tags: ['Glossary']
 - **データアーキテクチャ（第8章）**：[リレーショナルデータベース](#rdb)、[ACID](#acid)、[NoSQL](#nosql)、[インデックス](#index)、[WAL（ログ先行書き込み）](#wal)、[レプリケーション](#replication)、[シャーディング](#sharding)、[OLTP](#oltp)、[OLAP](#olap)、[データウェアハウス](#dwh)、[データレイク](#data-lake)、[レイクハウス](#lakehouse)、[ETL](#etl)、[ELT](#elt)、[CDC（変更データキャプチャ）](#cdc)、[データカタログ](#data-catalog)、[埋め込み](#embedding)、[ベクトルデータベース](#vector-db)、[知識グラフ](#knowledge-graph)、[セマンティックレイヤー](#semantic-layer)
 - **安全性・信頼性・運用（第9章）**：[認証](#authentication)、[認可](#authorization)、[OAuth 2.0](#oauth)、[OpenID Connect](#oidc)、[SAML](#saml)、[IAM](#iam)、[RBAC](#rbac)、[ABAC](#abac)、[最小権限の原則](#least-privilege)、[SCIM](#scim)、[ゼロトラスト](#zero-trust)、[KMS](#kms)、[可観測性](#observability)、[SLI・SLO・SLA](#sli-slo-sla)、[RTO・RPO](#rto-rpo)、[DevSecOps](#devsecops)、[Policy as Code](#policy-as-code)
 - **GPU と AI 計算基盤（第10章）**：[GPU](#gpu)、[CUDA](#cuda)、[SM](#sm)、[ワープ](#warp)、[Tensor Core](#tensor-core)、[HBM](#hbm)、[ルーフラインモデル](#roofline)、[NVLink](#nvlink)、[NCCL](#nccl)、[データ並列](#data-parallelism)、[テンソル並列](#tensor-parallelism)、[パイプライン並列](#pipeline-parallelism)、[KV キャッシュ](#kv-cache)、[量子化](#quantization)、[TPU](#tpu)
-- **AI 時代のアーキテクチャ（第11章）**：[大規模言語モデル](#llm)、[Transformer](#transformer)、[Attention（注意機構）](#attention)、[トークン](#token)、[RAG（検索拡張生成）](#rag)、[AI Agent](#ai-agent)、[AI Coding Agent](#ai-coding-agent)、[ハーネス](#harness)、[メタハーネス](#meta-harness)、[サンドボックス](#sandbox)、[プロンプトインジェクション](#prompt-injection)、[MCP](#mcp)、[A2A](#a2a)、[ガードレール](#guardrails)、[Human-in-the-Loop](#human-in-the-loop)
+- **機械学習のアーキテクチャ（第11章）**：[ニューラルネットワーク](#neural-network)、[誤差逆伝播法](#backpropagation)、[CNN](#cnn)、[RNN](#rnn)、[LSTM](#lstm)、[Liquid Neural Networks](#liquid-neural-network)、[Transformer](#transformer)、[Attention（注意機構）](#attention)、[MLOps](#mlops)、[データリーケージ](#data-leakage)、[特徴量ストア](#feature-store)、[MLflow](#mlflow)、[モデルレジストリ](#model-registry)、[データドリフト](#data-drift)
+- **AI 時代のアーキテクチャ（第12章）**：[大規模言語モデル](#llm)、[トークン](#token)、[RAG（検索拡張生成）](#rag)、[AI Agent](#ai-agent)、[AI Coding Agent](#ai-coding-agent)、[ハーネス](#harness)、[メタハーネス](#meta-harness)、[サンドボックス](#sandbox)、[プロンプトインジェクション](#prompt-injection)、[MCP](#mcp)、[A2A](#a2a)、[ガードレール](#guardrails)、[Human-in-the-Loop](#human-in-the-loop)
 
 ## 基本概念（第1・2・4章）
 
@@ -1097,16 +1098,61 @@ Google が開発した、行列演算に特化したシストリックアレイ�
 - 関連用語：[GPU](#gpu)
 - 詳細：[第10章](/tech/architecture/10-gpu-architecture)
 
-## AI 時代のアーキテクチャ（第11章）
+## 機械学習のアーキテクチャ（第11章）
 
-<a id="llm"></a>
+<a id="neural-network"></a>
 
-### 大規模言語モデル（Large Language Model, LLM）
+### ニューラルネットワーク（Neural Network）
 
-大量のテキストから学習し、次に来るトークンの確率を予測することで、文章やコードを生成するモデル。
+重み付きの和と非線形の活性化関数を持つ単純な計算単位（ニューロン）を層状につないだモデル。層を深く重ねたものを深層学習と呼ぶ。
 
-- 関連用語：[Transformer](#transformer)、[トークン](#token)
-- 詳細：[第11章](/tech/architecture/11-ai-architecture)
+- 関連用語：[誤差逆伝播法](#backpropagation)、[CNN](#cnn)、[RNN](#rnn)
+- 詳細：[第11章](/tech/architecture/11-ml-architecture)
+
+<a id="backpropagation"></a>
+
+### 誤差逆伝播法（Backpropagation）
+
+損失を各パラメータで微分した勾配を、出力側から入力側へ順に効率よく計算する方法。得られた勾配を使い、勾配降下法でパラメータを更新する。
+
+- 関連用語：[ニューラルネットワーク](#neural-network)
+- 詳細：[第11章](/tech/architecture/11-ml-architecture)
+
+<a id="cnn"></a>
+
+### CNN（畳み込みニューラルネットワーク）（Convolutional Neural Network）
+
+小さなフィルタを画像の上でずらしながら掛け合わせる畳み込みを使うネットワーク。局所的な結合と重みの共有により、少ないパラメータで画像の特徴を階層的に捉える。
+
+- 関連用語：[ニューラルネットワーク](#neural-network)、[Transformer](#transformer)
+- 詳細：[第11章](/tech/architecture/11-ml-architecture)
+
+<a id="rnn"></a>
+
+### RNN（再帰型ニューラルネットワーク）（Recurrent Neural Network）
+
+系列を1つずつ読みながら、それまでの内容を要約した隠れ状態を更新していくネットワーク。逐次的に計算するため、学習の並列化が難しい。
+
+- 関連用語：[LSTM](#lstm)、[Liquid Neural Networks](#liquid-neural-network)
+- 詳細：[第11章](/tech/architecture/11-ml-architecture)
+
+<a id="lstm"></a>
+
+### LSTM（Long Short-Term Memory）
+
+セル状態と3つのゲート（忘却・入力・出力）を持ち、RNN の勾配消失を緩和して長い依存関係を学べるようにした構造。
+
+- 関連用語：[RNN](#rnn)
+- 詳細：[第11章](/tech/architecture/11-ml-architecture)
+
+<a id="liquid-neural-network"></a>
+
+### Liquid Neural Networks（液体ニューラルネットワーク）
+
+入力に応じて時定数（状態の変化の速さ）が変わる、連続時間のニューロンで構成される RNN の一種。LTC や CfC があり、少数のニューロンで頑健な制御や不規則な時系列の処理ができる。
+
+- 関連用語：[RNN](#rnn)
+- 詳細：[第11章](/tech/architecture/11-ml-architecture)
 
 <a id="transformer"></a>
 
@@ -1115,7 +1161,7 @@ Google が開発した、行列演算に特化したシストリックアレイ�
 2017年に提案された、Attention を中心とするニューラルネットワークの構造。現在の LLM の多くの基礎。
 
 - 関連用語：[Attention（注意機構）](#attention)、[大規模言語モデル](#llm)
-- 詳細：[第11章](/tech/architecture/11-ai-architecture)
+- 詳細：[第11章](/tech/architecture/11-ml-architecture)
 
 <a id="attention"></a>
 
@@ -1124,7 +1170,72 @@ Google が開発した、行列演算に特化したシストリックアレイ�
 系列中のすべての要素同士の関係の強さを計算し、重要な情報に重みを置く仕組み。
 
 - 関連用語：[Transformer](#transformer)、[KV キャッシュ](#kv-cache)
-- 詳細：[第11章](/tech/architecture/11-ai-architecture)
+- 詳細：[第11章](/tech/architecture/11-ml-architecture)
+
+<a id="mlops"></a>
+
+### MLOps
+
+機械学習のデータ準備・学習・評価・デプロイ・監視・再学習のライフサイクルを、DevOps の考え方で自動化し、安定して運用するための考え方と仕組み。
+
+- 関連用語：[MLflow](#mlflow)、[モデルレジストリ](#model-registry)、[データドリフト](#data-drift)
+- 詳細：[第11章](/tech/architecture/11-ml-architecture)
+
+<a id="data-leakage"></a>
+
+### データリーケージ（Data Leakage）
+
+予測時には手に入らないはずの情報が学習データに混ざること。評価では高い成績が出るのに、本番では性能が出ない原因になる。
+
+- 関連用語：[特徴量ストア](#feature-store)
+- 詳細：[第11章](/tech/architecture/11-ml-architecture)
+
+<a id="feature-store"></a>
+
+### 特徴量ストア（Feature Store）
+
+特徴量の定義を一か所にまとめ、学習用には過去の値を、推論用には最新の値を低遅延で提供する仕組み。学習時と推論時の特徴量のずれを防ぐ。
+
+- 関連用語：[データリーケージ](#data-leakage)、[MLOps](#mlops)
+- 詳細：[第11章](/tech/architecture/11-ml-architecture)
+
+<a id="mlflow"></a>
+
+### MLflow
+
+実験の記録（Tracking）、モデルの保存形式、モデルレジストリ、評価、サービングなどの機能を持つ、機械学習のライフサイクル管理のためのオープンソースのプラットフォーム。
+
+- 関連用語：[モデルレジストリ](#model-registry)、[MLOps](#mlops)
+- 詳細：[第11章](/tech/architecture/11-ml-architecture)
+
+<a id="model-registry"></a>
+
+### モデルレジストリ（Model Registry）
+
+学習済みモデルにバージョンを付けて一元管理する場所。MLflow ではエイリアス（例：champion）で本番のモデルを指し、付け替えで切り替えやロールバックを行う。
+
+- 関連用語：[MLflow](#mlflow)
+- 詳細：[第11章](/tech/architecture/11-ml-architecture)
+
+<a id="data-drift"></a>
+
+### データドリフト（Data Drift）
+
+本番の入力データの分布が、学習時から変化すること。入力と正解の関係そのものが変わることはコンセプトドリフトと呼ぶ。どちらもモデルの性能を静かに低下させる。
+
+- 関連用語：[MLOps](#mlops)
+- 詳細：[第11章](/tech/architecture/11-ml-architecture)
+
+## AI 時代のアーキテクチャ（第12章）
+
+<a id="llm"></a>
+
+### 大規模言語モデル（Large Language Model, LLM）
+
+大量のテキストから学習し、次に来るトークンの確率を予測することで、文章やコードを生成するモデル。
+
+- 関連用語：[Transformer](#transformer)、[トークン](#token)
+- 詳細：[第12章](/tech/architecture/12-ai-architecture)
 
 <a id="token"></a>
 
@@ -1133,7 +1244,7 @@ Google が開発した、行列演算に特化したシストリックアレイ�
 LLM が扱うテキストの単位。単語や文字の断片。コストやコンテキストの長さもトークン数で数える。
 
 - 関連用語：[大規模言語モデル](#llm)
-- 詳細：[第11章](/tech/architecture/11-ai-architecture)
+- 詳細：[第12章](/tech/architecture/12-ai-architecture)
 
 <a id="rag"></a>
 
@@ -1142,7 +1253,7 @@ LLM が扱うテキストの単位。単語や文字の断片。コストやコ�
 質問に関係する情報を検索し、その結果を LLM に渡して根拠のある回答を生成させる仕組み。
 
 - 関連用語：[ベクトルデータベース](#vector-db)、[埋め込み](#embedding)
-- 詳細：[第11章](/tech/architecture/11-ai-architecture)
+- 詳細：[第12章](/tech/architecture/12-ai-architecture)
 
 <a id="ai-agent"></a>
 
@@ -1151,7 +1262,7 @@ LLM が扱うテキストの単位。単語や文字の断片。コストやコ�
 目的を与えられると、LLM が自ら計画し、ツールを使い、結果を観察して次の行動を決めることを繰り返すソフトウェア。
 
 - 関連用語：[MCP](#mcp)、[サンドボックス](#sandbox)
-- 詳細：[第11章](/tech/architecture/11-ai-architecture)
+- 詳細：[第12章](/tech/architecture/12-ai-architecture)
 
 <a id="ai-coding-agent"></a>
 
@@ -1160,7 +1271,7 @@ LLM が扱うテキストの単位。単語や文字の断片。コストやコ�
 リポジトリを読み、コードを編集し、コマンドやテストを実行しながら開発作業を行う AI Agent。
 
 - 関連用語：[AI Agent](#ai-agent)
-- 詳細：[第11章](/tech/architecture/11-ai-architecture)
+- 詳細：[第12章](/tech/architecture/12-ai-architecture)
 
 <a id="harness"></a>
 
@@ -1169,7 +1280,7 @@ LLM が扱うテキストの単位。単語や文字の断片。コストやコ�
 モデルの周りで、ファイル操作・ツール呼び出し・権限の確認・サンドボックス・画面など、外の世界との接点を与えるソフトウェア。AI Coding Agent や Agent 開発用の SDK が該当する。
 
 - 関連用語：[AI Coding Agent](#ai-coding-agent)、[メタハーネス](#meta-harness)
-- 詳細：[第11章](/tech/architecture/11-ai-architecture)
+- 詳細：[第12章](/tech/architecture/12-ai-architecture)
 
 <a id="meta-harness"></a>
 
@@ -1178,7 +1289,7 @@ LLM が扱うテキストの単位。単語や文字の断片。コストやコ�
 複数のハーネスを共通の API で包み、ハーネスをまたいだ合成・協働・統制を担う上位の層。
 
 - 関連用語：[ハーネス](#harness)、[ガードレール](#guardrails)
-- 詳細：[第11章](/tech/architecture/11-ai-architecture)
+- 詳細：[第12章](/tech/architecture/12-ai-architecture)
 
 <a id="sandbox"></a>
 
@@ -1187,7 +1298,7 @@ LLM が扱うテキストの単位。単語や文字の断片。コストやコ�
 外部に影響が及ばないよう隔離された実行環境。Agent のコード実行などに使う。
 
 - 関連用語：[コンテナ](#container)、[最小権限の原則](#least-privilege)
-- 詳細：[第11章](/tech/architecture/11-ai-architecture)
+- 詳細：[第12章](/tech/architecture/12-ai-architecture)
 
 <a id="prompt-injection"></a>
 
@@ -1196,7 +1307,7 @@ LLM が扱うテキストの単位。単語や文字の断片。コストやコ�
 入力やデータに紛れ込ませた指示によって、LLM に本来の指示と異なる動作をさせる攻撃。
 
 - 関連用語：[ガードレール](#guardrails)、[サンドボックス](#sandbox)
-- 詳細：[第11章](/tech/architecture/11-ai-architecture)
+- 詳細：[第12章](/tech/architecture/12-ai-architecture)
 
 <a id="mcp"></a>
 
@@ -1205,7 +1316,7 @@ LLM が扱うテキストの単位。単語や文字の断片。コストやコ�
 AI アプリケーションと外部のツール・データをつなぐためのオープンなプロトコル。2024年に Anthropic が公開した。
 
 - 関連用語：[A2A](#a2a)、[AI Agent](#ai-agent)
-- 詳細：[第11章](/tech/architecture/11-ai-architecture)
+- 詳細：[第12章](/tech/architecture/12-ai-architecture)
 
 <a id="a2a"></a>
 
@@ -1214,7 +1325,7 @@ AI アプリケーションと外部のツール・データをつなぐため�
 AI Agent 同士がタスクを依頼し合い、協調するためのオープンなプロトコル。2025年に Google が発表した。
 
 - 関連用語：[MCP](#mcp)
-- 詳細：[第11章](/tech/architecture/11-ai-architecture)
+- 詳細：[第12章](/tech/architecture/12-ai-architecture)
 
 <a id="guardrails"></a>
 
@@ -1223,7 +1334,7 @@ AI Agent 同士がタスクを依頼し合い、協調するためのオープ�
 AI の入力・出力・行動を検査し、望ましくない振る舞いを防ぐ仕組み。
 
 - 関連用語：[Human-in-the-Loop](#human-in-the-loop)、[Policy as Code](#policy-as-code)
-- 詳細：[第11章](/tech/architecture/11-ai-architecture)
+- 詳細：[第12章](/tech/architecture/12-ai-architecture)
 
 <a id="human-in-the-loop"></a>
 
@@ -1232,7 +1343,7 @@ AI の入力・出力・行動を検査し、望ましくない振る舞いを�
 AI の処理の流れの中に、人間による確認・承認・修正を組み込むこと。
 
 - 関連用語：[ガードレール](#guardrails)
-- 詳細：[第11章](/tech/architecture/11-ai-architecture)
+- 詳細：[第12章](/tech/architecture/12-ai-architecture)
 
 ## アルファベット順索引
 
@@ -1242,14 +1353,15 @@ AI の処理の流れの中に、人間による確認・承認・修正を組�
 - [AI Agent](#ai-agent)
 - [AI Coding Agent](#ai-coding-agent)
 - [Application Programming Interface（API）](#api)
-- [Architect（アーキテクト）](#architect)
-- [Architecture（アーキテクチャ）](#architecture)
 - [Architecture Decision Record（ADR）](#adr)
+- [Architecture（アーキテクチャ）](#architecture)
+- [Architect（アーキテクト）](#architect)
 - [Atomicity, Consistency, Isolation, Durability（ACID）](#acid)
 - [Attention（Attention（注意機構））](#attention)
 - [Attribute-Based Access Control（ABAC）](#abac)
 - [Authentication, AuthN（認証）](#authentication)
 - [Authorization, AuthZ（認可）](#authorization)
+- [Backpropagation（誤差逆伝播法）](#backpropagation)
 - [Bounded Context（境界づけられたコンテキスト）](#bounded-context)
 - [C4 Model（C4 モデル）](#c4-model)
 - [CAP Theorem（CAP 定理）](#cap-theorem)
@@ -1260,10 +1372,13 @@ AI の処理の流れの中に、人間による確認・承認・修正を組�
 - [Cohesion（凝集度）](#cohesion)
 - [Command Query Responsibility Segregation（CQRS）](#cqrs)
 - [Container（コンテナ）](#container)
+- [Convolutional Neural Network（CNN）](#cnn)
 - [Coupling（結合度）](#coupling)
 - [CUDA](#cuda)
 - [Data Catalog（データカタログ）](#data-catalog)
+- [Data Drift（データドリフト）](#data-drift)
 - [Data Lake（データレイク）](#data-lake)
+- [Data Leakage（データリーケージ）](#data-leakage)
 - [Data Parallelism（データ並列）](#data-parallelism)
 - [Data Warehouse, DWH（データウェアハウス）](#dwh)
 - [DevSecOps](#devsecops)
@@ -1275,6 +1390,7 @@ AI の処理の流れの中に、人間による確認・承認・修正を組�
 - [Event-Driven Architecture, EDA（イベント駆動アーキテクチャ）](#eda)
 - [Extract, Load, Transform（ELT）](#elt)
 - [Extract, Transform, Load（ETL）](#etl)
+- [Feature Store（特徴量ストア）](#feature-store)
 - [Firewall（ファイアウォール）](#firewall)
 - [Graphics Processing Unit（GPU）](#gpu)
 - [GraphQL](#graphql)
@@ -1297,16 +1413,22 @@ AI の処理の流れの中に、人間による確認・承認・修正を組�
 - [Lakehouse（レイクハウス）](#lakehouse)
 - [Large Language Model, LLM（大規模言語モデル）](#llm)
 - [Layered Architecture（レイヤードアーキテクチャ）](#layered-architecture)
+- [Liquid Neural Networks（液体ニューラルネットワーク）](#liquid-neural-network)
 - [Load Balancer（ロードバランサー）](#load-balancer)
+- [Long Short-Term Memory（LSTM）](#lstm)
 - [Mainframe（メインフレーム）](#mainframe)
 - [Message Queue（メッセージキュー）](#message-queue)
 - [Meta-Harness（メタハーネス）](#meta-harness)
 - [Microservices（マイクロサービス）](#microservices)
+- [MLflow](#mlflow)
+- [MLOps](#mlops)
 - [Model Context Protocol（MCP）](#mcp)
+- [Model Registry（モデルレジストリ）](#model-registry)
 - [Model-View-Controller（MVC）](#mvc)
 - [Modularization（モジュール化）](#modularization)
 - [Monolith（モノリス）](#monolith)
 - [Network Address Translation（NAT）](#nat)
+- [Neural Network（ニューラルネットワーク）](#neural-network)
 - [Non-functional Requirement, NFR（非機能要件）](#non-functional-requirement)
 - [Not only SQL（NoSQL）](#nosql)
 - [NVIDIA Collective Communications Library（NCCL）](#nccl)
@@ -1327,6 +1449,7 @@ AI の処理の流れの中に、人間による確認・承認・修正を組�
 - [Publish/Subscribe（Pub/Sub）](#pub-sub)
 - [Quantization（量子化）](#quantization)
 - [Recovery Time Objective / Recovery Point Objective（RTO・RPO）](#rto-rpo)
+- [Recurrent Neural Network（RNN）](#rnn)
 - [Relational Database, RDB（リレーショナルデータベース）](#rdb)
 - [Remote Procedure Call（RPC）](#rpc)
 - [Replication（レプリケーション）](#replication)

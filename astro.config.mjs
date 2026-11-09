@@ -13,6 +13,10 @@ const isBuild = process.argv.includes('build');
 export default defineConfig({
 	// 静的サイトとして dist/ に出力する（Docker・サーバーサイド実行は使用しない）
 	output: 'static',
+	// 第11章を「機械学習のアーキテクチャ」にしたため、旧URLを新しい第12章へ転送する
+	redirects: {
+		'/tech/architecture/11-ai-architecture': '/tech/architecture/12-ai-architecture',
+	},
 	markdown: {
 		// $...$ / $$...$$ の数式をビルド時に KaTeX で描画する
 		remarkPlugins: [remarkMath],
