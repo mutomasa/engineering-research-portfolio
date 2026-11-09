@@ -1,0 +1,48 @@
+Content License / コンテンツのライセンス
+
+Copyright (c) 2026 Masahiro Muto
+
+The written content and original figures of this repository and the website
+built from it are licensed under the Creative Commons
+Attribution-NonCommercial-ShareAlike 4.0 International License (CC BY-NC-SA 4.0).
+
+  https://creativecommons.org/licenses/by-nc-sa/4.0/
+  Legal code: https://creativecommons.org/licenses/by-nc-sa/4.0/legalcode
+
+This applies to:
+
+  - src/content/   (books in the AI/IT Tech tab, blog posts, research and lab pages)
+  - books/         (book outlines and drafts)
+  - diagram/       (original diagrams)
+  - public/images/ (original images)
+
+Source code (including code samples inside the content above) is licensed
+separately under the MIT License. See LICENSE.
+
+Third-party material (quoted text, figures, logos, trademarks, and anything
+credited to another source) remains under its original license and is NOT
+covered by this license.
+
+For commercial use (e.g. publication, paid courses, or redistribution for
+profit), please contact the author.
+
+Suggested attribution:
+
+  "<Title>" by Masahiro Muto, licensed under CC BY-NC-SA 4.0
+  https://github.com/mutomasa/engineering-research-portfolio
+
+----------------------------------------------------------------------
+
+本リポジトリおよびそこから生成される Web サイトの文章とオリジナルの図版は、
+クリエイティブ・コモンズ 表示 - 非営利 - 継承 4.0 国際 ライセンス
+（CC BY-NC-SA 4.0）の下で提供されます。
+
+  https://creativecommons.org/licenses/by-nc-sa/4.0/deed.ja
+
+対象: src/content/（AI/IT技術タブの書籍、ブログ、研究・Lab ページ）、
+books/、diagram/、public/images/
+
+ソースコード（上記コンテンツ内のコード例を含む）は MIT ライセンスです（LICENSE を参照）。
+他者の著作物（引用文、図、ロゴ、商標、出典を明記したもの）は元のライセンスに従い、
+本ライセンスの対象外です。商用利用（出版、有料講座、営利目的の再配布など）を
+希望する場合は著者に連絡してください。

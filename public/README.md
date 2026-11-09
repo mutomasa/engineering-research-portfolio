@@ -5,7 +5,7 @@ colorFrom: gray
 colorTo: blue
 sdk: static
 pinned: false
-license: mit
+license: cc-by-nc-sa-4.0
 ---
 
 Research portfolio of Masahiro Muto. Built with Astro (static output).

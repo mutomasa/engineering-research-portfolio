@@ -83,3 +83,10 @@ draft: false # 省略可
 ## Presentations ページについて
 
 ビルド時に Speaker Deck の Atom フィード（`https://speakerdeck.com/mutomasa.atom`）から公開スライドを取得し、静的 HTML に埋め込みます。最新化するにはリビルドが必要です。取得に失敗した場合は、Speaker Deck のプロフィールへのリンクを表示します。
+
+## ライセンス
+
+- **コンテンツ**（`src/content/` の書籍・ブログ・研究ページ、`books/`、`diagram/`、`public/images/` の文章とオリジナル図版）: [CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.ja)。詳細は [LICENSE-CONTENT](LICENSE-CONTENT)。
+- **ソースコード**（サイトのコードと、コンテンツ内のコード例）: [MIT](LICENSE)。
+- 引用した他者の文章・図・ロゴなどは、それぞれ元のライセンスに従います。
+- 商用利用を希望する場合は著者に連絡してください。

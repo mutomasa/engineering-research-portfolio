@@ -100,7 +100,9 @@ const isCurrent = (href: string) =>
 
 		<footer class="site-footer">
 			<div class="container">
-				<p style="margin:0">© {new Date().getFullYear()} {SITE.name}</p>
+				<p style="margin:0">
+					{`© ${new Date().getFullYear()} ${SITE.name}`}{'\u00a0·\u00a0'}<T en="Content:\u00a0" ja="コンテンツ:\u00a0" /><a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" rel="license noopener noreferrer">CC BY-NC-SA 4.0</a>{'\u00a0·\u00a0'}<T en="Code:\u00a0" ja="コード:\u00a0" /><a href={`${SITE.github.url}/engineering-research-portfolio/blob/main/LICENSE`} target="_blank" rel="noopener noreferrer">MIT</a>
+				</p>
 				<ul class="social">
 					<li>
 						<a href={SITE.github.url} target="_blank" rel="noopener noreferrer">
