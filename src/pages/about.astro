@@ -8,7 +8,7 @@ import { SITE } from '../consts';
 <Layout title="About" titleJa="プロフィール" description={`About ${SITE.name}: research areas and links.`}>
 	<div class="page">
 		<h1 class="page-title"><T en="About" ja="プロフィール" /></h1>
-		<p class="lead"><T en={SITE.name} ja={SITE.nameJa} /> — <T en={SITE.title} ja={SITE.titleJa} /></p>
+		<p class="lead"><T en={`${SITE.name} (${SITE.nameJa})`} ja={SITE.nameJa} /> — <T en={SITE.title} ja={SITE.titleJa} /></p>
 
 		<section class="about-section" aria-labelledby="affiliation">
 			<h2 id="affiliation"><T en="Affiliation" ja="所属" /></h2>
