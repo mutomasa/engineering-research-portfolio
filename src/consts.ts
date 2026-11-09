@@ -1,5 +1,6 @@
 export const SITE = {
 	name: 'Masahiro Muto',
+	nameJa: '武藤雅裕',
 	title: 'AI Engineer & Robotics Researcher · Quantum Technology Enthusiast',
 	titleJa: 'AIエンジニア・ロボティクス研究者・量子技術愛好家',
 	description:
