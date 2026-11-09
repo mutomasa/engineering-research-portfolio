@@ -8,12 +8,12 @@ updated: 2026-11-09
 
 | 領域 | 主な技術 | 代表プロジェクト |
 |---|---|---|
-| ロボティクス・空間AI・3D | 3D Gaussian Splatting、SAM 3.1、ROS 2、強化学習（PPO）、Three.js | SpatialSAM Studio、Smart 3D Ecosystem |
-| コンピュータビジョン | 物体検出・追跡（YOLO、DETR、OWL-ViT、DeepSORT）、セグメンテーション、行動認識 | Grounding SAM 2、DETR 可視化 |
 | LLM・AI Agent | vLLM、Qwen、LangGraph、CrewAI、MCP、LLM as a Judge、Lean 4 による検証 | Jev Decision Router、Lean Agent Verification Lab |
-| グラフ・知識グラフ・RAG | Neo4j、Cypher、Graph RAG、GNN（PyTorch Geometric） | Security Attack Graph 3D |
 | 機械学習・生成モデル | 埋め込み評価、拡散モデル、Transformer の実装、量子機械学習 | EmbeddingGemma Multimodal Lab |
+| グラフ・知識グラフ・RAG | Neo4j、Cypher、Graph RAG、GNN（PyTorch Geometric） | Security Attack Graph 3D |
+| コンピュータビジョン | 物体検出・追跡（YOLO、DETR、OWL-ViT、DeepSORT）、セグメンテーション、行動認識 | Grounding SAM 2、DETR 可視化 |
 | データ基盤・インフラ | Snowflake、dbt、Cloudflare（Workers・R2・Iceberg）、Kafka、Go | Cloudflare Basin Iceberg、Kafka 3D ストリーミング可視化 |
+| ロボティクス・空間AI・3D | 3D Gaussian Splatting、SAM 3.1、ROS 2、強化学習（PPO）、Three.js | SpatialSAM Studio、Smart 3D Ecosystem |
 
 ## 仕事の進め方の特徴
 
