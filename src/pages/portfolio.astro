@@ -20,8 +20,8 @@ const { Content } = await render(doc);
 		<p class="lead" lang="ja">{doc.data.description}</p>
 		<div class="meta">
 			<time datetime={doc.data.updated.toISOString()}>{formatDate(doc.data.updated)}</time>
-			<a class="text-link" href="/portfolio/masahiro-muto-portfolio.pdf" download>
-				<T en="Download PDF" ja="PDF をダウンロード" />
+			<a class="text-link" href="/portfolio/masahiro-muto-portfolio.pdf" target="_blank" rel="noopener">
+				<T en="View PDF" ja="PDF を見る" />
 			</a>
 		</div>
 		<p class="lead" data-lang-only="en" lang="en" style="margin-top:1.5rem">This page is available in Japanese only.</p>
