@@ -13,6 +13,8 @@ export interface TechSeries {
 	kind: string;
 	/** 「執筆中」「完結」などの状態 */
 	status: string;
+	/** 書籍の版（例：'1.0'）。書籍一覧と各章に「Version 1.0」と表示する */
+	version?: string;
 	tags: string[];
 }
 
@@ -26,6 +28,7 @@ export const techSeries: TechSeries[] = [
 		note: '注意事項：本書は、著者自身が設計・構築したアーキテクチャのみを記載しています。すべてのITアーキテクチャ・AIアーキテクチャを網羅したものではありません（第11章の機械学習のアーキテクチャは、一般的なものを紹介しています）。',
 		kind: '書籍',
 		status: '初版（随時改訂）',
+		version: '1.0',
 		tags: ['Architecture', 'System Design', 'Cloud', 'GPU', 'Machine Learning', 'AI Agent'],
 	},
 ];

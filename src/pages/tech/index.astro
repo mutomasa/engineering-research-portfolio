@@ -46,6 +46,7 @@ const articles = standaloneArticles(entries);
 							{series.note && <p class="book-note" lang="ja">{series.note}</p>}
 							<div class="meta">
 								<span class="badge" lang="ja">{series.kind}</span>
+								{series.version && <span>Version {series.version}</span>}
 								<span lang="ja">{series.status}</span>
 								<span>
 									<T en={`${chapters.length} parts`} ja={`全${chapters.length}編`} />

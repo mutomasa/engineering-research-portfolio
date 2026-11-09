@@ -38,6 +38,7 @@ const pageTitle = series ? `${heading} | ${series.title}` : heading;
 		<p class="lead" lang="ja" style="margin-bottom:1rem">{entry.data.description}</p>
 		<div class="meta">
 			{series && <span class="badge" lang="ja">{series.kind}</span>}
+			{series?.version && <span>Version {series.version}</span>}
 			<time datetime={entry.data.updated.toISOString()}>{formatDate(entry.data.updated)}</time>
 		</div>
 		<p class="lead" data-lang-only="en" lang="en" style="margin-top:1.5rem">This document is available in Japanese only.</p>
