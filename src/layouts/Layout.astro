@@ -57,6 +57,41 @@ const isCurrent = (href: string) =>
 				document.title = root.dataset[lang === 'ja' ? 'titleJa' : 'titleEn'] || document.title;
 			})();
 		</script>
+		{
+			/*
+			 * Hugging Face の Space ページ（huggingface.co/spaces/...）はサイトを iframe で開き、
+			 * 中でページを移動しても親の URL はトップのまま変わらない。
+			 * そこで今いるページを親の URL に `?page=/tech/.../index.html` として書き込み、
+			 * その URL を開いたとき（iframe はトップに ?page= 付きで読み込まれる）にそのページへ移動する。
+			 * 参考: https://huggingface.co/docs/hub/spaces-handle-url-parameters
+			 */
+		}
+		<script is:inline>
+			(() => {
+				if (window.parent === window) return;
+				const path = location.pathname;
+				const isTop = path === '/' || path === '/index.html';
+				const target = new URLSearchParams(location.search).get('page');
+				// サイト内のパスだけを受け付ける（//example.com のような外部への移動は無視する）
+				if (isTop && target && /^\/(?!\/)[\w\-./]*$/.test(target) && target !== path) {
+					location.replace(target + location.hash);
+					return;
+				}
+				const sync = () => {
+					try {
+						window.parent.postMessage(
+							{
+								queryString: isTop ? '' : `page=${path}`,
+								hash: location.hash.replace(/^#/, ''),
+							},
+							'https://huggingface.co',
+						);
+					} catch {}
+				};
+				sync();
+				window.addEventListener('hashchange', sync);
+			})();
+		</script>
 	</head>
 	<body>
 		<a class="skip-link" href="#main"><T en="Skip to content" ja="本文へスキップ" /></a>
