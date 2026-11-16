@@ -45,6 +45,11 @@ export const PROJECT_NOTES: Record<string, ProjectNote> = {
 		en: 'Research project that builds a Spatial Scene Graph (position, semantics, spatial relations, observation history) from a TurtleBot3’s 2D LiDAR and RGB-D camera, then uses an LLM to resolve natural-language instructions to objects and Nav2 to navigate. Design document and research plan are published.',
 		status: 'design',
 	},
+	'turtlebot3-muse-gadget': {
+		category: 'robotics',
+		ja: 'TurtleBot3 Burger を Muse のロボットガジェットとして ROS 2 につなぐアプリ。Muse のチャットから、ロボットの状態（robot.status）、地図画像（robot.map）、RViz2 の画面（robot.view）を取得する。常駐ブリッジが状態をキャッシュし、コマンドはすべて読み取り専用。',
+		en: 'Connects a TurtleBot3 Burger to Muse as a robot gadget via ROS 2 and the Muse Gadget SDK. From Muse chat it returns the robot status (robot.status), a map image (robot.map) and a headless RViz2 snapshot (robot.view). A resident bridge caches state, and every command is read-only.',
+	},
 	'questbot-xr': {
 		category: 'robotics',
 		ja: 'Unity と ROS 2 をつなぎ、Meta Quest 3 で TurtleBot3 Burger の LiDAR・地図・カメラを表示する VR/MR アプリ。最初の目標は、実機の LiDAR スキャンを VR 空間に実寸で表示すること。',
