@@ -13,7 +13,7 @@ updated: 2026-11-16
 | グラフ・知識グラフ・RAG | Neo4j、Cypher、Graph RAG、GNN（PyTorch Geometric） | Security Attack Graph 3D |
 | コンピュータビジョン | 物体検出・追跡（YOLO、DETR、OWL-ViT、DeepSORT）、セグメンテーション、行動認識 | Grounding SAM 2、DETR 可視化 |
 | データ基盤・インフラ | Snowflake、dbt、Cloudflare（Workers・R2・Iceberg）、Kafka、Go | Cloudflare Basin Iceberg、Kafka 3D ストリーミング可視化 |
-| ロボティクス・空間AI・3D | 3D Gaussian Splatting、SAM 3.1、ROS 2、強化学習（PPO）、Three.js | SpatialSAM Studio、Smart 3D Ecosystem |
+| ロボティクス・空間AI・3D | ROS 2、VLA、LeRobot、MuJoCo、Isaac Sim、Gazebo、3D Gaussian Splatting、SAM 3.1、強化学習（PPO）、Three.js | SpatialSAM Studio、Smart 3D Ecosystem |
 
 ## 仕事の進め方の特徴
 
