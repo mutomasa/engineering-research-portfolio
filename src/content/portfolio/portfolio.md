@@ -1,7 +1,7 @@
 ---
 title: 'ポートフォリオ'
 description: 'これまでに作ったプロジェクトを、構成図・成果物の概要・工夫している点・GitHub へのリンクとともに 1 件ずつ紹介します。'
-updated: 2026-11-09
+updated: 2026-11-16
 ---
 
 ## 対応できる領域
@@ -24,7 +24,7 @@ updated: 2026-11-09
 
 ## プロジェクト一覧
 
-各リポジトリの README と設計書を読んでまとめました。<span class="status">中断</span> は開発を止めているものです。
+各リポジトリの README と設計書を読んでまとめました。<span class="status">設計段階</span> は設計書・研究計画書まで作り実装前のもの、<span class="status">中断</span> は開発を止めているものです。
 
 | # | プロジェクト | カテゴリ | 状態 |
 |---|---|---|---|
@@ -32,55 +32,66 @@ updated: 2026-11-09
 | 2 | [Smart 3D Ecosystem — Boids + 機械学習](#project-2) | ロボティクス・空間AI・3D | 実装済み |
 | 3 | [gsplat Gaussian Splatting 比較デモ（3DGS）](#project-3) | ロボティクス・空間AI・3D | 実装済み |
 | 4 | [量子ロボット経路探索（quantum_policy_gradient）](#project-4) | ロボティクス・空間AI・3D | 実装済み |
-| 5 | [Grounding SAM 2 動画物体追跡](#project-5) | コンピュータビジョン | 実装済み |
-| 6 | [DETR 可視化アプリ](#project-6) | コンピュータビジョン | 実装済み |
-| 7 | [SegFormer セマンティックセグメンテーション](#project-7) | コンピュータビジョン | 実装済み |
-| 8 | [OWL-ViT オープンボキャブラリ物体検出](#project-8) | コンピュータビジョン | 実装済み |
-| 9 | [GLIP 物体検出・グラウンディング](#project-9) | コンピュータビジョン | 実装済み |
-| 10 | [Structure-CLIP + OWL-ViT](#project-10) | コンピュータビジョン | 実装済み |
-| 11 | [DeepSORT オブジェクトトラッキング](#project-11) | コンピュータビジョン | 実装済み |
-| 12 | [YOLOv8 物体検出・可視化](#project-12) | コンピュータビジョン | 実装済み |
-| 13 | [画像シーングラフ生成（Graph R-CNN 風）](#project-13) | コンピュータビジョン | 実装済み |
-| 14 | [MMAction2 行動認識デモ](#project-14) | コンピュータビジョン | 実装済み |
-| 15 | [PySlowFast 行動認識（最小構成）](#project-15) | コンピュータビジョン | 実装済み |
-| 16 | [ViTMAE 画像再構築](#project-16) | コンピュータビジョン | 実装済み |
-| 17 | [SimCLR 対照学習の可視化](#project-17) | コンピュータビジョン | 実装済み |
-| 18 | [画像キャプション評価アプリ（Qwen-VL）](#project-18) | コンピュータビジョン | 実装済み |
-| 19 | [画像処理ツールキット（manipulate_image_lists）](#project-19) | コンピュータビジョン | 実装済み |
-| 20 | [Jev Decision Router デモ](#project-20) | LLM・AI Agent | 実装済み |
-| 21 | [Lean Agent Verification Lab](#project-21) | LLM・AI Agent | 実装済み |
-| 22 | [Phoenix LLM Observability デモ](#project-22) | LLM・AI Agent | 実装済み |
-| 23 | [Prompt Optimizer（LangChain 対応）](#project-23) | LLM・AI Agent | 実装済み |
-| 24 | [Agent Evolution（Clojure）](#project-24) | LLM・AI Agent | 実装済み |
-| 25 | [Research OS](#project-25) | LLM・AI Agent | 実装済み |
-| 26 | [JAEA 特許・報告書検索（ローカル RAG）](#project-26) | LLM・AI Agent | 実装済み |
-| 27 | [DLT スライド生成システム](#project-27) | LLM・AI Agent | 実装済み |
-| 28 | [vLLM サーバーとモデルのダウンロード](#project-28) | LLM・AI Agent | 実装済み |
-| 29 | [RoboPaper TUI（論文収集エージェント）](#project-29) | LLM・AI Agent | 中断 |
-| 30 | [Security Attack Graph 3D](#project-30) | グラフ・知識グラフ・RAG | 実装済み |
-| 31 | [Graph RAG Video（動画分析）](#project-31) | グラフ・知識グラフ・RAG | 実装済み |
-| 32 | [Graph RAG アプリ](#project-32) | グラフ・知識グラフ・RAG | 実装済み |
-| 33 | [日本語テキストからの知識グラフ構築](#project-33) | グラフ・知識グラフ・RAG | 実装済み |
-| 34 | [GNN 可視化アプリ（R-GCN on Cora）](#project-34) | グラフ・知識グラフ・RAG | 実装済み |
-| 35 | [Node2Vec + GCN 可視化](#project-35) | グラフ・知識グラフ・RAG | 実装済み |
-| 36 | [ネットワーク指標の可視化](#project-36) | グラフ・知識グラフ・RAG | 実装済み |
-| 37 | [EmbeddingGemma Multimodal Lab](#project-37) | 機械学習・生成モデル | 実装済み |
-| 38 | [Diffusion Transformer vs U-Net](#project-38) | 機械学習・生成モデル | 実装済み |
-| 39 | [AI 駆動創薬 × 量子コンピュータ デモ](#project-39) | 機械学習・生成モデル | 実装済み |
-| 40 | [Simple GPT（学習用）](#project-40) | 機械学習・生成モデル | 実装済み |
-| 41 | [BERT + UMAP + HDBSCAN テキストクラスタリング](#project-41) | 機械学習・生成モデル | 実装済み |
-| 42 | [CLAP 音声とテキストの理解](#project-42) | 機械学習・生成モデル | 実装済み |
-| 43 | [Whisper 日本語音声認識デモ](#project-43) | 機械学習・生成モデル | 実装済み |
-| 44 | [PCA と NMF の可視化](#project-44) | 機械学習・生成モデル | 実装済み |
-| 45 | [ランダムフォレストの決定境界](#project-45) | 機械学習・生成モデル | 実装済み |
-| 46 | [Cloudflare Basin + Iceberg](#project-46) | データ基盤・インフラ・ツール | 実装済み |
-| 47 | [Kafka 3D ストリーミング可視化](#project-47) | データ基盤・インフラ・ツール | 実装済み |
-| 48 | [リアルタイム共有ホワイトボード](#project-48) | データ基盤・インフラ・ツール | 実装済み |
-| 49 | [Raft の可視化（Go）](#project-49) | データ基盤・インフラ・ツール | 実装済み |
-| 50 | [Git Uncommit Checker](#project-50) | データ基盤・インフラ・ツール | 実装済み |
-| 51 | [ターミナル Todo アプリ](#project-51) | データ基盤・インフラ・ツール | 実装済み |
-| 52 | [Ghostty AI-Native 開発環境](#project-52) | データ基盤・インフラ・ツール | 実装済み |
-| 53 | [Engineering Research Portfolio（このサイト）](#project-53) | データ基盤・インフラ・ツール | 実装済み |
+| 5 | [TurtleBot3 Muse Gadget](#project-5) | ロボティクス・空間AI・3D | 実装済み |
+| 6 | [TurtleBot3 Spatial AI](#project-6) | ロボティクス・空間AI・3D | 設計段階 |
+| 7 | [QuestBot XR](#project-7) | ロボティクス・空間AI・3D | 設計段階 |
+| 8 | [Grounding SAM 2 動画物体追跡](#project-8) | コンピュータビジョン | 実装済み |
+| 9 | [DETR 可視化アプリ](#project-9) | コンピュータビジョン | 実装済み |
+| 10 | [SegFormer セマンティックセグメンテーション](#project-10) | コンピュータビジョン | 実装済み |
+| 11 | [OWL-ViT オープンボキャブラリ物体検出](#project-11) | コンピュータビジョン | 実装済み |
+| 12 | [GLIP 物体検出・グラウンディング](#project-12) | コンピュータビジョン | 実装済み |
+| 13 | [Structure-CLIP + OWL-ViT](#project-13) | コンピュータビジョン | 実装済み |
+| 14 | [DeepSORT オブジェクトトラッキング](#project-14) | コンピュータビジョン | 実装済み |
+| 15 | [YOLOv8 物体検出・可視化](#project-15) | コンピュータビジョン | 実装済み |
+| 16 | [画像シーングラフ生成（Graph R-CNN 風）](#project-16) | コンピュータビジョン | 実装済み |
+| 17 | [MMAction2 行動認識デモ](#project-17) | コンピュータビジョン | 実装済み |
+| 18 | [PySlowFast 行動認識（最小構成）](#project-18) | コンピュータビジョン | 実装済み |
+| 19 | [ViTMAE 画像再構築](#project-19) | コンピュータビジョン | 実装済み |
+| 20 | [SimCLR 対照学習の可視化](#project-20) | コンピュータビジョン | 実装済み |
+| 21 | [画像キャプション評価アプリ（Qwen-VL）](#project-21) | コンピュータビジョン | 実装済み |
+| 22 | [画像処理ツールキット（manipulate_image_lists）](#project-22) | コンピュータビジョン | 実装済み |
+| 23 | [Jev Decision Router デモ](#project-23) | LLM・AI Agent | 実装済み |
+| 24 | [Lean Agent Verification Lab](#project-24) | LLM・AI Agent | 実装済み |
+| 25 | [Phoenix LLM Observability デモ](#project-25) | LLM・AI Agent | 実装済み |
+| 26 | [Prompt Optimizer（LangChain 対応）](#project-26) | LLM・AI Agent | 実装済み |
+| 27 | [Agent Evolution（Clojure）](#project-27) | LLM・AI Agent | 実装済み |
+| 28 | [Research OS](#project-28) | LLM・AI Agent | 実装済み |
+| 29 | [JAEA 特許・報告書検索（ローカル RAG）](#project-29) | LLM・AI Agent | 実装済み |
+| 30 | [DLT スライド生成システム](#project-30) | LLM・AI Agent | 実装済み |
+| 31 | [vLLM サーバーとモデルのダウンロード](#project-31) | LLM・AI Agent | 実装済み |
+| 32 | [Ignisolate — AI Agent 向けサンドボックス](#project-32) | LLM・AI Agent | 設計段階 |
+| 33 | [OpenBot + CrewAI Agent Mesh デモ](#project-33) | LLM・AI Agent | 設計段階 |
+| 34 | [Research-Nexus（研究情報管理アプリ）](#project-34) | LLM・AI Agent | 設計段階 |
+| 35 | [Deep Research + ネットワーク分析](#project-35) | LLM・AI Agent | 設計段階 |
+| 36 | [Yohaku OS（日常業務 OS）](#project-36) | LLM・AI Agent | 設計段階 |
+| 37 | [RoboPaper TUI（論文収集エージェント）](#project-37) | LLM・AI Agent | 中断 |
+| 38 | [Security Attack Graph 3D](#project-38) | グラフ・知識グラフ・RAG | 実装済み |
+| 39 | [Graph RAG Video（動画分析）](#project-39) | グラフ・知識グラフ・RAG | 実装済み |
+| 40 | [Graph RAG アプリ](#project-40) | グラフ・知識グラフ・RAG | 実装済み |
+| 41 | [日本語テキストからの知識グラフ構築](#project-41) | グラフ・知識グラフ・RAG | 実装済み |
+| 42 | [GNN 可視化アプリ（R-GCN on Cora）](#project-42) | グラフ・知識グラフ・RAG | 実装済み |
+| 43 | [Node2Vec + GCN 可視化](#project-43) | グラフ・知識グラフ・RAG | 実装済み |
+| 44 | [ネットワーク指標の可視化](#project-44) | グラフ・知識グラフ・RAG | 実装済み |
+| 45 | [EmbeddingGemma Multimodal Lab](#project-45) | 機械学習・生成モデル | 実装済み |
+| 46 | [Diffusion Transformer vs U-Net](#project-46) | 機械学習・生成モデル | 実装済み |
+| 47 | [AI 駆動創薬 × 量子コンピュータ デモ](#project-47) | 機械学習・生成モデル | 実装済み |
+| 48 | [Simple GPT（学習用）](#project-48) | 機械学習・生成モデル | 実装済み |
+| 49 | [BERT + UMAP + HDBSCAN テキストクラスタリング](#project-49) | 機械学習・生成モデル | 実装済み |
+| 50 | [CLAP 音声とテキストの理解](#project-50) | 機械学習・生成モデル | 実装済み |
+| 51 | [Whisper 日本語音声認識デモ](#project-51) | 機械学習・生成モデル | 実装済み |
+| 52 | [PCA と NMF の可視化](#project-52) | 機械学習・生成モデル | 実装済み |
+| 53 | [ランダムフォレストの決定境界](#project-53) | 機械学習・生成モデル | 実装済み |
+| 54 | [Cloudflare Basin + Iceberg](#project-54) | データ基盤・インフラ・ツール | 実装済み |
+| 55 | [Kafka 3D ストリーミング可視化](#project-55) | データ基盤・インフラ・ツール | 実装済み |
+| 56 | [リアルタイム共有ホワイトボード](#project-56) | データ基盤・インフラ・ツール | 実装済み |
+| 57 | [Raft の可視化（Go）](#project-57) | データ基盤・インフラ・ツール | 実装済み |
+| 58 | [Git Uncommit Checker](#project-58) | データ基盤・インフラ・ツール | 実装済み |
+| 59 | [ターミナル Todo アプリ](#project-59) | データ基盤・インフラ・ツール | 実装済み |
+| 60 | [Ghostty AI-Native 開発環境](#project-60) | データ基盤・インフラ・ツール | 実装済み |
+| 61 | [Engineering Research Portfolio（このサイト）](#project-61) | データ基盤・インフラ・ツール | 実装済み |
+| 62 | [Snowflake IoT 予知保全 RAG](#project-62) | データ基盤・インフラ・ツール | 設計段階 |
+| 63 | [自作オブジェクトストレージ（Go + Raft）](#project-63) | データ基盤・インフラ・ツール | 設計段階 |
+| 64 | [植物観察日記（Green Moments）](#project-64) | データ基盤・インフラ・ツール | 設計段階 |
 
 ## ロボティクス・空間AI・3D
 
@@ -211,11 +222,89 @@ flowchart LR
 - **結果を 6 つの観点で見せる。** 行動確率のヒートマップ、移動のアニメーション、累積報酬、各量子ビットの期待値の推移などを確認できます。
 - **理論とコードの対応を説明する。** README で、パラメータシフト則などの理論と実装の対応表を示しています。
 
-## コンピュータビジョン
-
 <a id="project-5"></a>
 
-### 5. Grounding SAM 2 動画物体追跡
+### 5. TurtleBot3 Muse Gadget
+
+<p class="meta"><span class="tag">ROS 2</span><span class="tag">rclpy</span><span class="tag">Muse Gadget SDK</span><span class="tag">RViz2</span><span class="tag">systemd</span></p>
+
+**GitHub:** [github.com/mutomasa/turtlebot3-muse-gadget](https://github.com/mutomasa/turtlebot3-muse-gadget)
+
+#### 成果物の概要
+
+TurtleBot3 Burger を Muse のロボットガジェットとして接続するアプリです。Muse のチャットから自然言語で頼むと、Ubuntu 上のコマンドが ROS 2 経由でロボットの状態を読み、結果を返します。位置・向き・LiDAR・バッテリーの状態を返す `robot.status`、地図にロボットの位置を重ねて画像で送る `robot.map`、画面なしの RViz2 を撮影して送る `robot.view` を実装しました。常駐ブリッジが状態をキャッシュするので、`robot.status` は約 0.25 秒で返ります。実機 TurtleBot3 の bringup 中に、Muse から `robot.status` を呼び出して `online` が返ることを確かめています。
+
+```mermaid
+flowchart LR
+    U["Muse アプリ<br/>自然言語で依頼"] --> G["Muse Gadget SDK<br/>登録コマンド"]
+    G --> B["常駐ブリッジ<br/>rclpy・状態キャッシュ"]
+    B <-->|"ROS 2 DDS"| R["TurtleBot3 Burger<br/>odom・scan・map"]
+    B --> V["地図 PNG・RViz2 の画面"]
+    V --> G
+```
+
+#### 工夫している点
+
+- **読み取り専用から始める。** 今のコマンドはロボットを動かさず、`/cmd_vel` も発行しません。移動は今後、ユーザーの承認と検証を通したうえで Nav2 経由にする設計です。
+- **古いデータを現在値として返さない。** 受信からの経過時間で鮮度を判定し、状態を `online` / `degraded` / `offline` / `unknown` に分けます。通信に失敗したときにサンプル値は返さず、開発用モックの出力には必ず `source: mock` を付けます。
+- **役割を境界だけに絞る。** SLAM や認識は TurtleBot3 Spatial AI 側に任せ、このリポジトリは Muse と ROS 2 をつなぐ部分だけを担います。Muse SDK は sudo 権限のない専用ユーザーで動かします。
+
+<a id="project-6"></a>
+
+### 6. TurtleBot3 Spatial AI
+
+<p class="meta"><span class="status">設計段階</span> <span class="tag">ROS 2</span><span class="tag">Nav2</span><span class="tag">LiDAR</span><span class="tag">RGB-D</span><span class="tag">LLM</span><span class="tag">Scene Graph</span></p>
+
+**GitHub:** [github.com/mutomasa/turtlebot3_spatial_ai](https://github.com/mutomasa/turtlebot3_spatial_ai)
+
+#### 成果物の概要
+
+TurtleBot3 Burger の 2D LiDAR と RGB-D カメラで観測した物体を、Spatial Scene Graph にまとめる研究プロジェクトです。グラフには、物体の位置・意味・空間関係・観測履歴を持たせます。LLM で自然言語の指示から目的の物体を特定し、Nav2 でそこへ移動します。設計書と研究計画書を公開しています。
+
+```mermaid
+flowchart LR
+    L["2D LiDAR<br/>RGB-D カメラ"] --> G["Spatial Scene Graph<br/>位置・意味・関係・履歴"]
+    U["自然言語の指示"] --> LLM["LLM<br/>対象の物体を特定"]
+    G --> LLM
+    LLM --> N["Nav2<br/>目的地へ移動"]
+```
+
+#### 工夫している点
+
+- **地図に「意味」と「関係」を持たせる。** 座標だけの地図ではなく、「机の上のマグカップ」のような空間関係と、いつ観測したかの履歴を持つグラフにします。
+- **LLM の役割を対象の特定に絞る。** 移動の制御は Nav2 に任せ、LLM は「どの物体か」を決める部分だけを担います。
+- **研究計画書を先に作った。** 実装の前に、設計書と研究計画書（PDF）で目的・手法・評価方法をまとめています。
+
+<a id="project-7"></a>
+
+### 7. QuestBot XR
+
+<p class="meta"><span class="status">設計段階</span> <span class="tag">Unity 6</span><span class="tag">ROS 2 Humble</span><span class="tag">Meta Quest 3</span><span class="tag">OpenXR</span></p>
+
+**GitHub:** [github.com/mutomasa/questbot-xr](https://github.com/mutomasa/questbot-xr)
+
+#### 成果物の概要
+
+Unity と ROS 2 をつなぎ、Meta Quest 3 で TurtleBot3 Burger の LiDAR・地図・カメラ映像を表示する VR/MR アプリの設計です。最初の目標は、実機の LiDAR スキャンを VR 空間に実寸で表示することです。
+
+```mermaid
+flowchart LR
+    B["TurtleBot3 Burger<br/>LiDAR・カメラ"] -->|"ROS 2 DDS"| U["Ubuntu PC<br/>ROS 2・SLAM・Nav2"]
+    U -->|"TCP<br/>スキャン・地図・姿勢"| Q["Meta Quest 3<br/>Unity アプリ"]
+    M["Mac<br/>Unity Editor"] -->|"APK を配置"| Q
+```
+
+#### 工夫している点
+
+- **段階ごとに完了条件を決めた。** 6 つの開発フェーズに分け、「壁までの距離が実機と一致する」のような、実機で確かめられる完了条件を置いています。
+- **安全を優先した順序。** 最初のマイルストーンは表示だけにし、ロボットへの速度指令は実装しません。遠隔操作は最後のフェーズで、デッドマンスイッチや切断時の停止を実機で検証してからにします。
+- **確認していないことを明記する。** 採用バージョンや互換性の未確認事項を一覧にし、実機で確かめていない項目は完了扱いにしないルールにしています。
+
+## コンピュータビジョン
+
+<a id="project-8"></a>
+
+### 8. Grounding SAM 2 動画物体追跡
 
 <p class="meta"><span class="tag">Grounding DINO</span><span class="tag">SAM 2</span><span class="tag">Streamlit</span><span class="tag">Plotly</span></p>
 
@@ -240,9 +329,9 @@ flowchart LR
 - **検出と境界を役割分担させる。** 位置の特定は Grounding DINO、正確な境界は SAM 2 に任せ、2 つのモデルの得意な部分を組み合わせています。
 - **結果を分析できる。** マスクの重ね合わせに加えて、Plotly のグラフで検出結果を分析できます。
 
-<a id="project-6"></a>
+<a id="project-9"></a>
 
-### 6. DETR 可視化アプリ
+### 9. DETR 可視化アプリ
 
 <p class="meta"><span class="tag">DETR</span><span class="tag">Transformer</span><span class="tag">PyTorch</span><span class="tag">Streamlit</span></p>
 
@@ -268,9 +357,9 @@ flowchart LR
 - **構造の図解つき。** DETR の構造と処理の流れを、アプリの中で図で説明しています。
 - **デバッグ情報を出す。** モデルの情報、メモリ使用量などを表示し、検証に使えるようにしています。
 
-<a id="project-7"></a>
+<a id="project-10"></a>
 
-### 7. SegFormer セマンティックセグメンテーション
+### 10. SegFormer セマンティックセグメンテーション
 
 <p class="meta"><span class="tag">SegFormer</span><span class="tag">ADE20K</span><span class="tag">Cityscapes</span><span class="tag">Streamlit</span></p>
 
@@ -295,9 +384,9 @@ flowchart LR
 - **内部を分析できる。** アテンションマップと特徴マップを表示し、処理時間とメモリ使用量も計測します。
 - **結果を統計で見る。** クラス別の画素数や信頼度の分布を表示し、どのクラスが不安定かを把握できます。
 
-<a id="project-8"></a>
+<a id="project-11"></a>
 
-### 8. OWL-ViT オープンボキャブラリ物体検出
+### 11. OWL-ViT オープンボキャブラリ物体検出
 
 <p class="meta"><span class="tag">OWL-ViT</span><span class="tag">Hugging Face Transformers</span><span class="tag">Streamlit</span></p>
 
@@ -322,9 +411,9 @@ flowchart LR
 - **3 つの検出モード。** 基本の検出、テキストで指定する検出、類似画像で指定する検出を切り替えられます。
 - **使いやすさ。** プリセットのクエリ、カンマ区切りの複数入力、信頼度しきい値の自動調整、日本語と英語の翻訳に対応しています。
 
-<a id="project-9"></a>
+<a id="project-12"></a>
 
-### 9. GLIP 物体検出・グラウンディング
+### 12. GLIP 物体検出・グラウンディング
 
 <p class="meta"><span class="tag">GLIP</span><span class="tag">Swin Transformer</span><span class="tag">BERT</span><span class="tag">Streamlit</span></p>
 
@@ -348,9 +437,9 @@ flowchart LR
 - **言葉と物体を結びつける。** 文中の語と画像中の物体を対応させるので、新しいカテゴリも追加の学習なしで検出できます。
 - **アーキテクチャを解説する。** Swin Transformer のシフトウィンドウや階層構造、Swin-T の仕様（約 28M パラメータなど）を README で説明しています。
 
-<a id="project-10"></a>
+<a id="project-13"></a>
 
-### 10. Structure-CLIP + OWL-ViT
+### 13. Structure-CLIP + OWL-ViT
 
 <p class="meta"><span class="tag">Structure-CLIP</span><span class="tag">OWL-ViT</span><span class="tag">Graphviz</span><span class="tag">Streamlit</span></p>
 
@@ -377,9 +466,9 @@ flowchart LR
 - **論文の実装を最小構成で動かす。** 元の実装は追加の前処理や学習済みチェックポイントが必要ですが、同梱の CLIP 実装を直接使い、軽いデモとして動くようにしました。
 - **構造の理解を見せる。** 文の構造（誰が・何を・どうした）をシーングラフで表示し、Structure-CLIP の狙いを直感的に伝えます。
 
-<a id="project-11"></a>
+<a id="project-14"></a>
 
-### 11. DeepSORT オブジェクトトラッキング
+### 14. DeepSORT オブジェクトトラッキング
 
 <p class="meta"><span class="tag">YOLOv8</span><span class="tag">DeepSORT</span><span class="tag">OpenCV</span><span class="tag">Streamlit</span></p>
 
@@ -415,9 +504,9 @@ flowchart TB
 - **用途に合わせた 3 つの版。** 動画全体を処理してからダウンロードする基本版、フレームごとに結果を見るリアルタイム版、ウェブカメラ入力のライブ版を用意しました。
 - **性能を見ながら使える。** リアルタイム版では FPS と処理時間を画面に表示します。
 
-<a id="project-12"></a>
+<a id="project-15"></a>
 
-### 12. YOLOv8 物体検出・可視化
+### 15. YOLOv8 物体検出・可視化
 
 <p class="meta"><span class="tag">YOLOv8</span><span class="tag">Ultralytics</span><span class="tag">OpenCV</span><span class="tag">Streamlit</span></p>
 
@@ -441,9 +530,9 @@ flowchart LR
 - **役割ごとにモジュールを分けた。** モデル管理、可視化、UI 部品を別のファイルにし、エラー処理もモデル管理側にまとめています。
 - **しきい値を調整できる。** 信頼度と NMS のしきい値を変えて、検出結果の変化を確かめられます。
 
-<a id="project-13"></a>
+<a id="project-16"></a>
 
-### 13. 画像シーングラフ生成（Graph R-CNN 風）
+### 16. 画像シーングラフ生成（Graph R-CNN 風）
 
 <p class="meta"><span class="tag">Mask R-CNN</span><span class="tag">Multi-Head Attention</span><span class="tag">NetworkX</span><span class="tag">Plotly</span></p>
 
@@ -479,9 +568,9 @@ flowchart TB
 - **論文の中心部分を自分で実装した。** 関係候補の選択（RePN）とアテンションによる関係スコアの調整を、簡易版として実装しています。
 - **空間特徴で候補を絞る。** すべての物体の組み合わせについて IoU と相対位置・サイズを計算し、近いものから順に候補にします。
 
-<a id="project-14"></a>
+<a id="project-17"></a>
 
-### 14. MMAction2 行動認識デモ
+### 17. MMAction2 行動認識デモ
 
 <p class="meta"><span class="tag">MMAction2</span><span class="tag">TSN</span><span class="tag">SlowFast</span><span class="tag">Streamlit</span></p>
 
@@ -505,9 +594,9 @@ flowchart LR
 - **速さと精度でモデルを選べる。** CPU でも動く軽量な TSN と、GPU を使う高精度な SlowFast を切り替えられます。
 - **層を分けた設計。** UI、推論のサービス層、モデルのレジストリ（設定・重み・ラベルの管理）を分けています。
 
-<a id="project-15"></a>
+<a id="project-18"></a>
 
-### 15. PySlowFast 行動認識（最小構成）
+### 18. PySlowFast 行動認識（最小構成）
 
 <p class="meta"><span class="tag">SlowFast</span><span class="tag">PyTorchVideo</span><span class="tag">Kinetics-400</span><span class="tag">Streamlit</span></p>
 
@@ -543,9 +632,9 @@ flowchart TB
 - **前処理を明確にした。** フレームの抽出、リサイズ、2 経路のテンソル作成までを、パイプラインとして分けています。
 - **ラベルがなくても動く。** 公式ラベルを取得できない環境では、仮のラベルを生成して動作を確認できます。
 
-<a id="project-16"></a>
+<a id="project-19"></a>
 
-### 16. ViTMAE 画像再構築
+### 19. ViTMAE 画像再構築
 
 <p class="meta"><span class="tag">ViTMAE</span><span class="tag">Vision Transformer</span><span class="tag">Streamlit</span></p>
 
@@ -581,9 +670,9 @@ flowchart TB
 - **自己教師あり学習の考え方を見せる。** どこを隠したかを可視化し、モデルが周りから全体を推測する様子を確かめられます。
 - **入力と出力の扱いやすさ。** サンプル、アップロード、URL から画像を入れられ、結果は PNG で保存できます。
 
-<a id="project-17"></a>
+<a id="project-20"></a>
 
-### 17. SimCLR 対照学習の可視化
+### 20. SimCLR 対照学習の可視化
 
 <p class="meta"><span class="tag">SimCLR</span><span class="tag">ResNet</span><span class="tag">t-SNE</span><span class="tag">Streamlit</span></p>
 
@@ -607,9 +696,9 @@ flowchart LR
 - **バックボーンを切り替えられる。** ResNet18/50、EfficientNet、MobileNet で、埋め込みの違いを比べられます。
 - **学習の過程も見せる。** 学習曲線と統計情報を表示します。
 
-<a id="project-18"></a>
+<a id="project-21"></a>
 
-### 18. 画像キャプション評価アプリ（Qwen-VL）
+### 21. 画像キャプション評価アプリ（Qwen-VL）
 
 <p class="meta"><span class="tag">Qwen2.5-VL</span><span class="tag">vLLM</span><span class="tag">LangChain</span><span class="tag">Streamlit</span></p>
 
@@ -647,9 +736,9 @@ flowchart TB
 - **人による評価を組み込んだ。** 生成して終わりではなく、評価ボタンと不正解時のコメントで、モデルの弱点を記録できます。
 - **評価データを再利用できる。** 評価結果を JSON で書き出し、モデルの比較や改善に使えます。
 
-<a id="project-19"></a>
+<a id="project-22"></a>
 
-### 19. 画像処理ツールキット（manipulate_image_lists）
+### 22. 画像処理ツールキット（manipulate_image_lists）
 
 <p class="meta"><span class="tag">OpenCV</span><span class="tag">Pillow</span><span class="tag">Streamlit</span></p>
 
@@ -678,9 +767,9 @@ flowchart LR
 
 ## LLM・AI Agent
 
-<a id="project-20"></a>
+<a id="project-23"></a>
 
-### 20. Jev Decision Router デモ
+### 23. Jev Decision Router デモ
 
 <p class="meta"><span class="tag">Jev</span><span class="tag">vLLM</span><span class="tag">Qwen2.5</span><span class="tag">Streamlit</span><span class="tag">Agentic Mesh</span></p>
 
@@ -707,9 +796,9 @@ flowchart LR
 - **精度を測れる。** 24 件の評価セットで全件正解（Gate 適用後は 23/24）でした。評価コマンドで、設定を変えたときの精度をすぐ確かめられます。
 - **部品を差し替えられる。** 判断と生成を小さなインターフェースで分け、別のモデルや Mock に替えてもルーターと UI は変わりません。
 
-<a id="project-21"></a>
+<a id="project-24"></a>
 
-### 21. Lean Agent Verification Lab
+### 24. Lean Agent Verification Lab
 
 <p class="meta"><span class="tag">Lean 4</span><span class="tag">vLLM</span><span class="tag">Qwen3-1.7B</span><span class="tag">OR-Tools</span><span class="tag">Streamlit</span></p>
 
@@ -749,9 +838,9 @@ flowchart TB
 - **判定の種類をはっきり分けた。** 「違反を証明した（VIOLATION）」と「証明が通らなかった（PROOF_FAILED）」を区別するなど、6 つの状態で結果を返します。
 - **最適化の結果も検証する。** OR-Tools が求めた配置が全制約を満たすことを Lean で確かめます（最適性は証明しない、と範囲を明記）。
 
-<a id="project-22"></a>
+<a id="project-25"></a>
 
-### 22. Phoenix LLM Observability デモ
+### 25. Phoenix LLM Observability デモ
 
 <p class="meta"><span class="tag">Arize Phoenix</span><span class="tag">OpenInference</span><span class="tag">LangGraph</span><span class="tag">vLLM</span><span class="tag">Qwen3</span></p>
 
@@ -775,9 +864,9 @@ flowchart LR
 - **再現できる環境。** Phoenix は Docker、依存は uv.lock で固定し、各ライブラリの検証済みバージョンを README に記録しています。
 - **8GB の GPU に合わせた運用。** vLLM はプロジェクトの依存に入れず uvx で実行し、メモリが足りないときの設定（最大長、小さいモデル）も用意しました。
 
-<a id="project-23"></a>
+<a id="project-26"></a>
 
-### 23. Prompt Optimizer（LangChain 対応）
+### 26. Prompt Optimizer（LangChain 対応）
 
 <p class="meta"><span class="tag">LangChain</span><span class="tag">LangGraph</span><span class="tag">LLM as a Judge</span><span class="tag">Thompson Sampling</span><span class="tag">FAISS</span></p>
 
@@ -802,9 +891,9 @@ flowchart LR
 - **Judge の偏りを抑える。** A と B の提示順をランダムにし、出力の JSON を厳密に検証します。僅差（0.05 未満）は引き分けにします。
 - **既存のパイプラインに組み込める。** 最良の設定を LangChain / LangGraph のノードとしてそのまま使えます。
 
-<a id="project-24"></a>
+<a id="project-27"></a>
 
-### 24. Agent Evolution（Clojure）
+### 27. Agent Evolution（Clojure）
 
 <p class="meta"><span class="tag">Clojure</span><span class="tag">遺伝的アルゴリズム</span><span class="tag">LLM Agent</span></p>
 
@@ -829,9 +918,9 @@ flowchart LR
 - **良い個体を失わない。** エリート保存戦略で、それまでの最良の個体を残します。
 - **依存ゼロ。** Clojure の標準ライブラリだけで書き、外部ライブラリ・ネットワーク・API キーなしで動きます。テストも付けています。
 
-<a id="project-25"></a>
+<a id="project-28"></a>
 
-### 25. Research OS
+### 28. Research OS
 
 <p class="meta"><span class="tag">Python</span><span class="tag">Textual（TUI）</span><span class="tag">Claude Code</span><span class="tag">MCP</span><span class="tag">SQLite</span></p>
 
@@ -870,9 +959,9 @@ flowchart TB
 - **Agent に目標を伝える操作。** ツールを順番に操作する代わりに、「最近の触覚 World Model の論文を探して」のような目標を伝えると、検索から登録まで Agent が進めます。
 - **設計の判断を記録している。** ADR（技術選定の記録）と C4 モデルの構成図をリポジトリに残しています。LLM なしでも動くオプションもあります。
 
-<a id="project-26"></a>
+<a id="project-29"></a>
 
-### 26. JAEA 特許・報告書検索（ローカル RAG）
+### 29. JAEA 特許・報告書検索（ローカル RAG）
 
 <p class="meta"><span class="tag">DuckDB</span><span class="tag">RAG</span><span class="tag">Claude Code</span><span class="tag">Codex</span><span class="tag">ベクトル検索</span></p>
 
@@ -898,9 +987,9 @@ flowchart LR
 - **検索語の長さで方法を変える。** 短い語は偶然の一致を避けるためキーワード一致を重視し、長い研究アイデアでは埋め込みの類似度も使います。
 - **AI Agent のスキルとして使える。** Claude Code と Codex に使い方と返答形式を教える指示ファイルを付けています。
 
-<a id="project-27"></a>
+<a id="project-30"></a>
 
-### 27. DLT スライド生成システム
+### 30. DLT スライド生成システム
 
 <p class="meta"><span class="tag">vLLM</span><span class="tag">python-pptx</span><span class="tag">Streamlit</span></p>
 
@@ -924,9 +1013,9 @@ flowchart LR
 - **レイアウトと内容を分けた。** 要素の配置と本文の生成を別の部品にし、それぞれを改善しやすくしています。
 - **実装の範囲を正直に書いた。** レイアウト生成は現時点ではルールベースのテンプレートです。本来の DLT（Transformer ベースの深層学習）との違いと、置き換える計画を README に明記しています。
 
-<a id="project-28"></a>
+<a id="project-31"></a>
 
-### 28. vLLM サーバーとモデルのダウンロード
+### 31. vLLM サーバーとモデルのダウンロード
 
 <p class="meta"><span class="tag">vLLM</span><span class="tag">Hugging Face</span><span class="tag">OpenAI 互換 API</span><span class="tag">量子化</span></p>
 
@@ -962,9 +1051,155 @@ flowchart TB
 - **8GB の GPU で使える構成。** モデルごとのサイズとメモリ使用量を表にまとめ、量子化モデルも含めて選べるようにしました。
 - **ほかのプロジェクトの土台。** OpenAI 互換 API にすることで、このポートフォリオの多くのアプリが同じ方法でローカル LLM を使えます。
 
-<a id="project-29"></a>
+<a id="project-32"></a>
 
-### 29. RoboPaper TUI（論文収集エージェント）
+### 32. Ignisolate — AI Agent 向けサンドボックス
+
+<p class="meta"><span class="status">設計段階</span> <span class="tag">Firecracker</span><span class="tag">Go</span><span class="tag">Rust</span><span class="tag">vsock</span><span class="tag">cgroups</span></p>
+
+**GitHub:** [github.com/mutomasa/ignisolate](https://github.com/mutomasa/ignisolate)
+
+#### 成果物の概要
+
+AI Agent が生成したコードやツール呼び出しを、ホストで直接実行せず、Firecracker の軽量な microVM の中で隔離して実行するサンドボックス基盤の設計です。設計書でアーキテクチャ、API、セキュリティ要件、開発フェーズを定めています。
+
+```mermaid
+flowchart LR
+    A["AI Agent"] -->|"Tool Call"| SM["Sandbox Manager<br/>Go"]
+    SM --> FC["Firecracker microVM<br/>1 セッション 1 VM"]
+    FC --> GA["Guest Agent<br/>Rust"]
+    SM <-->|"vsock"| GA
+    SM --> R["制限<br/>CPU・メモリ・ネットワーク"]
+```
+
+#### 工夫している点
+
+- **1 セッションに 1 つの VM。** Agent のセッションごとに microVM を分け、ほかのセッションやホストに影響しないようにします。
+- **何重にも制限する。** Jailer によるホスト側の隔離、cgroups による CPU・メモリ・プロセス数の制限、ネットワークの禁止または許可リストを組み合わせます。
+- **起動を速くする計画。** スナップショットとウォームプール（起動済みの VM の待機）で、Agent の待ち時間を短くします。
+
+<a id="project-33"></a>
+
+### 33. OpenBot + CrewAI Agent Mesh デモ
+
+<p class="meta"><span class="status">設計段階</span> <span class="tag">CrewAI</span><span class="tag">AG-UI</span><span class="tag">OpenBot</span><span class="tag">vLLM</span><span class="tag">Qwen2.5-7B</span></p>
+
+**GitHub:** [github.com/mutomasa/openbot-crewai-agent-mesh-demo](https://github.com/mutomasa/openbot-crewai-agent-mesh-demo)
+
+#### 成果物の概要
+
+複数の AI Agent が協調し、人が途中で確認・承認できる Multi-Agent デモの設計です。最初の用途は提案書のレビューで、Markdown の提案書を渡すと、複数の Agent が順に分析・レビュー・修正します。
+
+```mermaid
+flowchart LR
+    U["OpenBot<br/>操作・承認 UI"] <-->|"AG-UI"| C["CrewAI Flow"]
+    C --> A1["Analyst"]
+    C --> A2["Risk Reviewer<br/>承認が必要か判断"]
+    C --> A3["Editor"]
+    C -->|"OpenAI 互換 API"| V["vLLM + Qwen"]
+```
+
+#### 工夫している点
+
+- **LLM の実行環境と Agent の実行環境を分けた。** vLLM を OpenAI 互換 API として独立させ、Agent 側は差し替えられるようにします。
+- **人が途中で承認できる。** AG-UI のイベントで進行状況とツール呼び出しを UI に流し、人が確認してから先に進めます。
+- **段階的に広げる計画。** まず単一の CrewAI Flow で MVP を作り、その後 Agentic Mesh や複数 Agent の Fleet へ広げます。
+
+<a id="project-34"></a>
+
+### 34. Research-Nexus（研究情報管理アプリ）
+
+<p class="meta"><span class="status">設計段階</span> <span class="tag">Electron</span><span class="tag">React</span><span class="tag">TypeScript</span><span class="tag">Notion</span><span class="tag">Paperpile</span></p>
+
+**GitHub:** [github.com/mutomasa/Research-Nexus](https://github.com/mutomasa/Research-Nexus)
+
+#### 成果物の概要
+
+研究メモ、X で見つけた情報、論文、Paperpile、Notion に分かれている研究情報を、1 つのデスクトップアプリで集めて関連づける研究情報管理アプリの基本設計書です。
+
+```mermaid
+flowchart LR
+    A["情報を発見"] --> B["保存・要約"]
+    B --> C["論文・メモを関連づけ"]
+    C --> D["研究アイデア化"]
+    D --> E["実験・執筆"]
+    E --> C
+```
+
+#### 工夫している点
+
+- **ローカルファースト。** メモはまずローカルの DB に保存し、Notion や外部 API が止まっていても作成・編集・検索を続けられるようにします。
+- **外部サービスとの責任を分けた。** 文献の正本は Paperpile、共有と閲覧は Notion、収集と関連づけはこのアプリ、と役割を決めています。
+- **同期は非同期に。** 外部との同期を後回しにできる設計で、利用者の操作を待たせません。
+
+<a id="project-35"></a>
+
+### 35. Deep Research + ネットワーク分析
+
+<p class="meta"><span class="status">設計段階</span> <span class="tag">Open Deep Research</span><span class="tag">LangGraph</span><span class="tag">知識グラフ</span><span class="tag">ネットワーク分析</span></p>
+
+**GitHub:** [github.com/mutomasa/deep_research_design](https://github.com/mutomasa/deep_research_design)
+
+#### 成果物の概要
+
+Open Deep Research を拡張し、ネットワーク分析と知識グラフの機能を加えて、市場分析やアイデア分析を行うシステムの実装設計書です。
+
+```mermaid
+flowchart TB
+    subgraph row0[" "]
+        direction LR
+        S["質問の明確化"]
+        B["調査計画"]
+        R["Research Supervisor<br/>調査 Agent を並列実行"]
+        S --> B
+        B --> R
+    end
+    subgraph row1[" "]
+        direction LR
+        N["ネットワーク分析<br/>市場・アイデア"]
+        K["知識グラフの構築"]
+        F["最終レポート"]
+        N --> K
+        K --> F
+    end
+    row0 --> row1
+    style row0 fill:none,stroke:none
+    style row1 fill:none,stroke:none
+```
+
+#### 工夫している点
+
+- **既存のグラフ構造に新しい段階を足す。** 調査とレポート作成の間に「ネットワーク分析」のサブグラフを入れ、既存の部分を壊さずに拡張します。
+- **関係で市場を見る。** 調査結果を企業・技術・課題のネットワークにし、知識グラフとして残すことで、文章のレポートだけでは見えない関係を示します。
+
+<a id="project-36"></a>
+
+### 36. Yohaku OS（日常業務 OS）
+
+<p class="meta"><span class="status">設計段階</span> <span class="tag">Claude Code</span><span class="tag">Zapier</span><span class="tag">業務自動化</span></p>
+
+**GitHub:** [github.com/mutomasa/yohaku_os](https://github.com/mutomasa/yohaku_os)
+
+#### 成果物の概要
+
+Claude Code と Zapier で、メールの仕分け、情報収集、議事録の整理、タスクの登録などの定型業務を自動化し、人にしかできない仕事に時間を戻す「日常業務 OS」の構想です。
+
+```mermaid
+flowchart TD
+    A["メール・予定・タスク・会議"] --> B["Zapier<br/>検知・連携・実行"]
+    B --> C["Claude Code<br/>理解・整理・生成・検証"]
+    C --> D["自動処理<br/>分類・転記・下書き"]
+    C --> E["人の仕事<br/>相談・意思決定・発信"]
+```
+
+#### 工夫している点
+
+- **役割分担を表で決めた。** Claude Code は「考える・生成する・検証する」、Zapier は「検知する・つなぐ・実行する」、人は「重要な判断・対話・送信」を担当します。
+- **目的は時間を生むこと。** 処理件数ではなく、相談や学習、余白に使える時間を増やすことを目標にしています。
+
+<a id="project-37"></a>
+
+### 37. RoboPaper TUI（論文収集エージェント）
 
 <p class="meta"><span class="status">中断</span> <span class="tag">Textual</span><span class="tag">vLLM</span><span class="tag">Qwen2.5-7B</span><span class="tag">pytest</span></p>
 
@@ -988,9 +1223,9 @@ flowchart LR
 
 ## グラフ・知識グラフ・RAG
 
-<a id="project-30"></a>
+<a id="project-38"></a>
 
-### 30. Security Attack Graph 3D
+### 38. Security Attack Graph 3D
 
 <p class="meta"><span class="tag">Neo4j</span><span class="tag">Cypher</span><span class="tag">vLLM</span><span class="tag">Qwen</span><span class="tag">FastAPI</span><span class="tag">Three.js</span><span class="tag">Streamlit</span></p>
 
@@ -1033,9 +1268,9 @@ flowchart TB
 - **LLM がなくても動く。** vLLM が落ちているときは、ルールベースの解析とテンプレートの説明に自動で切り替えます。
 - **デモの録画を自動化した。** Playwright でアプリを自動操作して GIF を撮影し、字幕を付けています。
 
-<a id="project-31"></a>
+<a id="project-39"></a>
 
-### 31. Graph RAG Video（動画分析）
+### 39. Graph RAG Video（動画分析）
 
 <p class="meta"><span class="tag">Whisper</span><span class="tag">YOLO</span><span class="tag">Neo4j</span><span class="tag">Graph RAG</span><span class="tag">Streamlit</span></p>
 
@@ -1061,9 +1296,9 @@ flowchart LR
 - **音声と映像の両方を使う。** 話された内容（Whisper）と映っている物体（YOLO）を同じ知識グラフに入れ、動画の内容をまとめて検索できるようにしています。
 - **関係で検索する。** ベクトル検索だけでなく、グラフの関係をたどって回答の根拠を集めます。
 
-<a id="project-32"></a>
+<a id="project-40"></a>
 
-### 32. Graph RAG アプリ
+### 40. Graph RAG アプリ
 
 <p class="meta"><span class="tag">Neo4j</span><span class="tag">vLLM</span><span class="tag">LangChain</span><span class="tag">Streamlit</span></p>
 
@@ -1087,9 +1322,9 @@ flowchart LR
 - **ローカルで完結する RAG。** 生成はローカルの vLLM で行うので、社内データを外部に送らずに試せます。
 - **接続先を設定で切り替える。** Neo4j と vLLM の接続先は環境変数で設定します。
 
-<a id="project-33"></a>
+<a id="project-41"></a>
 
-### 33. 日本語テキストからの知識グラフ構築
+### 41. 日本語テキストからの知識グラフ構築
 
 <p class="meta"><span class="tag">日本語 NER</span><span class="tag">DeBERTa</span><span class="tag">Sudachi</span><span class="tag">Neo4j</span><span class="tag">pyvis</span></p>
 
@@ -1114,9 +1349,9 @@ flowchart LR
 - **投入前に確認できる。** 「抽出のみ」で結果とグラフを画面で確かめてから、Neo4j に入れられます。
 - **軽い関係抽出。** 文中の実体の対に、Sudachi で取り出した動詞の原形を関係として付けます。動詞が見つからないときは「related_to」にします。
 
-<a id="project-34"></a>
+<a id="project-42"></a>
 
-### 34. GNN 可視化アプリ（R-GCN on Cora）
+### 42. GNN 可視化アプリ（R-GCN on Cora）
 
 <p class="meta"><span class="tag">PyTorch Geometric</span><span class="tag">R-GCN</span><span class="tag">Plotly</span><span class="tag">Streamlit</span></p>
 
@@ -1140,9 +1375,9 @@ flowchart LR
 - **学習の進み具合が見える。** 損失と正解率を学習中にライブで更新します。
 - **予測と正解を比べられる。** ノードの色を予測ラベルと正解ラベルで切り替え、間違えやすい部分をグラフ上で確かめられます。
 
-<a id="project-35"></a>
+<a id="project-43"></a>
 
-### 35. Node2Vec + GCN 可視化
+### 43. Node2Vec + GCN 可視化
 
 <p class="meta"><span class="tag">Node2Vec</span><span class="tag">GCN</span><span class="tag">PyTorch Geometric</span><span class="tag">t-SNE</span></p>
 
@@ -1165,9 +1400,9 @@ flowchart LR
 - **左右に並べて比べる。** GCN が近くのノードの情報を集めて表現を滑らかにする様子を、前後で比べて理解できます。
 - **グラフの種類を変えられる。** 構造の違う 3 種類のグラフで、埋め込みの違いを確かめられます。
 
-<a id="project-36"></a>
+<a id="project-44"></a>
 
-### 36. ネットワーク指標の可視化
+### 44. ネットワーク指標の可視化
 
 <p class="meta"><span class="tag">PyTorch Geometric</span><span class="tag">NetworkX</span><span class="tag">Node2Vec</span><span class="tag">Streamlit</span></p>
 
@@ -1192,9 +1427,9 @@ flowchart LR
 
 ## 機械学習・生成モデル
 
-<a id="project-37"></a>
+<a id="project-45"></a>
 
-### 37. EmbeddingGemma Multimodal Lab
+### 45. EmbeddingGemma Multimodal Lab
 
 <p class="meta"><span class="tag">EmbeddingGemma</span><span class="tag">Matryoshka 埋め込み</span><span class="tag">マルチモーダル検索</span><span class="tag">Streamlit</span></p>
 
@@ -1233,9 +1468,9 @@ flowchart TB
 - **コストも測る。** 1 ベクトルの保存量（512B〜3KB）、クエリのエンコード時間（約 19〜22ms）、検索時間（約 0.03〜0.04ms）を記録しています。
 - **結果の限界を正直に書く。** サンプルが小さく次元間の差は誤差の範囲であることや、合成動画で結果が偏る問題を、既知の問題として README に記録しています。
 
-<a id="project-38"></a>
+<a id="project-46"></a>
 
-### 38. Diffusion Transformer vs U-Net
+### 46. Diffusion Transformer vs U-Net
 
 <p class="meta"><span class="tag">拡散モデル</span><span class="tag">DiT</span><span class="tag">U-Net</span><span class="tag">PyTorch</span></p>
 
@@ -1258,9 +1493,9 @@ flowchart LR
 - **同じ課題で 2 つの構造を比べる。** 局所的な特徴に強い U-Net と、全体の関係を捉える DiT の違いを、同じ拡散モデルの中で確かめます。
 - **条件付けの仕組みも実装した。** DiT では、タイムステップとクラスラベルで正規化を調整する AdaLN を実装しています。
 
-<a id="project-39"></a>
+<a id="project-47"></a>
 
-### 39. AI 駆動創薬 × 量子コンピュータ デモ
+### 47. AI 駆動創薬 × 量子コンピュータ デモ
 
 <p class="meta"><span class="tag">グラフ拡散モデル</span><span class="tag">E(3) 等変</span><span class="tag">VQE</span><span class="tag">量子化学</span><span class="tag">Streamlit</span></p>
 
@@ -1284,9 +1519,9 @@ flowchart LR
 - **生成と評価を 1 つの流れに。** 分子の生成、量子計算による物性の予測、薬らしさの評価を組み合わせ、候補の総合スコアを出します。
 - **生成の過程を見せる。** 分子ができあがっていく過程を 3D のアニメーションで表示します。
 
-<a id="project-40"></a>
+<a id="project-48"></a>
 
-### 40. Simple GPT（学習用）
+### 48. Simple GPT（学習用）
 
 <p class="meta"><span class="tag">PyTorch</span><span class="tag">Transformer</span><span class="tag">Hugging Face tokenizers</span></p>
 
@@ -1324,9 +1559,9 @@ flowchart TB
 - **読んで分かる大きさ。** Multi-Head Attention、Feed Forward、正規化、位置埋め込みを、理解しやすい形で実装しています。
 - **学習から生成まで。** 1 つのスクリプトで学習と生成のモードを切り替えられます。
 
-<a id="project-41"></a>
+<a id="project-49"></a>
 
-### 41. BERT + UMAP + HDBSCAN テキストクラスタリング
+### 49. BERT + UMAP + HDBSCAN テキストクラスタリング
 
 <p class="meta"><span class="tag">Sentence Transformers</span><span class="tag">UMAP</span><span class="tag">HDBSCAN</span><span class="tag">Streamlit</span></p>
 
@@ -1362,9 +1597,9 @@ flowchart TB
 - **クラスタ数を決めなくてよい。** HDBSCAN でクラスタ数を自動で決め、どこにも属さないテキストをノイズとして分けます。
 - **パラメータを調整できる。** UMAP の近傍数や最小距離、モデルの種類を変えて、分類の変化を確かめられます。
 
-<a id="project-42"></a>
+<a id="project-50"></a>
 
-### 42. CLAP 音声とテキストの理解
+### 50. CLAP 音声とテキストの理解
 
 <p class="meta"><span class="tag">CLAP</span><span class="tag">librosa</span><span class="tag">Plotly</span><span class="tag">Streamlit</span></p>
 
@@ -1389,9 +1624,9 @@ flowchart LR
 - **クエリを提案する。** 音声のカテゴリに合わせて、試すとよいテキストのクエリを提案します。
 - **テスト用の音声を用意した。** カテゴリ別のサンプル音声と合成音声の生成機能で、手元に音声がなくても試せます。
 
-<a id="project-43"></a>
+<a id="project-51"></a>
 
-### 43. Whisper 日本語音声認識デモ
+### 51. Whisper 日本語音声認識デモ
 
 <p class="meta"><span class="tag">Whisper</span><span class="tag">spaCy</span><span class="tag">gTTS</span><span class="tag">Streamlit</span></p>
 
@@ -1414,9 +1649,9 @@ flowchart LR
 - **音声がなくても試せる。** gTTS でデモ用の日本語音声を自動で作ります。
 - **モデルの大きさを選べる。** tiny から medium まで切り替えて、精度と速度の違いを確かめられます。
 
-<a id="project-44"></a>
+<a id="project-52"></a>
 
-### 44. PCA と NMF の可視化
+### 52. PCA と NMF の可視化
 
 <p class="meta"><span class="tag">scikit-learn</span><span class="tag">Plotly</span><span class="tag">mypy</span><span class="tag">pytest</span></p>
 
@@ -1440,9 +1675,9 @@ flowchart LR
 - **2 つの手法の違いが見える。** 画像を基底の線形和として表す方法の違い（負の値を許すか）を、基底の画像と再構成で比べられます。
 - **品質管理の仕組み。** ruff、mypy、pytest で静的解析・型チェック・単体テストを行っています。
 
-<a id="project-45"></a>
+<a id="project-53"></a>
 
-### 45. ランダムフォレストの決定境界
+### 53. ランダムフォレストの決定境界
 
 <p class="meta"><span class="tag">scikit-learn</span><span class="tag">Plotly</span><span class="tag">Streamlit</span></p>
 
@@ -1465,9 +1700,9 @@ flowchart LR
 
 ## データ基盤・インフラ・ツール
 
-<a id="project-46"></a>
+<a id="project-54"></a>
 
-### 46. Cloudflare Basin + Iceberg
+### 54. Cloudflare Basin + Iceberg
 
 <p class="meta"><span class="tag">Cloudflare Workers</span><span class="tag">Pipelines</span><span class="tag">R2</span><span class="tag">Apache Iceberg</span><span class="tag">Vitest</span></p>
 
@@ -1506,9 +1741,9 @@ flowchart TB
 - **サーバーなしのデータ基盤。** サーバーを持たずに、ログの収集から分析用テーブル（Iceberg・Parquet）までを作れます。
 - **構成を文書にした。** 各部品の役割とデータの流れを図と文章で説明し、Vitest のテストも付けています。
 
-<a id="project-47"></a>
+<a id="project-55"></a>
 
-### 47. Kafka 3D ストリーミング可視化
+### 55. Kafka 3D ストリーミング可視化
 
 <p class="meta"><span class="tag">Kafka</span><span class="tag">Docker Compose</span><span class="tag">Plotly</span><span class="tag">Streamlit</span></p>
 
@@ -1530,9 +1765,9 @@ flowchart LR
 - **すぐに動かせる。** Kafka と Zookeeper を Docker Compose で立ち上げ、テスト用のデータを送る Producer も付けています。
 - **表示を調整できる。** 表示する点の数とポーリング間隔を画面から変えられます。
 
-<a id="project-48"></a>
+<a id="project-56"></a>
 
-### 48. リアルタイム共有ホワイトボード
+### 56. リアルタイム共有ホワイトボード
 
 <p class="meta"><span class="tag">TypeScript</span><span class="tag">Node.js</span><span class="tag">Express</span><span class="tag">WebSocket</span><span class="tag">Canvas</span></p>
 
@@ -1555,9 +1790,9 @@ flowchart LR
 - **切れても戻る。** 接続が切れると自動で再接続し、接続の状態を画面に表示します。
 - **リモート開発でも動く。** VS Code のポートフォワードを使うリモート環境での手順を用意しました。
 
-<a id="project-49"></a>
+<a id="project-57"></a>
 
-### 49. Raft の可視化（Go）
+### 57. Raft の可視化（Go）
 
 <p class="meta"><span class="tag">Go</span><span class="tag">Raft</span><span class="tag">Mermaid</span></p>
 
@@ -1581,9 +1816,9 @@ flowchart LR
 - **メッセージの流れが見える。** 選挙からリーダーの確定、ハートビートまでのやり取りを、シーケンス図で順を追って確かめられます。
 - **範囲を明記した。** 学習用の擬似実装であり、実運用の合意の要件を満たさないことを README に書いています。
 
-<a id="project-50"></a>
+<a id="project-58"></a>
 
-### 50. Git Uncommit Checker
+### 58. Git Uncommit Checker
 
 <p class="meta"><span class="tag">Go</span><span class="tag">CLI</span><span class="tag">Git</span></p>
 
@@ -1605,9 +1840,9 @@ flowchart LR
 - **状態を見分けやすく。** 変更・追加・削除・未追跡など 8 種類の状態を、絵文字で区別して表示します。
 - **多数のリポジトリを一度に確認。** 作業の終わりにコミット漏れがないかをまとめて確かめられます。
 
-<a id="project-51"></a>
+<a id="project-59"></a>
 
-### 51. ターミナル Todo アプリ
+### 59. ターミナル Todo アプリ
 
 <p class="meta"><span class="tag">Go</span><span class="tag">Redis</span><span class="tag">Docker Compose</span><span class="tag">promptui</span></p>
 
@@ -1628,9 +1863,9 @@ flowchart LR
 - **環境構築が要らない。** アプリと Redis を Docker Compose でまとめて起動できます。
 - **対話的な操作。** 追加・一覧・完了の切り替え・削除を、ターミナルのメニューで操作できます。
 
-<a id="project-52"></a>
+<a id="project-60"></a>
 
-### 52. Ghostty AI-Native 開発環境
+### 60. Ghostty AI-Native 開発環境
 
 <p class="meta"><span class="tag">Ghostty</span><span class="tag">Neovim</span><span class="tag">yazi</span><span class="tag">fzf</span><span class="tag">mise</span><span class="tag">AI Coding Agent</span></p>
 
@@ -1654,13 +1889,15 @@ flowchart LR
 - **ツール同士の連携を表にした。** 各ツールの役割・用途・ほかのツールとの連携を一覧にし、環境全体を説明できるようにしています。
 - **GUI への依存を減らす。** ターミナルを開発環境全体の入口にし、AI Coding Agent との作業もそこで完結させます。
 
-<a id="project-53"></a>
+<a id="project-61"></a>
 
-### 53. Engineering Research Portfolio（このサイト）
+### 61. Engineering Research Portfolio（このサイト）
 
 <p class="meta"><span class="tag">Astro</span><span class="tag">GitHub Actions</span><span class="tag">Hugging Face Spaces</span><span class="tag">GitHub API</span></p>
 
 **GitHub:** [github.com/mutomasa/engineering-research-portfolio](https://github.com/mutomasa/engineering-research-portfolio)
+
+**サイト:** [huggingface.co/spaces/mutomasa/engineering-research-portfolio](https://huggingface.co/spaces/mutomasa/engineering-research-portfolio)
 
 #### 成果物の概要
 
@@ -1680,3 +1917,97 @@ flowchart LR
 - **サーバーを持たない。** ビルド時に GitHub と Speaker Deck から情報を取得して静的 HTML に埋め込み、毎日リビルドして最新に保ちます。
 - **取得に失敗しても壊れない。** API の取得に失敗したときは、各サービスのページへのリンクを表示します。
 - **日本語と英語に対応。** 言語の切り替え、数式（KaTeX）、Mermaid の図に対応しています。
+
+<a id="project-62"></a>
+
+### 62. Snowflake IoT 予知保全 RAG
+
+<p class="meta"><span class="status">設計段階</span> <span class="tag">Snowflake</span><span class="tag">dbt</span><span class="tag">Cortex Search</span><span class="tag">Cortex AI</span><span class="tag">Streamlit</span></p>
+
+**GitHub:** [github.com/mutomasa/snowflake-iot-cortex-rag](https://github.com/mutomasa/snowflake-iot-cortex-rag)
+
+#### 成果物の概要
+
+Snowflake・dbt・Cortex Search・Cortex AI で、IoT センサーデータの収集・加工・異常検知から、RAG による原因分析までを通して実演する設備保全デモの設計書です。シナリオは「工場のモーターで振動と温度が上がった。原因と必要な点検を AI に問い合わせる」です。
+
+```mermaid
+flowchart TB
+    subgraph row0[" "]
+        direction LR
+        S["IoT センサー<br/>Python で生成"]
+        SF["Snowflake<br/>取り込み"]
+        DBT["dbt<br/>クレンジング・特徴量・異常検知"]
+        S --> SF
+        SF --> DBT
+    end
+    subgraph row1[" "]
+        direction LR
+        CS["Cortex Search<br/>保守記録・マニュアル"]
+        AI["Cortex AI<br/>原因と対応の提案"]
+        UI["Streamlit<br/>監視と分析"]
+        CS --> AI
+        AI --> UI
+    end
+    row0 --> row1
+    style row0 fill:none,stroke:none
+    style row1 fill:none,stroke:none
+```
+
+#### 工夫している点
+
+- **分かれたデータを 1 つの流れに。** センサーの時系列、稼働情報、故障・保守記録、マニュアルを Snowflake にまとめ、異常検知から原因分析までを 1 本のパイプラインにします。
+- **AI は診断の補助に限る。** 設備の停止判断や制御コマンドは自動で実行しない、と設計の段階で決めています。
+- **AI Coding Agent 向けの設計書。** Claude Code で段階的に実装できるよう、作業の単位と完了条件を設計書に書いています。
+
+<a id="project-63"></a>
+
+### 63. 自作オブジェクトストレージ（Go + Raft）
+
+<p class="meta"><span class="status">設計段階</span> <span class="tag">Go</span><span class="tag">Raft</span><span class="tag">S3 互換 API</span><span class="tag">イレージャーコーディング</span></p>
+
+**GitHub:** [github.com/mutomasa/simple_object_storage](https://github.com/mutomasa/simple_object_storage)
+
+#### 成果物の概要
+
+Go と Raft で S3 互換のオブジェクトストレージを自作するための設計メモです。メタデータ層・データ層・API 層の構成と、MVP の範囲をまとめています。
+
+```mermaid
+flowchart LR
+    C["クライアント<br/>S3 互換 API"] --> GW["Gateway<br/>SigV4 認証"]
+    GW --> MD["メタデータ層<br/>Raft で合意"]
+    GW --> DN["データノード × N<br/>レプリカ・EC"]
+    DN -->|"クォーラム ACK"| GW
+    GW -->|"最後にコミット"| MD
+```
+
+#### 工夫している点
+
+- **書き込みの順序で整合性を守る。** データを複数ノードに書いてクォーラムの応答を得てから、最後にメタデータを Raft でコミットします。途中で失敗したデータは後から回収します。
+- **追記のみの保存形式。** データは追記と削除マークで保存し、クラッシュ後の復旧を簡単にします。
+- **運用まで考えた MVP。** ヘルスチェック、再配置、欠けたレプリカの自動修復、Prometheus と OpenTelemetry による監視を最初の範囲に含めています。
+
+<a id="project-64"></a>
+
+### 64. 植物観察日記（Green Moments）
+
+<p class="meta"><span class="status">設計段階</span> <span class="tag">Flutter Web PWA</span><span class="tag">Firebase</span><span class="tag">Gemini</span><span class="tag">TypeScript</span><span class="tag">Zod</span></p>
+
+**GitHub:** [github.com/mutomasa/green-moments](https://github.com/mutomasa/green-moments)
+
+#### 成果物の概要
+
+植物の写真と気持ちを記録する観察日記アプリの設計書と実装計画です。iPhone の Safari で使える Flutter Web PWA として作り、App Store の審査なしで提供します。
+
+```mermaid
+flowchart LR
+    U["iPhone Safari<br/>Flutter Web PWA"] --> AU["Firebase Auth<br/>+ App Check"]
+    AU --> F["Cloud Functions<br/>TypeScript + Zod"]
+    F --> DB["Firestore"]
+    F --> AI["Gemini<br/>植物名の推測"]
+```
+
+#### 工夫している点
+
+- **層を分けた設計。** Flutter はプレゼンテーション → アプリケーション → ドメイン → データ、TypeScript はコントローラー → サービス → リポジトリ → ドメインに分け、UI からデータベースを直接呼びません。
+- **安全を最初から組み込む。** Firebase の認証、App Check、利用者 ID による所有者の確認を必須にし、API キーはクライアントに埋め込まず Secret Manager で管理します。
+- **AI の出力を推測として扱う。** モデルが返す植物名や感情は推測として表示し、利用者が直せるようにします。感情を医学的に診断しません。
