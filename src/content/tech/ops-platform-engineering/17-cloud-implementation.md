@@ -80,8 +80,6 @@ AWSは、*Building an Internal Developer Platform on AWS*（AWS Prescriptive Gui
 - **EKSとECSの選択**：Kubernetesのエコシステム（Argo CD、Crossplane、Kyvernoなど）を共通基盤として使うならEKSが、AWSのマネージドサービスとしての簡潔さを優先するならECSが、選択肢になる。第15章のGolden Pathの多くはKubernetesを前提としているため、本書の例ではEKSを想定する。
 - **Bedrockと第12章のAIゲートウェイ**：Bedrockは、複数の基盤モデルへのアクセスを提供する。第12章のAIゲートウェイを、Bedrockの前段に置くか、Bedrockの機能（ガードレール、利用状況の記録）で代替するかは、組織のマルチクラウド・マルチ提供者の方針による。
 
-> **執筆メモ**：AWSは開発者向けのいくつかのサービス（例：AWS Proton、Amazon CodeCatalystなど）について、提供の終了や新規受付の停止を案内している可能性がある。刊行前に各サービスの公式の状況を確認し、該当する場合は17.7節のライフサイクルの事例として記述する。
-
 ## 17.3　Azure――AKS、Entra ID、GitHub Actions／Azure Pipelines、Azure Monitor、Microsoft Foundry系サービス
 
 ### 主なサービスの対応
@@ -114,8 +112,6 @@ Azureには、開発者がテンプレートから環境をセルフサービス
 1. **長期の新規採用候補として無条件に推奨しない**：本書の時点（2026年11月）で、終了まで約3か月である。新しくIDPを設計する組織が、このサービスを中核に据えることは適切ではない。
 2. **代替の設計を検討する**：Microsoftの移行ガイドが示す選択肢や、Bicep、Azure Verified Modules、GitHub Actions、Azure DevOpsなどを組み合わせて、同等の能力を実現する設計を検討する。
 3. **IDPのためのサービスでさえ、廃止されうる**：Platform Engineeringのために提供されたマネージドサービスであっても、ベンダーの戦略の変更によって終了しうる。この事例は、17.7節のライフサイクルの議論の具体的なケースになる。
-
-> **執筆メモ**：Azure Deployment Environmentsの終了日と、Microsoftが推奨する移行先は、[R25] の最新の記述を刊行直前に再確認する。
 
 ### Azureでの設計の要点
 

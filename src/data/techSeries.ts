@@ -37,7 +37,7 @@ export const techSeries: TechSeries[] = [
 		subtitle: 'IT運用の歴史からAIエージェント、自律進化するSoftware Factoryへ',
 		description:
 			'メインフレームの運用と監視ツールから、DevOps、SRE、Cloud Native、Observability、MLOps・LLMOps・AgentOps などの XOps を経て、Platform Engineering、Agent Mesh、Software Factory、自己改善型プラットフォームまで。各Opsの専門性を生かしながら、共通能力・開発体験・ガバナンスをどう提供するかを、歴史・原典・設計・実装例で解説する。',
-		note: '注意事項：本書は初稿（Version 0.1.1、基準日 2026年11月14日）です。本文中の「執筆メモ」は、刊行前に一次資料で再確認する予定の箇所です。クラウド製品の名称・提供状況などは基準日時点の情報です。',
+		note: '注意事項：本書は初稿（Version 0.1.1、基準日 2026年11月14日）です。年代・論文の数値・各種の定義などは、刊行に向けて一次資料で再確認を進めています。クラウド製品の名称・提供状況などは基準日時点の情報です。',
 		kind: '書籍',
 		status: '初稿（執筆中）',
 		version: '0.1.1',

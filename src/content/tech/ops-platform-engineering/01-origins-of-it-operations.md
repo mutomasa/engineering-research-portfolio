@@ -451,4 +451,3 @@ if __name__ == "__main__":
 - [R05] B. Treynor Sloss et al., "Introduction", in *Site Reliability Engineering*, O'Reilly / Google, 2016. https://sre.google/sre-book/introduction/
 - ITIL関連文献：本文で用語を引用する場合は、参照した版（ITIL v3 / ITIL 4 等）と出版年を明記すること。
 
-> **執筆メモ**：メインフレーム時代の運用実務（オペレーター業務、ジョブ管理）については、当時の運用マニュアルや回想録など一次に近い歴史資料を刊行前に追加し、年代の記述を裏付ける（付録Aの年表と整合させる）。
