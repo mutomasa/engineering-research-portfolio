@@ -28,13 +28,13 @@ updated: 2026-11-16
 
 | # | プロジェクト | カテゴリ | 状態 |
 |---|---|---|---|
-| 1 | [SpatialSAM Studio（gaussian-sam-studio）](#project-1) | ロボティクス・空間AI・3D | 実装済み |
-| 2 | [Smart 3D Ecosystem — Boids + 機械学習](#project-2) | ロボティクス・空間AI・3D | 実装済み |
-| 3 | [gsplat Gaussian Splatting 比較デモ（3DGS）](#project-3) | ロボティクス・空間AI・3D | 実装済み |
-| 4 | [量子ロボット経路探索（quantum_policy_gradient）](#project-4) | ロボティクス・空間AI・3D | 実装済み |
-| 5 | [TurtleBot3 Muse Gadget](#project-5) | ロボティクス・空間AI・3D | 実装済み |
-| 6 | [TurtleBot3 Spatial AI](#project-6) | ロボティクス・空間AI・3D | 設計段階 |
-| 7 | [QuestBot XR](#project-7) | ロボティクス・空間AI・3D | 設計段階 |
+| 1 | [TurtleBot3 Muse Gadget](#project-1) | ロボティクス・空間AI・3D | 実装済み |
+| 2 | [TurtleBot3 Spatial AI](#project-2) | ロボティクス・空間AI・3D | 設計段階 |
+| 3 | [QuestBot XR](#project-3) | ロボティクス・空間AI・3D | 設計段階 |
+| 4 | [SpatialSAM Studio（gaussian-sam-studio）](#project-4) | ロボティクス・空間AI・3D | 実装済み |
+| 5 | [Smart 3D Ecosystem — Boids + 機械学習](#project-5) | ロボティクス・空間AI・3D | 実装済み |
+| 6 | [gsplat Gaussian Splatting 比較デモ（3DGS）](#project-6) | ロボティクス・空間AI・3D | 実装済み |
+| 7 | [量子ロボット経路探索（quantum_policy_gradient）](#project-7) | ロボティクス・空間AI・3D | 実装済み |
 | 8 | [Grounding SAM 2 動画物体追跡](#project-8) | コンピュータビジョン | 実装済み |
 | 9 | [DETR 可視化アプリ](#project-9) | コンピュータビジョン | 実装済み |
 | 10 | [SegFormer セマンティックセグメンテーション](#project-10) | コンピュータビジョン | 実装済み |
@@ -97,7 +97,85 @@ updated: 2026-11-16
 
 <a id="project-1"></a>
 
-### 1. SpatialSAM Studio（gaussian-sam-studio）
+### 1. TurtleBot3 Muse Gadget
+
+<p class="meta"><span class="tag">ROS 2</span><span class="tag">rclpy</span><span class="tag">Muse Gadget SDK</span><span class="tag">RViz2</span><span class="tag">systemd</span></p>
+
+**GitHub:** [github.com/mutomasa/turtlebot3-muse-gadget](https://github.com/mutomasa/turtlebot3-muse-gadget)
+
+#### 成果物の概要
+
+TurtleBot3 Burger を Muse のロボットガジェットとして接続するアプリです。Muse のチャットから自然言語で頼むと、Ubuntu 上のコマンドが ROS 2 経由でロボットの状態を読み、結果を返します。位置・向き・LiDAR・バッテリーの状態を返す `robot.status`、地図にロボットの位置を重ねて画像で送る `robot.map`、画面なしの RViz2 を撮影して送る `robot.view` を実装しました。常駐ブリッジが状態をキャッシュするので、`robot.status` は約 0.25 秒で返ります。実機 TurtleBot3 の bringup 中に、Muse から `robot.status` を呼び出して `online` が返ることを確かめています。
+
+```mermaid
+flowchart LR
+    U["Muse アプリ<br/>自然言語で依頼"] --> G["Muse Gadget SDK<br/>登録コマンド"]
+    G --> B["常駐ブリッジ<br/>rclpy・状態キャッシュ"]
+    B <-->|"ROS 2 DDS"| R["TurtleBot3 Burger<br/>odom・scan・map"]
+    B --> V["地図 PNG・RViz2 の画面"]
+    V --> G
+```
+
+#### 工夫している点
+
+- **読み取り専用から始める。** 今のコマンドはロボットを動かさず、`/cmd_vel` も発行しません。移動は今後、ユーザーの承認と検証を通したうえで Nav2 経由にする設計です。
+- **古いデータを現在値として返さない。** 受信からの経過時間で鮮度を判定し、状態を `online` / `degraded` / `offline` / `unknown` に分けます。通信に失敗したときにサンプル値は返さず、開発用モックの出力には必ず `source: mock` を付けます。
+- **役割を境界だけに絞る。** SLAM や認識は TurtleBot3 Spatial AI 側に任せ、このリポジトリは Muse と ROS 2 をつなぐ部分だけを担います。Muse SDK は sudo 権限のない専用ユーザーで動かします。
+
+<a id="project-2"></a>
+
+### 2. TurtleBot3 Spatial AI
+
+<p class="meta"><span class="status">設計段階</span> <span class="tag">ROS 2</span><span class="tag">Nav2</span><span class="tag">LiDAR</span><span class="tag">RGB-D</span><span class="tag">LLM</span><span class="tag">Scene Graph</span></p>
+
+**GitHub:** [github.com/mutomasa/turtlebot3_spatial_ai](https://github.com/mutomasa/turtlebot3_spatial_ai)
+
+#### 成果物の概要
+
+TurtleBot3 Burger の 2D LiDAR と RGB-D カメラで観測した物体を、Spatial Scene Graph にまとめる研究プロジェクトです。グラフには、物体の位置・意味・空間関係・観測履歴を持たせます。LLM で自然言語の指示から目的の物体を特定し、Nav2 でそこへ移動します。設計書と研究計画書を公開しています。
+
+```mermaid
+flowchart LR
+    L["2D LiDAR<br/>RGB-D カメラ"] --> G["Spatial Scene Graph<br/>位置・意味・関係・履歴"]
+    U["自然言語の指示"] --> LLM["LLM<br/>対象の物体を特定"]
+    G --> LLM
+    LLM --> N["Nav2<br/>目的地へ移動"]
+```
+
+#### 工夫している点
+
+- **地図に「意味」と「関係」を持たせる。** 座標だけの地図ではなく、「机の上のマグカップ」のような空間関係と、いつ観測したかの履歴を持つグラフにします。
+- **LLM の役割を対象の特定に絞る。** 移動の制御は Nav2 に任せ、LLM は「どの物体か」を決める部分だけを担います。
+- **研究計画書を先に作った。** 実装の前に、設計書と研究計画書（PDF）で目的・手法・評価方法をまとめています。
+
+<a id="project-3"></a>
+
+### 3. QuestBot XR
+
+<p class="meta"><span class="status">設計段階</span> <span class="tag">Unity 6</span><span class="tag">ROS 2 Humble</span><span class="tag">Meta Quest 3</span><span class="tag">OpenXR</span></p>
+
+**GitHub:** [github.com/mutomasa/questbot-xr](https://github.com/mutomasa/questbot-xr)
+
+#### 成果物の概要
+
+Unity と ROS 2 をつなぎ、Meta Quest 3 で TurtleBot3 Burger の LiDAR・地図・カメラ映像を表示する VR/MR アプリの設計です。最初の目標は、実機の LiDAR スキャンを VR 空間に実寸で表示することです。
+
+```mermaid
+flowchart LR
+    B["TurtleBot3 Burger<br/>LiDAR・カメラ"] -->|"ROS 2 DDS"| U["Ubuntu PC<br/>ROS 2・SLAM・Nav2"]
+    U -->|"TCP<br/>スキャン・地図・姿勢"| Q["Meta Quest 3<br/>Unity アプリ"]
+    M["Mac<br/>Unity Editor"] -->|"APK を配置"| Q
+```
+
+#### 工夫している点
+
+- **段階ごとに完了条件を決めた。** 6 つの開発フェーズに分け、「壁までの距離が実機と一致する」のような、実機で確かめられる完了条件を置いています。
+- **安全を優先した順序。** 最初のマイルストーンは表示だけにし、ロボットへの速度指令は実装しません。遠隔操作は最後のフェーズで、デッドマンスイッチや切断時の停止を実機で検証してからにします。
+- **確認していないことを明記する。** 採用バージョンや互換性の未確認事項を一覧にし、実機で確かめていない項目は完了扱いにしないルールにしています。
+
+<a id="project-4"></a>
+
+### 4. SpatialSAM Studio（gaussian-sam-studio）
 
 <p class="meta"><span class="tag">SAM 3.1</span><span class="tag">3D Gaussian Splatting</span><span class="tag">gsplat</span><span class="tag">Streamlit</span><span class="tag">MLflow</span></p>
 
@@ -137,9 +215,9 @@ flowchart TB
 - **8GB の GPU で全工程が動く。** 3DGS の学習は 7000 step・9 分・VRAM 1.2GB で、評価用視点の PSNR は 30.7 です。動画セグメンテーションは DAVIS で J&F 0.95〜0.97 を確認しました。
 - **実験を MLflow で記録する。** 条件と結果を一覧で比べられます。GPU がない環境では、ダミーのセグメンタで UI とパイプラインを確認できます。
 
-<a id="project-2"></a>
+<a id="project-5"></a>
 
-### 2. Smart 3D Ecosystem — Boids + 機械学習
+### 5. Smart 3D Ecosystem — Boids + 機械学習
 
 <p class="meta"><span class="tag">Three.js</span><span class="tag">Web Worker</span><span class="tag">PyTorch</span><span class="tag">PPO</span><span class="tag">FastAPI</span><span class="tag">WebSocket</span></p>
 
@@ -165,9 +243,9 @@ flowchart LR
 - **学習と推論のずれを防ぐ。** 観測と行動の形式を 1 つの JSON スキーマにまとめ、学習と推論で同じ前処理コードを使います。TypeScript と Python の実装が一致することもテストしています。
 - **再現できる比較。** シードを固定し、学習に使っていないシードで評価します。学習済み方策がルールに勝てていない結果もそのまま見せ、「ML を入れる価値があるか」の判断材料にしています。
 
-<a id="project-3"></a>
+<a id="project-6"></a>
 
-### 3. gsplat Gaussian Splatting 比較デモ（3DGS）
+### 6. gsplat Gaussian Splatting 比較デモ（3DGS）
 
 <p class="meta"><span class="tag">gsplat</span><span class="tag">COLMAP</span><span class="tag">FastAPI</span><span class="tag">TypeScript</span><span class="tag">three.js</span></p>
 
@@ -194,9 +272,9 @@ flowchart LR
 - **CUDA ツールチェーンがない環境でも動かす。** nvcc を仮想環境の中だけに入れて gsplat のカーネルをビルドする手順を用意しました。システムには手を入れません。
 - **バックエンドとフロントエンドを分けた。** Python（uv）の CLI と FastAPI、TypeScript（Vite）のビューアを分けて構成しています。
 
-<a id="project-4"></a>
+<a id="project-7"></a>
 
-### 4. 量子ロボット経路探索（quantum_policy_gradient）
+### 7. 量子ロボット経路探索（quantum_policy_gradient）
 
 <p class="meta"><span class="tag">量子機械学習</span><span class="tag">変分量子回路</span><span class="tag">REINFORCE</span><span class="tag">Streamlit</span></p>
 
@@ -221,84 +299,6 @@ flowchart LR
 - **量子回路の条件を変えて試せる。** 量子ビット数（2〜8）、回路の深さ、有限ショット、脱分極ノイズを UI から変えられます。NISQ（ノイズのある中規模量子計算機）の制約を体感できます。
 - **結果を 6 つの観点で見せる。** 行動確率のヒートマップ、移動のアニメーション、累積報酬、各量子ビットの期待値の推移などを確認できます。
 - **理論とコードの対応を説明する。** README で、パラメータシフト則などの理論と実装の対応表を示しています。
-
-<a id="project-5"></a>
-
-### 5. TurtleBot3 Muse Gadget
-
-<p class="meta"><span class="tag">ROS 2</span><span class="tag">rclpy</span><span class="tag">Muse Gadget SDK</span><span class="tag">RViz2</span><span class="tag">systemd</span></p>
-
-**GitHub:** [github.com/mutomasa/turtlebot3-muse-gadget](https://github.com/mutomasa/turtlebot3-muse-gadget)
-
-#### 成果物の概要
-
-TurtleBot3 Burger を Muse のロボットガジェットとして接続するアプリです。Muse のチャットから自然言語で頼むと、Ubuntu 上のコマンドが ROS 2 経由でロボットの状態を読み、結果を返します。位置・向き・LiDAR・バッテリーの状態を返す `robot.status`、地図にロボットの位置を重ねて画像で送る `robot.map`、画面なしの RViz2 を撮影して送る `robot.view` を実装しました。常駐ブリッジが状態をキャッシュするので、`robot.status` は約 0.25 秒で返ります。実機 TurtleBot3 の bringup 中に、Muse から `robot.status` を呼び出して `online` が返ることを確かめています。
-
-```mermaid
-flowchart LR
-    U["Muse アプリ<br/>自然言語で依頼"] --> G["Muse Gadget SDK<br/>登録コマンド"]
-    G --> B["常駐ブリッジ<br/>rclpy・状態キャッシュ"]
-    B <-->|"ROS 2 DDS"| R["TurtleBot3 Burger<br/>odom・scan・map"]
-    B --> V["地図 PNG・RViz2 の画面"]
-    V --> G
-```
-
-#### 工夫している点
-
-- **読み取り専用から始める。** 今のコマンドはロボットを動かさず、`/cmd_vel` も発行しません。移動は今後、ユーザーの承認と検証を通したうえで Nav2 経由にする設計です。
-- **古いデータを現在値として返さない。** 受信からの経過時間で鮮度を判定し、状態を `online` / `degraded` / `offline` / `unknown` に分けます。通信に失敗したときにサンプル値は返さず、開発用モックの出力には必ず `source: mock` を付けます。
-- **役割を境界だけに絞る。** SLAM や認識は TurtleBot3 Spatial AI 側に任せ、このリポジトリは Muse と ROS 2 をつなぐ部分だけを担います。Muse SDK は sudo 権限のない専用ユーザーで動かします。
-
-<a id="project-6"></a>
-
-### 6. TurtleBot3 Spatial AI
-
-<p class="meta"><span class="status">設計段階</span> <span class="tag">ROS 2</span><span class="tag">Nav2</span><span class="tag">LiDAR</span><span class="tag">RGB-D</span><span class="tag">LLM</span><span class="tag">Scene Graph</span></p>
-
-**GitHub:** [github.com/mutomasa/turtlebot3_spatial_ai](https://github.com/mutomasa/turtlebot3_spatial_ai)
-
-#### 成果物の概要
-
-TurtleBot3 Burger の 2D LiDAR と RGB-D カメラで観測した物体を、Spatial Scene Graph にまとめる研究プロジェクトです。グラフには、物体の位置・意味・空間関係・観測履歴を持たせます。LLM で自然言語の指示から目的の物体を特定し、Nav2 でそこへ移動します。設計書と研究計画書を公開しています。
-
-```mermaid
-flowchart LR
-    L["2D LiDAR<br/>RGB-D カメラ"] --> G["Spatial Scene Graph<br/>位置・意味・関係・履歴"]
-    U["自然言語の指示"] --> LLM["LLM<br/>対象の物体を特定"]
-    G --> LLM
-    LLM --> N["Nav2<br/>目的地へ移動"]
-```
-
-#### 工夫している点
-
-- **地図に「意味」と「関係」を持たせる。** 座標だけの地図ではなく、「机の上のマグカップ」のような空間関係と、いつ観測したかの履歴を持つグラフにします。
-- **LLM の役割を対象の特定に絞る。** 移動の制御は Nav2 に任せ、LLM は「どの物体か」を決める部分だけを担います。
-- **研究計画書を先に作った。** 実装の前に、設計書と研究計画書（PDF）で目的・手法・評価方法をまとめています。
-
-<a id="project-7"></a>
-
-### 7. QuestBot XR
-
-<p class="meta"><span class="status">設計段階</span> <span class="tag">Unity 6</span><span class="tag">ROS 2 Humble</span><span class="tag">Meta Quest 3</span><span class="tag">OpenXR</span></p>
-
-**GitHub:** [github.com/mutomasa/questbot-xr](https://github.com/mutomasa/questbot-xr)
-
-#### 成果物の概要
-
-Unity と ROS 2 をつなぎ、Meta Quest 3 で TurtleBot3 Burger の LiDAR・地図・カメラ映像を表示する VR/MR アプリの設計です。最初の目標は、実機の LiDAR スキャンを VR 空間に実寸で表示することです。
-
-```mermaid
-flowchart LR
-    B["TurtleBot3 Burger<br/>LiDAR・カメラ"] -->|"ROS 2 DDS"| U["Ubuntu PC<br/>ROS 2・SLAM・Nav2"]
-    U -->|"TCP<br/>スキャン・地図・姿勢"| Q["Meta Quest 3<br/>Unity アプリ"]
-    M["Mac<br/>Unity Editor"] -->|"APK を配置"| Q
-```
-
-#### 工夫している点
-
-- **段階ごとに完了条件を決めた。** 6 つの開発フェーズに分け、「壁までの距離が実機と一致する」のような、実機で確かめられる完了条件を置いています。
-- **安全を優先した順序。** 最初のマイルストーンは表示だけにし、ロボットへの速度指令は実装しません。遠隔操作は最後のフェーズで、デッドマンスイッチや切断時の停止を実機で検証してからにします。
-- **確認していないことを明記する。** 採用バージョンや互換性の未確認事項を一覧にし、実機で確かめていない項目は完了扱いにしないルールにしています。
 
 ## コンピュータビジョン
 
