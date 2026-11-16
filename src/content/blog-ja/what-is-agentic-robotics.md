@@ -9,7 +9,7 @@ originalUrl: 'https://mutomasa.hatenablog.com/entry/2026/11/03/202554'
 
 最近、Physical AIやVLA（Vision-Language-Action）の研究が急速に進んでいます。
 
-その中で注目しているのが、\*\*Agentic Robotics（エージェント型ロボティクス）\*\*です。
+その中で注目しているのが、**Agentic Robotics（エージェント型ロボティクス）**です。
 
 従来のロボットは、決められた動作を正確に実行することが中心でした。VLAの登場によって、画像と言語から動作を生成できるようになりました。
 

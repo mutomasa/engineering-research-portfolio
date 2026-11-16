@@ -67,25 +67,6 @@ def split_outside_fences(lines: list[str]):
         yield line, not in_fence
 
 
-INLINE_CODE = re.compile(r"(`+)(?:.+?)\1")
-BOLD = re.compile(r"\*\*(?=\S)(.+?)(?<=\S)\*\*")
-
-
-def strong_tags(line: str) -> str:
-    """`**…**` を <strong> に置き換える（インラインコードの中は変えない）。
-
-    CommonMark では「**第Ⅰ部（第1〜3章）**は」のように閉じの ** の前が約物で後ろが文字だと
-    太字にならないため、日本語の本文では HTML のタグで太字にする。
-    """
-    out, pos = [], 0
-    for m in INLINE_CODE.finditer(line):
-        out.append(BOLD.sub(r"<strong>\1</strong>", line[pos : m.start()]))
-        out.append(m.group(0))
-        pos = m.end()
-    out.append(BOLD.sub(r"<strong>\1</strong>", line[pos:]))
-    return "".join(out)
-
-
 def first_paragraph_after(lines: list[str], heading: str) -> str | None:
     for i, line in enumerate(lines):
         if line.strip() == heading:
@@ -130,7 +111,7 @@ def convert(src_name: str, slug: str, label: str, order: int, tags: list[str]) -
         # 付録は「# 付録A …」を ## に、その下の見出しを1段下げる
         if slug == "appendices" and outside and re.match(r"^#{1,5} ", line):
             line = "#" + line
-        body.append(strong_tags(line) if outside else line)
+        body.append(line)
 
     # 先頭の見出しからラベルを除いたものをタイトルにする（例: 「第1章　…」→「…」）
     title = re.sub(r"^(第\d+章|はじめに――)\s*", "", title).strip() or title
@@ -147,7 +128,7 @@ def convert(src_name: str, slug: str, label: str, order: int, tags: list[str]) -
         body.pop()
     # 付録の部の区切り（---）は見出しで区切られるので残しても問題ないが、連続する空行は詰める
     # 刊行前の確認用の「執筆メモ」は公開版に載せない
-    body = [l for l in body if not l.startswith(("> **執筆メモ**", "> <strong>執筆メモ</strong>"))]
+    body = [l for l in body if not l.startswith("> **執筆メモ**")]
     text = "\n".join(body)
     text = re.sub(r"\n{3,}", "\n\n", text)
 
@@ -156,8 +137,8 @@ def convert(src_name: str, slug: str, label: str, order: int, tags: list[str]) -
             part_body.pop()
         while part_body and not part_body[0].strip():
             part_body.pop(0)
-        quoted = "\n".join(("> " + strong_tags(l)) if l.strip() else ">" for l in part_body)
-        text = f"> <strong>{part_title}</strong>\n>\n{quoted}\n\n{text}"
+        quoted = "\n".join(("> " + l) if l.strip() else ">" for l in part_body)
+        text = f"> **{part_title}**\n>\n{quoted}\n\n{text}"
 
     desc = DESCRIPTIONS.get(slug) or clean_text(first_paragraph_after(lines, "## 本章の問い") or title)
     if len(desc) > 160:

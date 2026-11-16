@@ -1,5 +1,6 @@
 // @ts-check
 import { defineConfig } from 'astro/config';
+import remarkCjkFriendly from 'remark-cjk-friendly';
 import remarkMath from 'remark-math';
 import rehypeKatex from 'rehype-katex';
 import rehypeExternalLinks from './src/plugins/rehype-external-links.mjs';
@@ -19,7 +20,8 @@ export default defineConfig({
 	},
 	markdown: {
 		// $...$ / $$...$$ の数式をビルド時に KaTeX で描画する
-		remarkPlugins: [remarkMath],
+		// 「**第Ⅰ部（第1〜3章）**は」のように約物の隣でも ** を太字にする（CommonMark の日本語対策）
+		remarkPlugins: [remarkCjkFriendly, remarkMath],
 		// 外部リンクは新しいタブで開く（HF Space の iframe 内では GitHub などが開けないため）
 		// `> [!POINT]` の引用を猫のキャラクター付きの「ポイント」ボックスにする
 		rehypePlugins: [rehypeKatex, rehypePointCallout, rehypeExternalLinks, [rehypeInternalLinks, { enabled: isBuild }]],
