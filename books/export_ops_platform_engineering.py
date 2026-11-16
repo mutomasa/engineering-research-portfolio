@@ -127,6 +127,8 @@ def convert(src_name: str, slug: str, label: str, order: int, tags: list[str]) -
     while body and body[-1].strip() in ("", "---"):
         body.pop()
     # 付録の部の区切り（---）は見出しで区切られるので残しても問題ないが、連続する空行は詰める
+    # 刊行前の確認用の「執筆メモ」は公開版に載せない
+    body = [l for l in body if not l.startswith("> **執筆メモ**")]
     text = "\n".join(body)
     text = re.sub(r"\n{3,}", "\n\n", text)
 
