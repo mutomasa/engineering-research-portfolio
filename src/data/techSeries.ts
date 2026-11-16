@@ -43,4 +43,16 @@ export const techSeries: TechSeries[] = [
 		version: '0.1.1',
 		tags: ['Operations', 'DevOps', 'SRE', 'Observability', 'MLOps', 'LLMOps', 'AgentOps', 'Platform Engineering'],
 	},
+	{
+		id: 'knowledge-graph-algorithms',
+		title: '知識グラフとグラフアルゴリズム',
+		subtitle: '理論・数式・Python実装から、オントロジー、GraphRAG、グラフ機械学習、AIエージェントへの応用まで',
+		description:
+			'経路探索、中心性分析、コミュニティ検出、類似性分析、リンク予測、グラフ表現学習の6分野・17アルゴリズムを、数式と計算量、NetworkX・Neo4j GDS・igraph・PyTorch Geometric の実装で解説する。オントロジーによる意味と構造分析・予測の違いを区別しながら、GraphRAG、AIエージェント、セキュリティ、人材、製造業、創薬、ロボティクスへの応用につなげる。',
+		note: '注意事項：コードは各節の考え方を再現する最小例です。パッケージのバージョンや Neo4j の Edition、Graph Data Science の導入状況によって動作が異なる場合があります。例示する人材・製品・組織などは、特記のない限り説明用の架空データです。',
+		kind: '書籍',
+		status: '初版（随時改訂）',
+		version: '1.0',
+		tags: ['Knowledge Graph', 'Graph Algorithms', 'Ontology', 'GraphRAG', 'Graph Neural Networks', 'Neo4j'],
+	},
 ];
