@@ -6,6 +6,19 @@ kind: '研究紹介（拡張テーマ）'
 order: 1.5
 updated: 2026-11-13
 tags: ['Agentic Robotics', 'VLA', 'Failure Recovery', 'Tactile Sensing', 'SO-101']
+poster:
+  width: 2400
+  height: 3393
+  ja:
+    image: '/images/research/agentic-robotics-poster-ja.png'
+    thumb: '/images/research/agentic-robotics-poster-ja-thumb.png'
+    pdf: '/research/agentic-robotics-poster-ja.pdf'
+    alt: '研究ポスター「Agentic Robotics × Vision-Tactile JEPA: Feeding Tactile Failure Precursors Back to Robot Agents（エージェントに「失敗の予兆」を渡すロボット操作）」。背景としての Agentic Robotics の手法比較、運動層の失敗に気づくのが遅いという課題、触覚由来の予兆を推論層へ返す提案の構成図、ワークショップの未解決問題、研究の工程で使うところ、外乱と回復の実験（R0〜R3）、スケジュール、注意していることをまとめている。'
+  en:
+    image: '/images/research/agentic-robotics-poster-en.png'
+    thumb: '/images/research/agentic-robotics-poster-en-thumb.png'
+    pdf: '/research/agentic-robotics-poster-en.pdf'
+    alt: 'Research poster "Agentic Robotics × Vision-Tactile JEPA: Feeding Tactile Failure Precursors Back to Robot Agents", covering background methods in Agentic Robotics, the problem that motor-level failures are noticed late, the proposal to return tactile precursors to the reasoning layer, workshop open problems, where agents help the research, the disturbance-and-recovery experiment (R0–R3), the schedule, and cautions.'
 ---
 
 - 作成日：2026-11-13
