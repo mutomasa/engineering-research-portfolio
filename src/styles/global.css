@@ -325,6 +325,11 @@ a.card:hover {
 	line-height: 1.5;
 	vertical-align: middle;
 }
+/* 博士課程入学予定の研究など、目立たせたい種類のバッジ */
+.badge-phd {
+	border-color: var(--fg);
+	color: var(--fg);
+}
 .tags {
 	display: flex;
 	flex-wrap: wrap;

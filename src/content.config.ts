@@ -62,7 +62,9 @@ const posterVersion = z.object({
 	alt: z.string(),
 });
 
-// 研究内容（/research に一覧、/research/<slug> に本文を表示）。日本語のみ。
+// 研究内容（/research に一覧、/research/<slug> に本文を表示）。基本は日本語のみ。
+// en を指定したテーマは、題名・説明・種類を英語でも表示し、本文も日英の両方を持つ
+// （本文では <div data-lang-only="ja"> と <div data-lang-only="en"> で言語ごとに囲む）。
 const research = defineCollection({
 	loader: glob({ base: './src/content/research', pattern: '**/[^_]*.{md,mdx}' }),
 	schema: z.object({
@@ -75,6 +77,13 @@ const research = defineCollection({
 		order: z.number().default(100),
 		updated: z.coerce.date(),
 		tags: z.array(z.string()).default([]),
+		en: z
+			.object({
+				title: z.string(),
+				description: z.string(),
+				kind: z.string(),
+			})
+			.optional(),
 		// 研究ポスター（任意）。日本語版・英語版を用意し、表示中の言語に合わせて切り替える。
 		// 画像は public/ 以下の絶対パス。一覧・ホームでは thumb、詳細ページでは image を表示する
 		poster: z
