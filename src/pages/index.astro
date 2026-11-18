@@ -118,25 +118,45 @@ const cards: HomeCard[] = [
 								<tr>
 									<td class="col-poster">
 										{doc.data.poster ? (
+											<>
 											<a href={href} tabindex="-1" aria-hidden="true">
 												<PosterImage poster={doc.data.poster} variant="thumb" width={96} decorative />
 											</a>
+											<span class="pdf-links">
+												{doc.data.poster.ja.pdf && (
+													<a class="text-link" href={doc.data.poster.ja.pdf} target="_blank" rel="noopener" title="PDF（日本語版）">
+														PDF JA
+													</a>
+												)}
+												{doc.data.poster.en.pdf && (
+													<a class="text-link" href={doc.data.poster.en.pdf} target="_blank" rel="noopener" title="PDF (English)">
+														PDF EN
+													</a>
+												)}
+											</span>
+											</>
 										) : (
 											<span class="no-poster">—</span>
 										)}
 									</td>
 									<td class="col-title">
-										<a class="text-link" href={href} lang="ja">
-											{doc.data.title}
-										</a>
+										{doc.data.en ? (
+											<a class="text-link" href={href}>
+												<T en={doc.data.en.title} ja={doc.data.title} />
+											</a>
+										) : (
+											<a class="text-link" href={href} lang="ja">
+												{doc.data.title}
+											</a>
+										)}
 										{doc.data.subtitle && (
-											<span class="subtitle" lang="en">
+											<span class="subtitle" lang="en" data-lang-only={doc.data.en ? 'ja' : undefined}>
 												{doc.data.subtitle}
 											</span>
 										)}
 									</td>
-									<td class="col-kind" lang="ja">
-										{doc.data.kind}
+									<td class:list={['col-kind', { 'col-kind-phd': doc.data.en }]} lang={doc.data.en ? undefined : 'ja'}>
+										{doc.data.en ? <T en={doc.data.en.kind} ja={doc.data.kind} /> : doc.data.kind}
 									</td>
 									<td>
 										<ul class="tags">
@@ -252,6 +272,14 @@ const cards: HomeCard[] = [
 		border-radius: 4px;
 		background: #fff;
 	}
+	.pdf-links {
+		display: flex;
+		flex-direction: column;
+		gap: 0.15rem;
+		margin-top: 0.4rem;
+		font-size: 0.75rem;
+		white-space: nowrap;
+	}
 	.no-poster {
 		color: var(--muted);
 	}
@@ -269,6 +297,10 @@ const cards: HomeCard[] = [
 	.col-date {
 		white-space: nowrap;
 		color: var(--muted);
+	}
+	.col-kind-phd {
+		color: var(--fg);
+		font-weight: 600;
 	}
 	.research-table .tags {
 		margin: 0;

@@ -15,17 +15,44 @@ export async function getStaticPaths() {
 
 const { doc } = Astro.props as { doc: CollectionEntry<'research'> };
 const { Content } = await render(doc);
+// 英語版を持つテーマ（本文も日英の両方を持つ）
+const en = doc.data.en;
 ---
 
-<Layout title={doc.data.title} titleJa={doc.data.title} description={doc.data.description}>
+<Layout title={en?.title ?? doc.data.title} titleJa={doc.data.title} description={en?.description ?? doc.data.description}>
 	<article class="page">
 		<p class="eyebrow">
 			<a class="text-link" href={pageHref('/research')}><Icon name="back" size={16} /> <T en="Research" ja="研究内容" /></a>
 		</p>
-		<h1 class="page-title" lang="ja">{doc.data.title}</h1>
-		{doc.data.subtitle && <p class="lead" lang="en">{doc.data.subtitle}</p>}
+		{
+			en ? (
+				<>
+					<h1 class="page-title">
+						<T en={en.title} ja={doc.data.title} />
+					</h1>
+					{doc.data.subtitle && (
+						<p class="lead" data-lang-only="ja" lang="en">
+							{doc.data.subtitle}
+						</p>
+					)}
+				</>
+			) : (
+				<>
+					<h1 class="page-title" lang="ja">
+						{doc.data.title}
+					</h1>
+					{doc.data.subtitle && <p class="lead" lang="en">{doc.data.subtitle}</p>}
+				</>
+			)
+		}
 		<div class="meta">
-			<span class="badge" lang="ja">{doc.data.kind}</span>
+			{en ? (
+				<span class="badge badge-phd">
+					<T en={en.kind} ja={doc.data.kind} />
+				</span>
+			) : (
+				<span class="badge" lang="ja">{doc.data.kind}</span>
+			)}
 			<time datetime={doc.data.updated.toISOString()}>{formatDate(doc.data.updated)}</time>
 		</div>
 		{
@@ -34,32 +61,23 @@ const { Content } = await render(doc);
 					<PosterImage poster={doc.data.poster} variant="image" width={doc.data.poster.width} linkToFull />
 					<figcaption>
 						<T en="Research poster (click to enlarge)" ja="研究ポスター（クリックで拡大）" />
-						{doc.data.poster.en.pdf && (
-							<a class="text-link" href={doc.data.poster.en.pdf} target="_blank" rel="noopener" data-lang-only="en" lang="en">
-								View PDF
-							</a>
-						)}
+						{/* 日本語版・英語版の PDF は、表示中の言語にかかわらず両方載せる */}
 						{doc.data.poster.ja.pdf && (
-							<a class="text-link" href={doc.data.poster.ja.pdf} target="_blank" rel="noopener" data-lang-only="ja" lang="ja">
-								PDF で見る
+							<a class="text-link" href={doc.data.poster.ja.pdf} target="_blank" rel="noopener">
+								<T en="PDF (Japanese)" ja="PDF（日本語版）" />
 							</a>
 						)}
-						{doc.data.poster.ja.pdf && doc.data.poster.en.pdf && (
-							<>
-								<a class="text-link" href={doc.data.poster.ja.pdf} target="_blank" rel="noopener" data-lang-only="en">
-									Japanese version (PDF)
-								</a>
-								<a class="text-link" href={doc.data.poster.en.pdf} target="_blank" rel="noopener" data-lang-only="ja">
-									英語版（PDF）
-								</a>
-							</>
+						{doc.data.poster.en.pdf && (
+							<a class="text-link" href={doc.data.poster.en.pdf} target="_blank" rel="noopener">
+								<T en="PDF (English)" ja="PDF（英語版）" />
+							</a>
 						)}
 					</figcaption>
 				</figure>
 			)
 		}
-		<p class="lead" data-lang-only="en" lang="en" style="margin-top:1.5rem">This document is available in Japanese only.</p>
-		<div class="prose" style="margin-top:2rem" lang="ja">
+		{!en && <p class="lead" data-lang-only="en" lang="en" style="margin-top:1.5rem">This document is available in Japanese only.</p>}
+		<div class="prose" style="margin-top:2rem" lang={en ? undefined : 'ja'}>
 			<Content />
 		</div>
 	</article>
@@ -78,7 +96,24 @@ const { Content } = await render(doc);
 			pre.replaceWith(div);
 			return div;
 		});
-		await mermaid.run({ nodes });
+		// 日英の本文を持つページでは、表示中でない言語の図も正しい大きさで描けるよう、
+		// 描画の間だけ非表示側を見えない状態のまま配置する
+		const hidden = Array.from(document.querySelectorAll<HTMLElement>('.prose [data-lang-only]')).filter(
+			(el) => getComputedStyle(el).display === 'none',
+		);
+		for (const el of hidden) {
+			el.style.setProperty('display', 'block', 'important');
+			el.style.setProperty('visibility', 'hidden');
+			el.style.setProperty('position', 'absolute');
+			el.style.setProperty('width', '100%');
+		}
+		try {
+			await mermaid.run({ nodes });
+		} finally {
+			for (const el of hidden) {
+				for (const prop of ['display', 'visibility', 'position', 'width']) el.style.removeProperty(prop);
+			}
+		}
 	}
 </script>
 
