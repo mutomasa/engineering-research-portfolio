@@ -54,6 +54,14 @@ const portfolio = defineCollection({
 	}),
 });
 
+// 研究ポスターの1言語分
+const posterVersion = z.object({
+	image: z.string(),
+	thumb: z.string(),
+	pdf: z.string().optional(),
+	alt: z.string(),
+});
+
 // 研究内容（/research に一覧、/research/<slug> に本文を表示）。日本語のみ。
 const research = defineCollection({
 	loader: glob({ base: './src/content/research', pattern: '**/[^_]*.{md,mdx}' }),
@@ -67,6 +75,16 @@ const research = defineCollection({
 		order: z.number().default(100),
 		updated: z.coerce.date(),
 		tags: z.array(z.string()).default([]),
+		// 研究ポスター（任意）。日本語版・英語版を用意し、表示中の言語に合わせて切り替える。
+		// 画像は public/ 以下の絶対パス。一覧・ホームでは thumb、詳細ページでは image を表示する
+		poster: z
+			.object({
+				width: z.number(),
+				height: z.number(),
+				ja: posterVersion,
+				en: posterVersion,
+			})
+			.optional(),
 	}),
 });
 

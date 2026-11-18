@@ -1,0 +1,60 @@
+---
+// 研究ポスターの日本語版・英語版の画像を両方出力し、表示中の言語の方だけを見せる（T と同じ data-lang-only の仕組み）。
+// 隠れている方は loading="lazy" なので読み込まれない。
+import type { CollectionEntry } from 'astro:content';
+
+type Poster = NonNullable<CollectionEntry<'research'>['data']['poster']>;
+
+interface Props {
+	poster: Poster;
+	/** thumb: 一覧・ホーム用のサムネイル / image: 詳細ページ用の大きい画像 */
+	variant: 'thumb' | 'image';
+	/** 表示幅（px）。高さはポスターの縦横比から計算する */
+	width: number;
+	class?: string;
+	/** 装飾として扱う（同じリンク先のテキストが隣にある場合）。alt を空にする */
+	decorative?: boolean;
+	/** 画像を原寸画像へのリンクにする */
+	linkToFull?: boolean;
+}
+
+const { poster, variant, width, class: className, decorative = false, linkToFull = false } = Astro.props;
+const height = Math.round((width * poster.height) / poster.width);
+const versions = [
+	{ lang: 'ja', v: poster.ja },
+	{ lang: 'en', v: poster.en },
+] as const;
+---
+
+{
+	versions.map(({ lang, v }) => {
+		const img = (
+			<img
+				class={className}
+				src={variant === 'thumb' ? v.thumb : v.image}
+				alt={decorative ? '' : v.alt}
+				lang={lang}
+				width={width}
+				height={height}
+				loading="lazy"
+				decoding="async"
+			/>
+		);
+		return linkToFull ? (
+			<a href={v.image} target="_blank" rel="noopener" data-lang-only={lang}>
+				{img}
+			</a>
+		) : (
+			<span data-lang-only={lang} class="poster-lang">
+				{img}
+			</span>
+		);
+	})
+}
+
+<style>
+	.poster-lang,
+	a {
+		display: block;
+	}
+</style>

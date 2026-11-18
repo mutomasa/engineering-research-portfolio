@@ -1,10 +1,15 @@
 ---
+import { getCollection } from 'astro:content';
 import Layout from '../layouts/Layout.astro';
 import Icon from '../components/Icon.astro';
 import type { IconName } from '../components/Icon.astro';
 import T from '../components/T.astro';
+import PosterImage from '../components/PosterImage.astro';
 import { SITE } from '../consts';
 import { pageHref } from '../lib/url';
+import { formatDate } from '../lib/blog';
+
+const research = (await getCollection('research')).sort((a, b) => a.data.order - b.data.order);
 
 interface HomeCard {
 	icon: IconName;
@@ -92,6 +97,71 @@ const cards: HomeCard[] = [
 		<p class="lead" style="margin-bottom:0">{SITE.researchThemes.join(' · ')}</p>
 	</section>
 
+	<section class="research" aria-labelledby="research-title">
+		<h2 class="section-title" id="research-title"><T en="Research" ja="研究内容" /></h2>
+		<div class="table-wrap">
+			<table class="research-table">
+				<thead>
+					<tr>
+						<th scope="col"><T en="Poster" ja="ポスター" /></th>
+						<th scope="col"><T en="Theme" ja="研究テーマ" /></th>
+						<th scope="col"><T en="Type" ja="種類" /></th>
+						<th scope="col"><T en="Keywords" ja="キーワード" /></th>
+						<th scope="col"><T en="Updated" ja="更新日" /></th>
+					</tr>
+				</thead>
+				<tbody>
+					{
+						research.map((doc) => {
+							const href = pageHref(`/research/${doc.id}`);
+							return (
+								<tr>
+									<td class="col-poster">
+										{doc.data.poster ? (
+											<a href={href} tabindex="-1" aria-hidden="true">
+												<PosterImage poster={doc.data.poster} variant="thumb" width={96} decorative />
+											</a>
+										) : (
+											<span class="no-poster">—</span>
+										)}
+									</td>
+									<td class="col-title">
+										<a class="text-link" href={href} lang="ja">
+											{doc.data.title}
+										</a>
+										{doc.data.subtitle && (
+											<span class="subtitle" lang="en">
+												{doc.data.subtitle}
+											</span>
+										)}
+									</td>
+									<td class="col-kind" lang="ja">
+										{doc.data.kind}
+									</td>
+									<td>
+										<ul class="tags">
+											{doc.data.tags.map((tag) => (
+												<li class="tag">{tag}</li>
+											))}
+										</ul>
+									</td>
+									<td class="col-date">
+										<time datetime={doc.data.updated.toISOString()}>{formatDate(doc.data.updated)}</time>
+									</td>
+								</tr>
+							);
+						})
+					}
+				</tbody>
+			</table>
+		</div>
+		<p class="more">
+			<a class="text-link" href={pageHref('/research')}>
+				<T en="All research" ja="研究内容をすべて見る" /> <Icon name="arrow" size={16} />
+			</a>
+		</p>
+	</section>
+
 	<ul class="card-grid">
 		{
 			cards.map((card) => (
@@ -135,3 +205,75 @@ const cards: HomeCard[] = [
 		}
 	</ul>
 </Layout>
+
+<style>
+	.research {
+		margin: 0 0 2.5rem;
+	}
+	.section-title {
+		margin: 0 0 1rem;
+		font-size: 1.4rem;
+	}
+	/* 幅が足りないときは表だけを横スクロールさせる */
+	.table-wrap {
+		overflow-x: auto;
+		border: 1px solid var(--border);
+		border-radius: var(--radius);
+	}
+	.research-table {
+		width: 100%;
+		min-width: 44rem;
+		border-collapse: collapse;
+		font-size: 0.95rem;
+	}
+	.research-table th,
+	.research-table td {
+		padding: 0.75rem 0.9rem;
+		border-bottom: 1px solid var(--border);
+		text-align: left;
+		vertical-align: top;
+	}
+	.research-table th {
+		background: var(--surface);
+		font-weight: 700;
+		white-space: nowrap;
+	}
+	.research-table tr:last-child td {
+		border-bottom: 0;
+	}
+	.col-poster {
+		width: 7rem;
+	}
+	.col-poster :global(img) {
+		display: block;
+		width: 96px;
+		height: auto;
+		border: 1px solid var(--border);
+		border-radius: 4px;
+		background: #fff;
+	}
+	.no-poster {
+		color: var(--muted);
+	}
+	.col-title a {
+		font-weight: 600;
+	}
+	.subtitle {
+		display: block;
+		margin-top: 0.25rem;
+		color: var(--muted);
+		font-size: 0.85rem;
+		font-style: italic;
+	}
+	.col-kind,
+	.col-date {
+		white-space: nowrap;
+		color: var(--muted);
+	}
+	.research-table .tags {
+		margin: 0;
+	}
+	.more {
+		margin: 0.75rem 0 0;
+	}
+</style>

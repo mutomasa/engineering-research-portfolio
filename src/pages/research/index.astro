@@ -3,6 +3,7 @@ import { getCollection } from 'astro:content';
 import Layout from '../../layouts/Layout.astro';
 import Icon from '../../components/Icon.astro';
 import T from '../../components/T.astro';
+import PosterImage from '../../components/PosterImage.astro';
 import { publications } from '../../data/publications';
 import { formatDate } from '../../lib/blog';
 import { pageHref } from '../../lib/url';
@@ -52,7 +53,11 @@ const kindLabel = {
 			{
 				docs.map((doc) => (
 					<li>
-						<a class="card" href={pageHref(`/research/${doc.id}`)}>
+						<a class:list={['card', { 'has-poster': doc.data.poster }]} href={pageHref(`/research/${doc.id}`)}>
+							{doc.data.poster && (
+								<PosterImage poster={doc.data.poster} variant="thumb" width={600} class="poster-thumb" />
+							)}
+							<div class="card-body">
 							<h3 lang="ja">{doc.data.title}</h3>
 							{doc.data.subtitle && (
 								<p lang="en">
@@ -72,6 +77,7 @@ const kindLabel = {
 							<span class="card-cta">
 								<T en="Read (Japanese)" ja="資料を読む" /> <Icon name="arrow" size={16} />
 							</span>
+							</div>
 						</a>
 					</li>
 				))
@@ -124,5 +130,35 @@ const kindLabel = {
 	.section-title {
 		margin: 2.5rem 0 1rem;
 		font-size: 1.4rem;
+	}
+	.card-body {
+		display: flex;
+		flex: 1;
+		flex-direction: column;
+		gap: 0.5rem;
+		min-width: 0;
+	}
+	/* ポスターがあるテーマは、ポスターのサムネイルを左（スマホでは上）に並べる */
+	.has-poster {
+		display: grid;
+		grid-template-columns: minmax(0, 14rem) minmax(0, 1fr);
+		gap: 1.25rem;
+		align-items: start;
+	}
+	.has-poster :global(.poster-thumb) {
+		display: block;
+		width: 100%;
+		height: auto;
+		border: 1px solid var(--border);
+		border-radius: 6px;
+		background: #fff;
+	}
+	@media (max-width: 640px) {
+		.has-poster {
+			grid-template-columns: minmax(0, 1fr);
+		}
+		.has-poster :global(.poster-thumb) {
+			max-width: 18rem;
+		}
 	}
 </style>
