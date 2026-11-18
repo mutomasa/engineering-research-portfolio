@@ -5,6 +5,19 @@ kind: '研究計画書'
 order: 2
 updated: 2026-11-03
 tags: ['Spatial AI', 'Scene Graphs', 'ROS 2', 'LLM', 'TurtleBot3']
+poster:
+  width: 2400
+  height: 3393
+  ja:
+    image: '/images/research/spatial-scene-graph-navigation-poster-ja.png'
+    thumb: '/images/research/spatial-scene-graph-navigation-poster-ja-thumb.png'
+    pdf: '/research/spatial-scene-graph-navigation-poster-ja.pdf'
+    alt: '研究ポスター「空間関係と観測履歴を持つ Spatial Scene Graph による自然言語指示からの物体特定と移動ロボットナビゲーション」。背景と課題、研究の問いと仮説、TurtleBot3 と GPU PC による提案システムの構成図、Scene Graph の例、LLM の型付きツール、比較実験（A/B/C 条件）、評価指標、進め方と期待される貢献をまとめている。'
+  en:
+    image: '/images/research/spatial-scene-graph-navigation-poster-en.png'
+    thumb: '/images/research/spatial-scene-graph-navigation-poster-en-thumb.png'
+    pdf: '/research/spatial-scene-graph-navigation-poster-en.pdf'
+    alt: 'Research poster "Object Grounding and Navigation from Natural-Language Instructions with a Spatial Scene Graph Carrying Spatial Relations and Observation History", covering background and problems, research questions and hypotheses, the proposed TurtleBot3 + GPU PC system, a scene graph example, typed LLM tools, the A/B/C comparison experiment, evaluation metrics, roadmap and expected contributions.'
 ---
 
 ## 1. 研究概要

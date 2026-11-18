@@ -6,6 +6,19 @@ kind: '研究紹介'
 order: 1
 updated: 2026-11-13
 tags: ['Robot Foundation Models', 'VLA', 'World Models', 'Tactile Sensing', 'SO-101']
+poster:
+  width: 2400
+  height: 3393
+  ja:
+    image: '/images/research/vision-tactile-jepa-poster-ja.png'
+    thumb: '/images/research/vision-tactile-jepa-poster-ja-thumb.png'
+    pdf: '/research/vision-tactile-jepa-poster-ja.pdf'
+    alt: '研究ポスター「Vision-Tactile JEPA World Models for Failure-Aware Long-Horizon Robotic Manipulation」。背景と課題、新規性、提案手法の構成図、Research Questions、比較実験、SO-101 実機タスク、評価指標、データと環境、修士論文の最小成立条件をまとめている。'
+  en:
+    image: '/images/research/vision-tactile-jepa-poster-en.png'
+    thumb: '/images/research/vision-tactile-jepa-poster-en-thumb.png'
+    pdf: '/research/vision-tactile-jepa-poster-en.pdf'
+    alt: 'Research poster "Vision-Tactile JEPA World Models for Failure-Aware Long-Horizon Robotic Manipulation", covering background and problem, novelty, the proposed architecture, research questions, comparison experiments, SO-101 real-robot tasks, evaluation metrics, data and environment, and the minimum conditions for the master thesis.'
 ---
 
 - 作成日：2026-11-03（修士1年・研究期間 2026年9月〜2027年10月）
