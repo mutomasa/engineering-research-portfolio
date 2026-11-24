@@ -181,4 +181,37 @@ const isCurrent = (href: string) =>
 		button.addEventListener('click', () => setLang(button.dataset.setLang as Lang));
 	}
 	document.addEventListener('langchange', (event) => sync((event as CustomEvent<Lang>).detail));
+
+	// Hugging Face Space では PDF などのバイナリが us.aws.cdn.hf.co へリダイレクトされ、
+	// その応答に `Content-Security-Policy: sandbox` が付くため、Chrome は PDF ビューアを開けない
+	// （ERR_BLOCKED_BY_CLIENT）。CDN は CORS を許可しているので、PDF を取得して
+	// このサイトの blob URL として新しいタブで開く。失敗したときはダウンロードに切り替える。
+	document.addEventListener('click', (event) => {
+		if (event.defaultPrevented || event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
+		const link = (event.target as Element | null)?.closest<HTMLAnchorElement>('a[href]');
+		if (!link || link.hasAttribute('download')) return;
+		const url = new URL(link.href, location.href);
+		if (url.origin !== location.origin || !url.pathname.toLowerCase().endsWith('.pdf')) return;
+
+		event.preventDefault();
+		// ポップアップブロックを避けるため、クリックの直後に同期でタブを開いておく
+		const tab = window.open('', '_blank');
+		const fallback = () => {
+			url.searchParams.set('download', 'true');
+			if (tab) tab.location.href = url.href;
+			else location.href = url.href;
+		};
+		if (!tab) return fallback();
+		tab.document.title = decodeURIComponent(url.pathname.split('/').pop() ?? 'PDF');
+		tab.document.body.textContent = 'Loading PDF…';
+		fetch(url)
+			.then((res) => {
+				if (!res.ok) throw new Error(`HTTP ${res.status}`);
+				return res.blob();
+			})
+			.then((blob) => {
+				tab.location.href = URL.createObjectURL(new Blob([blob], { type: 'application/pdf' }));
+			})
+			.catch(fallback);
+	});
 </script>
