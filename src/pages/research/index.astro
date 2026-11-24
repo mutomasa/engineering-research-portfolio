@@ -36,7 +36,8 @@ const kindLabel = {
 					I am also exploring Agentic Robotics: feeding tactile failure precursors back to LLM/VLM robot agents so they can
 					recover before a failure happens. Building on this, my planned PhD research extends vision-tactile failure prediction to
 					multi-robot collaboration, with Agentic AI automating failure-driven experiments and policy improvement. Alongside my research, I am building
-					Kawasemi Rover, an outdoor quadruped robot, as a side project to learn robot hardware hands-on. Most of the
+					Kawasemi Rover, an outdoor quadruped robot, and Kawasemi Humanoid, a 3D-printed humanoid that will carry VLA and bipedal walking,
+					as side projects to learn robot hardware hands-on. Most of the
 					research documents below are written in Japanese; the planned PhD research is also available in English.
 				</p>
 			</div>
@@ -46,7 +47,7 @@ const kindLabel = {
 				</p>
 				<p>
 					視覚と触覚を統合した世界モデルによる「失敗を先読みする」ロボット操作と、Spatial Scene Graph
-					を用いて自然言語指示から物体を特定し移動する Spatial AI の2つのテーマを進めています。あわせて拡張テーマとして、触覚由来の失敗の予兆を LLM/VLM のエージェントに渡して回復させる Agentic Robotics との連携にも取り組んでいます。さらに、博士課程入学予定の研究として、視触覚による失敗予測を複数ロボットの協調へ広げ、失敗にもとづく実験と方策の改善を Agentic AI で自動化する研究を構想しています。また、研究とは別に、屋外四足歩行ロボット Kawasemi Rover の自作を通してハードウェアの仕組みを理解するサブプロジェクトも進めています。各テーマの詳細は下の資料から読めます。
+					を用いて自然言語指示から物体を特定し移動する Spatial AI の2つのテーマを進めています。あわせて拡張テーマとして、触覚由来の失敗の予兆を LLM/VLM のエージェントに渡して回復させる Agentic Robotics との連携にも取り組んでいます。さらに、博士課程入学予定の研究として、視触覚による失敗予測を複数ロボットの協調へ広げ、失敗にもとづく実験と方策の改善を Agentic AI で自動化する研究を構想しています。また、研究とは別に、屋外四足歩行ロボット Kawasemi Rover と、VLA と二足歩行を載せる 3D プリント製ヒューマノイド Kawasemi Humanoid の自作を通して、ハードウェアの仕組みを理解するサブプロジェクトも進めています。各テーマの詳細は下の資料から読めます。
 				</p>
 			</div>
 		</T>
@@ -111,18 +112,10 @@ const kindLabel = {
 			}
 		</ul>
 
-		<h2 class="section-title"><T en="Publications" ja="論文・研究成果" /></h2>
 		{
-			pubs.length === 0 ? (
-				<div class="empty">
-					<p style="margin:0">
-						<T
-							en="There are no papers, posters or research outputs to list yet. They will appear here once available."
-							ja="現在、掲載できる論文・ポスター・研究成果はありません。追加され次第ここに掲載します。"
-						/>
-					</p>
-				</div>
-			) : (
+			pubs.length > 0 && (
+				<>
+				<h2 class="section-title"><T en="Publications" ja="論文・研究成果" /></h2>
 				<ul class="pub-list">
 					{pubs.map((pub) => (
 						<li>
@@ -148,6 +141,7 @@ const kindLabel = {
 						</li>
 					))}
 				</ul>
+				</>
 			)
 		}
 	</div>
